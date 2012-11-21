@@ -1,0 +1,7 @@
+.project
+.htaccess
+.buildpath
+.settings/
+
+*.pyc
+.pydevproject

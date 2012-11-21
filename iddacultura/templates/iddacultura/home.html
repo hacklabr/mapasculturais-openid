@@ -1,0 +1,6 @@
+{% extends "iddacultura/base.html" %}
+{% block title %}Página inicial{% endblock %}
+{% block content %}
+<a href='{% url auth_login %}'>Entrar no site</a><br />
+<a href="{% url registration_register %}">Criar novo usuário</a>
+{% endblock %}
