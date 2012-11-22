@@ -14,4 +14,5 @@ urlpatterns = patterns('',
     url(r'^accounts/register/$', register, {'backend': 'iddacultura.regbackend.RegBackend', 'form_class': UserRegistrationForm}, name='registration_register'),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^profiles/', include('profiles.urls')),
+    url(r'^provider/', include('iddacultura.provider.urls')),
 )

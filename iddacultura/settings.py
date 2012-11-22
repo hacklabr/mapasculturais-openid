@@ -123,6 +123,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'registration',
     'profiles',
+    'iddacultura.provider'
 )
 
 # A sample logging configuration. The only tangible logging
