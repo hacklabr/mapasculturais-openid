@@ -20,7 +20,7 @@
 	<p><a href="{% url auth_password_reset %}">Forgot</a> your password?</p>
 	
 	<input type="submit" value="login" />
-	<input type="hidden" name="next" value="{% url profiles.views.edit_profile %}" />
+	<input type="hidden" name="next" value="{% url iddacultura.views.user_profile %}" />
 </form>
 
 {% endblock %}
