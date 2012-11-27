@@ -1,5 +1,9 @@
 {% extends "iddacultura/base.html" %}
 {% block title %}Profile detail{% endblock %}
+{% block head %}
+    <link rel="openid.server" href="http://192.168.56.1:8000{% url iddacultura.provider.views.endpoint %}">
+    <link rel="openid2.provider" href="http://192.168.56.1:8000{% url iddacultura.provider.views.endpoint %}">
+{% endblock %}
 {% block content %}
 <p>CPF: {{ profile.cpf }}</p>
 {% endblock %}

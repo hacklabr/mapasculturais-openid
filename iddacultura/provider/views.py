@@ -22,6 +22,7 @@ from iddacultura.provider.util import getViewURL
 
 from django import http
 from django.views.generic.simple import direct_to_template
+from django.views.decorators.csrf import csrf_exempt
 
 from openid.server.server import Server, ProtocolError, CheckIDRequest, \
      EncodingError
@@ -67,7 +68,7 @@ def server(request):
     return direct_to_template(
         request,
         'provider/index.html',
-        {'user_url': getViewURL(request, idPage),
+        {'user_url': 'http://192.168.56.1:8000/profiles/rodrigo', #getViewURL(request, idPage),
          'server_xrds_url': getViewURL(request, idpXrds),
          })
 
@@ -79,15 +80,6 @@ def idpXrds(request):
     return util.renderXRDS(
         request, [OPENID_IDP_2_0_TYPE], [getViewURL(request, endpoint)])
 
-def idPage(request):
-    """
-    Serve the identity page for OpenID URLs.
-    """
-    return direct_to_template(
-        request,
-        'provider/idPage.html',
-        {'server_url': getViewURL(request, endpoint)})
-
 def trustPage(request):
     """
     Display the trust page template, which allows the user to decide
@@ -98,6 +90,7 @@ def trustPage(request):
         'provider/trust.html',
         {'trust_handler_url':getViewURL(request, processTrustResult)})
 
+@csrf_exempt
 def endpoint(request):
     """
     Respond to low-level OpenID protocol messages.
@@ -148,8 +141,7 @@ def handleCheckIDRequest(request, openid_request):
     # provider, there could be interaction with the user to determine
     # what URL should be sent.
     if not openid_request.idSelect():
-
-        id_url = getViewURL(request, idPage)
+        id_url = 'http://192.168.56.1:8000/profiles/rodrigo/' #getViewURL(request, idPage)
 
         # Confirm that this server can actually vouch for that
         # identifier
@@ -205,6 +197,7 @@ def showDecidePage(request, openid_request):
          'pape_request': pape_request,
          })
 
+@csrf_exempt
 def processTrustResult(request):
     """
     Handle the result of a trust decision and respond to the RP
@@ -215,7 +208,7 @@ def processTrustResult(request):
     openid_request = getRequest(request)
 
     # The identifier that this server can vouch for
-    response_identity = getViewURL(request, idPage)
+    response_identity = 'http://192.168.56.1:8000/profiles/rodrigo/' #getViewURL(request, idPage)
 
     # If the decision was to allow the verification, respond
     # accordingly.
