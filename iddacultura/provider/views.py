@@ -61,17 +61,6 @@ def getRequest(request):
     """
     return request.session.get('openid_request')
 
-def server(request):
-    """
-    Respond to requests for the server's primary web page.
-    """
-    return direct_to_template(
-        request,
-        'provider/index.html',
-        {'user_url': 'http://192.168.56.1:8000/profiles/rodrigo', #getViewURL(request, idPage),
-         'server_xrds_url': getViewURL(request, idpXrds),
-         })
-
 def idpXrds(request):
     """
     Respond to requests for the IDP's XRDS document, which is used in
