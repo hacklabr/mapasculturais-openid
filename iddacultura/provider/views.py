@@ -20,6 +20,8 @@ import cgi
 from iddacultura.provider import util
 from iddacultura.provider.util import getViewURL
 
+from profiles.views import profile_detail
+
 from django import http
 from django.views.generic.simple import direct_to_template
 from django.views.decorators.csrf import csrf_exempt
@@ -130,7 +132,7 @@ def handleCheckIDRequest(request, openid_request):
     # provider, there could be interaction with the user to determine
     # what URL should be sent.
     if not openid_request.idSelect():
-        id_url = 'http://192.168.56.1:8000/profiles/rodrigo/' #getViewURL(request, idPage)
+        id_url = getViewURL(request, profile_detail, {request.user.username})
 
         # Confirm that this server can actually vouch for that
         # identifier
@@ -197,7 +199,7 @@ def processTrustResult(request):
     openid_request = getRequest(request)
 
     # The identifier that this server can vouch for
-    response_identity = 'http://192.168.56.1:8000/profiles/rodrigo/' #getViewURL(request, idPage)
+    response_identity = getViewURL(request, profile_detail, {request.user.username})
 
     # If the decision was to allow the verification, respond
     # accordingly.
