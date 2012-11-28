@@ -224,16 +224,11 @@ def processTrustResult(request):
     # Send Simple Registration data in the response, if appropriate.
     if allowed:
         sreg_data = {
-            'fullname': 'Example User',
-            'nickname': 'example',
-            'dob': '1970-01-01',
-            'email': 'invalid@example.com',
-            'gender': 'F',
-            'postcode': '12345',
-            'country': 'ES',
-            'language': 'eu',
-            'timezone': 'America/New_York',
-            }
+            'fullname': request.user.get_full_name(),
+            'nickname': request.user.username,
+            'email': request.user.email,
+            'postcode': request.user.get_profile().cpf,
+        }
 
         sreg_req = sreg.SRegRequest.fromOpenIDRequest(openid_request)
         sreg_resp = sreg.SRegResponse.extractResponse(sreg_req, sreg_data)
