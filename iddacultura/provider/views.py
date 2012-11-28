@@ -118,11 +118,10 @@ def endpoint(request):
         if not request.user or request.user.is_authenticated() == False:
             return redirect_to_login(request.get_full_path() + "&tr=" + urllib.quote(openid_request.trust_root))
         
-        #Get a django user based on the identity URI
-        user = getUserFromIdentity(openid_request.identity)
+        user_identity = request.build_absolute_uri(request.user.get_profile().get_absolute_url())
         
-        if not user == request.user.username:
-            raise Exception, "Logged in as " + request.user.username + " while expecting " + user
+        if not openid_request.identity == user_identity:
+            raise Exception, "User " + request.user.username + " is not the owner of " + openid_request.identity + " identity"
         
         return handleCheckIDRequest(request, openid_request)
     else:
@@ -268,12 +267,3 @@ def displayResponse(request, openid_response):
         r[header] = value
 
     return r
-
-def getUserFromIdentity(identity):
-    """
-    Get a django user object based on a OpenID URI
-    """
-    
-    #TODO: descobrir qual eh o usuario a partir da identidade OpenID
-    
-    return 'rodrigo'
