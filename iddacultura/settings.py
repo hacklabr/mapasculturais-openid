@@ -1,18 +1,22 @@
 # Django settings for iddacultura project.
 
-DEBUG = True
+import os
+
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/rodrigo/devel/iddacultura-provider/base.db',                      # Or path to database file if using sqlite3.
+        'NAME': 'you_must_configure_settings_local',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -161,3 +165,5 @@ ACCOUNT_ACTIVATION_DAYS = 7
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = '/tmp/app-messages'
+
+execfile(os.path.join(SITE_ROOT, 'settings_local.py'))

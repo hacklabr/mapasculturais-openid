@@ -7,3 +7,4 @@
 .pydevproject
 
 base.db
+settings_local.py
