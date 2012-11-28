@@ -16,15 +16,18 @@ Some code conventions used here:
 """
 
 import cgi
+import urllib
 
 from iddacultura.provider import util
 from iddacultura.provider.util import getViewURL
+import iddacultura.settings as settings
 
 from profiles.views import profile_detail
 
 from django import http
 from django.views.generic.simple import direct_to_template
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.views import redirect_to_login
 
 from openid.server.server import Server, ProtocolError, CheckIDRequest, \
      EncodingError
@@ -112,6 +115,15 @@ def endpoint(request):
     # We got a request; if the mode is checkid_*, we will handle it by
     # getting feedback from the user or by checking the session.
     if openid_request.mode in ["checkid_immediate", "checkid_setup"]:
+        if not request.user or request.user.is_authenticated() == False:
+            return redirect_to_login(request.get_full_path() + "&tr=" + urllib.quote(openid_request.trust_root))
+        
+        #Get a django user based on the identity URI
+        user = getUserFromIdentity(openid_request.identity)
+        
+        if not user == request.user.username:
+            raise Exception, "Logged in as " + request.user.username + " while expecting " + user
+        
         return handleCheckIDRequest(request, openid_request)
     else:
         # We got some other kind of OpenID request, so we let the
@@ -261,3 +273,12 @@ def displayResponse(request, openid_response):
         r[header] = value
 
     return r
+
+def getUserFromIdentity(identity):
+    """
+    Get a django user object based on a OpenID URI
+    """
+    
+    #TODO: descobrir qual eh o usuario a partir da identidade OpenID
+    
+    return 'rodrigo'
