@@ -5,6 +5,8 @@
     <link rel="openid2.provider" href="http://192.168.56.1:8000{% url iddacultura.provider.views.endpoint %}">
 {% endblock %}
 {% block content %}
+<p>Nome: {{ profile.user.get_full_name }}</p>
+<p>E-mail: {{ profile.user.email }}</p>
 <p>CPF: {{ profile.cpf }}</p>
 {% endblock %}
 
