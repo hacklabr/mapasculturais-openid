@@ -6,10 +6,13 @@
     <link rel="openid2.provider" href="{% absolute iddacultura.provider.views.endpoint %}">
 {% endblock %}
 {% block content %}
-<p>Nome: {{ profile.user.get_full_name }}</p>
-<p>E-mail: {{ profile.user.email }}</p>
-<p>CPF: {{ profile.cpf }}</p>
-<p>ID da Cultura: {% absolute profiles.views.profile_detail request.user.username %}</p>
+
+{% ifequal request.user.username profile.user.username %}
+	<p>Nome: {{ profile.user.get_full_name }}</p>
+	<p>E-mail: {{ profile.user.email }}</p>
+	<p>CPF: {{ profile.cpf }}</p>
+    <p>ID da Cultura: {% absolute profiles.views.profile_detail request.user.username %}</p>
+{% else %}
+    <p>Identidade OpenID do usuário {{ profile.user.username }}</p>
+{% endifequal %}
 {% endblock %}
-
-
