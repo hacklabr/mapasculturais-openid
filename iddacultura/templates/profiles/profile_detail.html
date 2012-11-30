@@ -1,13 +1,15 @@
 {% extends "iddacultura/base.html" %}
+{% load absolute %}
 {% block title %}Profile detail{% endblock %}
 {% block head %}
-    <link rel="openid.server" href="http://192.168.56.1:8000{% url iddacultura.provider.views.endpoint %}">
-    <link rel="openid2.provider" href="http://192.168.56.1:8000{% url iddacultura.provider.views.endpoint %}">
+    <link rel="openid.server" href="{% absolute iddacultura.provider.views.endpoint %}">
+    <link rel="openid2.provider" href="{% absolute iddacultura.provider.views.endpoint %}">
 {% endblock %}
 {% block content %}
 <p>Nome: {{ profile.user.get_full_name }}</p>
 <p>E-mail: {{ profile.user.email }}</p>
 <p>CPF: {{ profile.cpf }}</p>
+<p>ID da Cultura: {% absolute profiles.views.profile_detail request.user.username %}</p>
 {% endblock %}
 
 
