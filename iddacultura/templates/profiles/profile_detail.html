@@ -2,8 +2,7 @@
 {% load absolute %}
 {% block title %}Profile detail{% endblock %}
 {% block head %}
-    <link rel="openid.server" href="{% absolute iddacultura.provider.views.endpoint %}">
-    <link rel="openid2.provider" href="{% absolute iddacultura.provider.views.endpoint %}">
+    <meta http-equiv="x-xrds-location" content="{% absolute iddacultura.provider.views.userXrds profile.user.username %}" />
 {% endblock %}
 {% block content %}
 

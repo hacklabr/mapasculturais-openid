@@ -1,4 +1,8 @@
 {% extends "iddacultura/base.html" %}
+{% load absolute %}
+{% block head %}
+    <meta http-equiv="x-xrds-location" content="{% absolute iddacultura.provider.views.opXrds %}" />
+{% endblock %}
 {% block title %}Página inicial{% endblock %}
 {% block content %}
 Página inicial do site

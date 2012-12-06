@@ -33,7 +33,7 @@ from openid.server.server import Server, ProtocolError, CheckIDRequest, \
      EncodingError
 from openid.server.trustroot import verifyReturnTo
 from openid.yadis.discover import DiscoveryFailure
-from openid.consumer.discover import OPENID_IDP_2_0_TYPE
+from openid.consumer.discover import OPENID_IDP_2_0_TYPE, OPENID_2_0_TYPE
 from openid.extensions import sreg
 from openid.extensions import pape
 from openid.fetchers import HTTPFetchingError
@@ -66,13 +66,20 @@ def getRequest(request):
     """
     return request.session.get('openid_request')
 
-def idpXrds(request):
+def opXrds(request):
     """
-    Respond to requests for the IDP's XRDS document, which is used in
+    Respond to requests for the OpenID Provider XRDS document, which is used in
     IDP-driven identifier selection.
     """
     return util.renderXRDS(
-        request, [OPENID_IDP_2_0_TYPE], [getViewURL(request, endpoint)])
+        request, [OPENID_IDP_2_0_TYPE, sreg.ns_uri], [getViewURL(request, endpoint)])
+
+def userXrds(request, username):
+    """
+    Respond to requests for a specific user identity XRDS Document
+    """
+    return util.renderXRDS(
+        request, [OPENID_2_0_TYPE, sreg.ns_uri], [getViewURL(request, endpoint)], username)
 
 def trustPage(request):
     """

@@ -135,13 +135,13 @@ def normalDict(request_data):
     """
     return dict((k, v) for k, v in request_data.iteritems())
 
-def renderXRDS(request, type_uris, endpoint_urls):
+def renderXRDS(request, type_uris, endpoint_urls, username = None):
     """Render an XRDS page with the specified type URIs and endpoint
     URLs in one service block, and return a response with the
     appropriate content-type.
     """
     response = direct_to_template(
         request, 'xrds.xml',
-        {'type_uris':type_uris, 'endpoint_urls':endpoint_urls,})
+        {'type_uris':type_uris, 'endpoint_urls':endpoint_urls, 'username': username})
     response['Content-Type'] = YADIS_CONTENT_TYPE
     return response
