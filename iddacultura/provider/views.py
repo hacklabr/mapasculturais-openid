@@ -235,7 +235,7 @@ def processTrustResult(request):
     openid_response = openid_request.answer(allowed,
                                             identity=response_identity)
 
-    if request.POST['remember'] == 'yes':
+    if request.POST.has_key('remember') and request.POST['remember'] == 'yes':
         url = TrustedRoot.objects.get(url = openid_response.request.trust_root)
         request.user.userprofile.trusted_roots.add(url)
 
