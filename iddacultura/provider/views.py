@@ -125,7 +125,7 @@ def endpoint(request):
     if openid_request.mode in ["checkid_immediate", "checkid_setup"]:
         if not request.user or request.user.is_authenticated() == False:
             #TODO: verificar porque o openid_request.encodeToURL() remove os parâmetros relacionados com a extensão SREG
-            return redirect_to_login(request.get_full_path() + '?' + urllib.urlencode(query) + "&tr=" + urllib.quote(openid_request.trust_root))
+            return redirect_to_login(request.get_full_path() + '?' + urllib.urlencode(query))
         
         user_identity = request.build_absolute_uri(request.user.get_profile().get_absolute_url())
         
