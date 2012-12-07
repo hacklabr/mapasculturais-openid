@@ -22,6 +22,7 @@ import urllib
 from iddacultura.provider import util
 from iddacultura.provider.util import getViewURL
 import iddacultura.settings as settings
+from iddacultura.models import TrustedRoot 
 
 from profiles.views import profile_detail
 
@@ -165,6 +166,10 @@ def handleCheckIDRequest(request, openid_request):
 
             return displayResponse(request, error_response)
 
+    if request.user.userprofile.trusted_url(openid_request.trust_root):
+        openid_request.answer(True)
+        return displayResponse(request, openid_response)
+
     if openid_request.immediate:
         # Always respond with 'cancel' to immediate mode requests
         # because we don't track information about a logged-in user.
@@ -228,6 +233,10 @@ def processTrustResult(request):
     # Generate a response with the appropriate answer.
     openid_response = openid_request.answer(allowed,
                                             identity=response_identity)
+
+    if request.POST['remember'] == 'yes':
+        url = TrustedRoot.objects.get(url = openid_response.request.trust_root)
+        request.user.userprofile.trusted_roots.add(url)
 
     # Send Simple Registration data in the response, if appropriate.
     if allowed:

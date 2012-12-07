@@ -36,11 +36,10 @@
 <!-- trust_root_valid is {{ trust_root_valid }} -->
 
 <div>
-<form method="post"
-      action="{{ trust_handler_url }}">
-  Verify your identity to the relying party?
+<form method="post" action="{{ trust_handler_url }}">
+  <p>Verify your identity to the relying party?</p>
 
-  <br/>
+  <p><input type="checkbox" name="remember" value="yes"/><label for="remember">Remember your decision?</label></p>
   <input type="submit" value="Yes (Allow)" name="allow" />
   <input type="submit" value="No (Cancel)" name="cancel" />
 </form>
