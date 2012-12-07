@@ -2,7 +2,7 @@
 {% load absolute %}
 {% block title %}Profile detail{% endblock %}
 {% block head %}
-    <meta http-equiv="x-xrds-location" content="{% absolute iddacultura.provider.views.userXrds profile.user.username %}" />
+    <meta http-equiv="x-xrds-location" content="{% absolute iddacultura.provider.views.user_xrds profile.user.username %}" />
 {% endblock %}
 {% block content %}
 

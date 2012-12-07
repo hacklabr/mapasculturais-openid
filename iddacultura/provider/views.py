@@ -66,7 +66,7 @@ def getRequest(request):
     """
     return request.session.get('openid_request')
 
-def opXrds(request):
+def op_xrds(request):
     """
     Respond to requests for the OpenID Provider XRDS document, which is used in
     IDP-driven identifier selection.
@@ -74,7 +74,7 @@ def opXrds(request):
     return util.renderXRDS(
         request, [OPENID_IDP_2_0_TYPE, sreg.ns_uri], [getViewURL(request, endpoint)])
 
-def userXrds(request, username):
+def user_xrds(request, username):
     """
     Respond to requests for a specific user identity XRDS Document
     """
