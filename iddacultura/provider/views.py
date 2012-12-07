@@ -147,14 +147,15 @@ def handleCheckIDRequest(request, openid_request):
     what Simple Registration information, if any, to send in the
     response.
     """
+    
+    id_url = getViewURL(request, profile_detail, {request.user.username})
+    
     # If the request was an IDP-driven identifier selection request
     # (i.e., the IDP URL was entered at the RP), then return the
     # default identity URL for this server. In a full-featured
     # provider, there could be interaction with the user to determine
     # what URL should be sent.
     if not openid_request.idSelect():
-        id_url = getViewURL(request, profile_detail, {request.user.username})
-
         # Confirm that this server can actually vouch for that
         # identifier
         if id_url != openid_request.identity:
@@ -167,7 +168,7 @@ def handleCheckIDRequest(request, openid_request):
             return displayResponse(request, error_response)
 
     if request.user.userprofile.trusted_url(openid_request.trust_root):
-        openid_request.answer(True)
+        openid_response = openid_request.answer(True, identity = id_url)
         return displayResponse(request, openid_response)
 
     if openid_request.immediate:
