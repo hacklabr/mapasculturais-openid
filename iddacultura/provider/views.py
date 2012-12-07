@@ -129,7 +129,7 @@ def endpoint(request):
         
         user_identity = request.build_absolute_uri(request.user.get_profile().get_absolute_url())
         
-        if not openid_request.identity == user_identity:
+        if not openid_request.identity == user_identity and not openid_request.idSelect():
             raise Exception, "User " + request.user.username + " is not the owner of " + openid_request.identity + " identity"
         
         return handleCheckIDRequest(request, openid_request)
