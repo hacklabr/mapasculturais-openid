@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 """
 This module implements an example server for the OpenID library.  Some
@@ -123,7 +124,8 @@ def endpoint(request):
     # getting feedback from the user or by checking the session.
     if openid_request.mode in ["checkid_immediate", "checkid_setup"]:
         if not request.user or request.user.is_authenticated() == False:
-            return redirect_to_login(request.get_full_path() + "&tr=" + urllib.quote(openid_request.trust_root))
+            #TODO: verificar porque o openid_request.encodeToURL() remove os parâmetros relacionados com a extensão SREG
+            return redirect_to_login(request.get_full_path() + '?' + urllib.urlencode(query) + "&tr=" + urllib.quote(openid_request.trust_root))
         
         user_identity = request.build_absolute_uri(request.user.get_profile().get_absolute_url())
         
