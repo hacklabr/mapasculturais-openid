@@ -16,3 +16,4 @@ TEMPLATE_DEBUG = DEBUG
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = '/tmp/app-messages'
+DEFAULT_FROM_EMAIL = 'hacklab@lagarta.hacklab.com.br'
