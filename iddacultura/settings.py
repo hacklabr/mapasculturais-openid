@@ -165,7 +165,4 @@ AUTH_PROFILE_MODULE = 'iddacultura.UserProfile'
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = '/tmp/app-messages'
-
 execfile(os.path.join(SITE_ROOT, 'settings_local.py'))
