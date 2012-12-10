@@ -6,7 +6,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Rodrigo Primo', 'rodrigo@hacklab.com.br'),
 )
 
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
