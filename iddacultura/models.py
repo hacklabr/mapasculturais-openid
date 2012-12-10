@@ -20,7 +20,7 @@ class UserProfile(models.Model):
     """
     
     user = models.OneToOneField(User)
-    trusted_roots = models.ManyToManyField(TrustedRoot, blank = True, null = True, help_text = "OpenID consumers URL's trusted by this user")
+    trusted_roots = models.ManyToManyField(TrustedRoot, blank = True, null = True, help_text = "Lista de clientes OpenID autorizados por este usuário")
     cpf = models.CharField(max_length=50)
     
     def get_absolute_url(self):

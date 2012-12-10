@@ -1,1 +1,1 @@
-Account registration for {{ site.name }}
+Cadastro de nova conta para {{ site.name }}

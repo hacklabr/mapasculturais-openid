@@ -19,7 +19,7 @@
 	</table>
 	<p><a href="{% url auth_password_reset %}">Esqueceu</a> sua senha?</p>
 	
-	<input type="submit" value="login" />
+	<input type="submit" value="Entrar" />
 	{% if request.GET.next %}
 	   <input type="hidden" name="next" value="{{ request.GET.next }}" />
 	{% else %}
