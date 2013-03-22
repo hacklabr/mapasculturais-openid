@@ -27,12 +27,15 @@ class UserProfileForm(ModelForm):
             self.fields['email'].initial = self.instance.user.email
             self.fields['first_name'].initial = self.instance.user.first_name
             self.fields['last_name'].initial = self.instance.user.last_name
+            
+            self.fields.keyOrder = ['first_name', 'last_name', 'email', 'cpf', 'trusted_roots']
+
         except User.DoesNotExist:
             pass
  
-    first_name = forms.CharField(label="Nome",help_text='')
-    last_name = forms.CharField(label="Sobrenome",help_text='')
-    email = forms.EmailField(label="E-mail",help_text='')
+    first_name = forms.CharField(label="Nome", help_text='',)
+    last_name = forms.CharField(label="Sobrenome", help_text='')
+    email = forms.EmailField(label="E-mail", help_text='')
  
     class Meta:
         model = UserProfile

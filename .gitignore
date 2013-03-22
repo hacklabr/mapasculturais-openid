@@ -2,7 +2,7 @@
 .htaccess
 .buildpath
 .settings/
-
+build
 *.pyc
 .pydevproject
 
