@@ -14,6 +14,30 @@ class TrustedRoot(models.Model):
     def __unicode__(self):
         return self.url
 
+class UserOccupation(models.Model):
+    """
+    Valores possíveis para os diferentes campos
+    para definir a ocupação de um usuário de acordo
+    com o padrão estabelecido pelo governo federal.
+    """
+    
+    TYPE_CHOICES = (
+        ('primary', 'primary'),
+        ('secondary', 'secondary'),
+        ('tertiary', 'tertiary'),
+        ('quartenary', 'quartenary'),
+        ('quinary', 'quinary'),
+        ('senary', 'senary')
+    )
+    
+    parent = models.CharField(max_length = 10)
+    type = models.CharField(max_length = 10, choices = TYPE_CHOICES)
+    code = models.CharField(max_length = 10)
+    name = models.CharField(max_length = 255)
+    
+    def __unicode__(self):
+        return self.name
+
 class UserProfile(models.Model):
     """
     Adiciona campos extras para os usuários
@@ -21,6 +45,8 @@ class UserProfile(models.Model):
     
     user = models.OneToOneField(User)
     trusted_roots = models.ManyToManyField(TrustedRoot, blank = True, null = True, verbose_name = "Sites autorizados", help_text = "Lista de clientes OpenID autorizados.")
+    user_occupation_primary = models.ForeignKey(UserOccupation, limit_choices_to = {'type': 'primary'}, related_name = 'occupation_primary', null = True)
+    user_occupation_secondary = models.ForeignKey(UserOccupation, limit_choices_to = {'type': 'secondary'}, related_name = 'occupation_secondary', null = True)
     cpf = models.CharField(max_length=50, verbose_name = "CPF")
     
     def get_absolute_url(self):

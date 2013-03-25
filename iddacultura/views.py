@@ -1,5 +1,9 @@
+# -*- coding: utf-8 -*-
+
+import json
 from django.shortcuts import redirect
-from profiles.views import profile_detail
+from django.http import HttpResponse
+from models import UserOccupation
 
 def user_profile(request):
     """
@@ -8,3 +12,17 @@ def user_profile(request):
     """
     
     return redirect('/profiles/' + request.user.username + '/')
+
+def occupations(request):
+    """
+    Retorna um JSON com a lista de ocupações em um
+    nível com base no pai
+    """
+    occupations = {}
+    
+    parent = UserOccupation.objects.get(id = request.GET['parent'])
+    
+    for occupation in UserOccupation.objects.filter(parent = parent.code):
+        occupations[occupation.id] = occupation.name
+    
+    return HttpResponse(json.dumps(occupations), content_type="application/json")

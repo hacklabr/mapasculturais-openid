@@ -1,10 +1,10 @@
-#coding: utf-8
+# -*- coding: utf-8 -*-
 
 from registration.forms import RegistrationForm
 from django.contrib.localflavor.br.forms import BRCPFField
 from django.forms import ModelForm
 from django import forms
-from iddacultura.models import User, UserProfile
+from iddacultura.models import User, UserProfile, UserOccupation
 
 class UserRegistrationForm(RegistrationForm):
     """
@@ -28,7 +28,12 @@ class UserProfileForm(ModelForm):
             self.fields['first_name'].initial = self.instance.user.first_name
             self.fields['last_name'].initial = self.instance.user.last_name
             
-            self.fields.keyOrder = ['first_name', 'last_name', 'email', 'cpf', 'trusted_roots']
+            if kwargs['instance'].user_occupation_primary:
+                self.fields['user_occupation_secondary'].choices = [(o.id, str(o)) for o in UserOccupation.objects.filter(parent = kwargs['instance'].user_occupation_primary.code)]
+            else:
+                self.fields['user_occupation_secondary'] = forms.ChoiceField(choices = [('', 'Selecione primeiro um grupo')])
+            
+            self.fields.keyOrder = ['first_name', 'last_name', 'email', 'cpf', 'trusted_roots', 'user_occupation_primary', 'user_occupation_secondary']
 
         except User.DoesNotExist:
             pass
