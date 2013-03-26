@@ -19,6 +19,7 @@ def occupations(request):
     nível com base no pai
     """
     occupations = {}
+    occupations[u''] = 'Selecione'
     
     parent = UserOccupation.objects.get(id = request.GET['parent'])
     

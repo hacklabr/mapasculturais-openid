@@ -27,7 +27,7 @@ class UserOccupation(models.Model):
         ('tertiary', 'tertiary'),
         ('quartenary', 'quartenary'),
         ('quinary', 'quinary'),
-        ('senary', 'senary')
+        ('synonymous', 'synonymous')
     )
     
     parent = models.CharField(max_length = 10)
@@ -44,10 +44,14 @@ class UserProfile(models.Model):
     """
     
     user = models.OneToOneField(User)
+    cpf = models.CharField(max_length = 50, verbose_name = "CPF")
     trusted_roots = models.ManyToManyField(TrustedRoot, blank = True, null = True, verbose_name = "Sites autorizados", help_text = "Lista de clientes OpenID autorizados.")
+    
     user_occupation_primary = models.ForeignKey(UserOccupation, limit_choices_to = {'type': 'primary'}, related_name = 'occupation_primary', null = True)
     user_occupation_secondary = models.ForeignKey(UserOccupation, limit_choices_to = {'type': 'secondary'}, related_name = 'occupation_secondary', null = True)
-    cpf = models.CharField(max_length=50, verbose_name = "CPF")
+    user_occupation_tertiary = models.ForeignKey(UserOccupation, limit_choices_to = {'type': 'tertiary'}, related_name = 'occupation_tertiary', null = True)
+    user_occupation_quartenary = models.ForeignKey(UserOccupation, limit_choices_to = {'type': 'quartenary'}, related_name = 'occupation_quartenary', null = True)
+    user_occupation_quinary = models.ForeignKey(UserOccupation, limit_choices_to = {'type': 'quinary'}, related_name = 'occupation_quinary', null = True)
     
     def get_absolute_url(self):
         return reverse('profiles_profile_detail', args=[unicode(self.user.username)])
