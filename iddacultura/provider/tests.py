@@ -1,6 +1,6 @@
 
 from django.test.testcases import TestCase
-from provider import views
+from iddacultura.provider import views
 import util
 
 from django.http import HttpRequest
@@ -22,7 +22,7 @@ class TestProcessTrustResult(TestCase):
     def setUp(self):
         self.request = dummyRequest()
 
-        id_url = util.getViewURL(self.request, views.idPage)
+        id_url = util.get_view_url(self.request, views.idPage)
 
         # Set up the OpenID request we're responding to.
         op_endpoint = 'http://127.0.0.1:8080/endpoint'
@@ -34,13 +34,13 @@ class TestProcessTrustResult(TestCase):
             })
         self.openid_request = CheckIDRequest.fromMessage(message, op_endpoint)
 
-        views.setRequest(self.request, self.openid_request)
+        views.set_request(self.request, self.openid_request)
 
 
     def test_allow(self):
         self.request.POST['allow'] = 'Yes'
 
-        response = views.processTrustResult(self.request)
+        response = views.process_trust_result(self.request)
 
         self.failUnlessEqual(response.status_code, 302)
         finalURL = response['location']
@@ -51,7 +51,7 @@ class TestProcessTrustResult(TestCase):
     def test_cancel(self):
         self.request.POST['cancel'] = 'Yes'
 
-        response = views.processTrustResult(self.request)
+        response = views.process_trust_result(self.request)
 
         self.failUnlessEqual(response.status_code, 302)
         finalURL = response['location']
@@ -65,7 +65,7 @@ class TestShowDecidePage(TestCase):
     def test_unreachableRealm(self):
         self.request = dummyRequest()
 
-        id_url = util.getViewURL(self.request, views.idPage)
+        id_url = util.get_view_url(self.request, views.idPage)
 
         # Set up the OpenID request we're responding to.
         op_endpoint = 'http://127.0.0.1:8080/endpoint'
@@ -77,9 +77,9 @@ class TestShowDecidePage(TestCase):
             })
         self.openid_request = CheckIDRequest.fromMessage(message, op_endpoint)
 
-        views.setRequest(self.request, self.openid_request)
+        views.set_request(self.request, self.openid_request)
 
-        response = views.showDecidePage(self.request, self.openid_request)
+        response = views.show_decide_page(self.request, self.openid_request)
         self.failUnless('trust_root_valid is Unreachable' in response.content,
                         response)
 
@@ -93,7 +93,7 @@ class TestGenericXRDS(TestCase):
 
         type_uris = ['A_TYPE']
         endpoint_url = 'A_URL'
-        response = util.renderXRDS(request, type_uris, [endpoint_url])
+        response = util.render_xrds(request, type_uris, [endpoint_url])
 
         requested_url = 'http://requested.invalid/'
         (endpoint,) = applyFilter(requested_url, response.content)

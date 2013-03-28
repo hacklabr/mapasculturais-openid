@@ -19,7 +19,7 @@ from openid.store.filestore import FileOpenIDStore
 from openid.store import sqlstore
 from openid.yadis.constants import YADIS_CONTENT_TYPE
 
-def getOpenIDStore(filestore_path, table_prefix):
+def get_openid_store(filestore_path, table_prefix):
     """
     Returns an OpenID association store object based on the database
     engine chosen for this Django application.
@@ -85,12 +85,12 @@ def getOpenIDStore(filestore_path, table_prefix):
 
     return s
 
-def getViewURL(req, view_name_or_obj, args=None, kwargs=None):
+def get_view_url(req, view_name_or_obj, args=None, kwargs=None):
     relative_url = reverseURL(view_name_or_obj, args=args, kwargs=kwargs)
     full_path = req.META.get('SCRIPT_NAME', '') + relative_url
-    return urljoin(getBaseURL(req), full_path)
+    return urljoin(get_base_url(req), full_path)
 
-def getBaseURL(req):
+def get_base_url(req):
     """
     Given a Django web request object, returns the OpenID 'trust root'
     for that request; namely, the absolute URL to the site root which
@@ -124,7 +124,7 @@ def getBaseURL(req):
     url = "%s://%s%s/" % (proto, name, port)
     return url
 
-def normalDict(request_data):
+def normal_dict(request_data):
     """
     Converts a django request MutliValueDict (e.g., request.GET,
     request.POST) into a standard python dict whose values are the
@@ -135,7 +135,7 @@ def normalDict(request_data):
     """
     return dict((k, v) for k, v in request_data.iteritems())
 
-def renderXRDS(request, type_uris, endpoint_urls, username = None):
+def render_xrds(request, type_uris, endpoint_urls, username = None):
     """Render an XRDS page with the specified type URIs and endpoint
     URLs in one service block, and return a response with the
     appropriate content-type.

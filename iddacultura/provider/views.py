@@ -20,8 +20,7 @@ import cgi
 import urllib
 
 from iddacultura.provider import util
-from iddacultura.provider.util import getViewURL
-import iddacultura.settings as settings
+from iddacultura.provider.util import get_view_url
 from iddacultura.models import TrustedRoot 
 
 from profiles.views import profile_detail
@@ -31,8 +30,7 @@ from django.views.generic.simple import direct_to_template
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.views import redirect_to_login
 
-from openid.server.server import Server, ProtocolError, CheckIDRequest, \
-     EncodingError
+from openid.server.server import Server, ProtocolError, EncodingError
 from openid.server.trustroot import verifyReturnTo
 from openid.yadis.discover import DiscoveryFailure
 from openid.consumer.discover import OPENID_IDP_2_0_TYPE, OPENID_2_0_TYPE
@@ -40,20 +38,20 @@ from openid.extensions import sreg
 from openid.extensions import pape
 from openid.fetchers import HTTPFetchingError
 
-def getOpenIDStore():
+def get_openid_store():
     """
     Return an OpenID store object fit for the currently-chosen
     database backend, if any.
     """
-    return util.getOpenIDStore('/tmp/djopenid_s_store', 's_')
+    return util.get_openid_store('/tmp/djopenid_s_store', 's_')
 
-def getServer(request):
+def get_server(request):
     """
     Get a Server object to perform OpenID authentication.
     """
-    return Server(getOpenIDStore(), getViewURL(request, endpoint))
+    return Server(get_openid_store(), get_view_url(request, endpoint))
 
-def setRequest(request, openid_request):
+def set_request(request, openid_request):
     """
     Store the openid request information in the session.
     """
@@ -62,7 +60,7 @@ def setRequest(request, openid_request):
     else:
         request.session['openid_request'] = None
 
-def getRequest(request):
+def get_request(request):
     """
     Get an openid request from the session, if any.
     """
@@ -73,17 +71,17 @@ def op_xrds(request):
     Respond to requests for the OpenID Provider XRDS document, which is used in
     IDP-driven identifier selection.
     """
-    return util.renderXRDS(
-        request, [OPENID_IDP_2_0_TYPE, sreg.ns_uri], [getViewURL(request, endpoint)])
+    return util.render_xrds(
+        request, [OPENID_IDP_2_0_TYPE, sreg.ns_uri], [get_view_url(request, endpoint)])
 
 def user_xrds(request, username):
     """
     Respond to requests for a specific user identity XRDS Document
     """
-    return util.renderXRDS(
-        request, [OPENID_2_0_TYPE, sreg.ns_uri], [getViewURL(request, endpoint)], username)
+    return util.render_xrds(
+        request, [OPENID_2_0_TYPE, sreg.ns_uri], [get_view_url(request, endpoint)], username)
 
-def trustPage(request):
+def trust_page(request):
     """
     Display the trust page template, which allows the user to decide
     whether to approve the OpenID verification.
@@ -91,16 +89,16 @@ def trustPage(request):
     return direct_to_template(
         request,
         'provider/trust.html',
-        {'trust_handler_url':getViewURL(request, processTrustResult)})
+        {'trust_handler_url':get_view_url(request, process_trust_result)})
 
 @csrf_exempt
 def endpoint(request):
     """
     Respond to low-level OpenID protocol messages.
     """
-    s = getServer(request)
+    s = get_server(request)
 
-    query = util.normalDict(request.GET or request.POST)
+    query = util.normal_dict(request.GET or request.POST)
 
     # First, decode the incoming request into something the OpenID
     # library can use.
@@ -133,14 +131,14 @@ def endpoint(request):
         if not openid_request.identity == user_identity and not openid_request.idSelect():
             raise Exception, "User " + request.user.username + " is not the owner of " + openid_request.identity + " identity"
         
-        return handleCheckIDRequest(request, openid_request)
+        return handle_check_id_request(request, openid_request)
     else:
         # We got some other kind of OpenID request, so we let the
         # server handle this.
         openid_response = s.handleRequest(openid_request)
-        return displayResponse(request, openid_response)
+        return display_response(request, openid_response)
 
-def handleCheckIDRequest(request, openid_request):
+def handle_check_id_request(request, openid_request):
     """
     Handle checkid_* requests.  Get input from the user to find out
     whether she trusts the RP involved.  Possibly, get intput about
@@ -148,7 +146,7 @@ def handleCheckIDRequest(request, openid_request):
     response.
     """
     
-    id_url = getViewURL(request, profile_detail, {request.user.username})
+    id_url = get_view_url(request, profile_detail, {request.user.username})
     
     # If the request was an IDP-driven identifier selection request
     # (i.e., the IDP URL was entered at the RP), then return the
@@ -165,11 +163,11 @@ def handleCheckIDRequest(request, openid_request):
                 "This server cannot verify the URL %r" %
                 (openid_request.identity,))
 
-            return displayResponse(request, error_response)
+            return display_response(request, error_response)
 
     if request.user.userprofile.trusted_url(openid_request.trust_root):
         openid_response = openid_request.answer(True, identity = id_url)
-        return displayResponse(request, openid_response)
+        return display_response(request, openid_response)
 
     if openid_request.immediate:
         # Always respond with 'cancel' to immediate mode requests
@@ -178,14 +176,14 @@ def handleCheckIDRequest(request, openid_request):
         # had trusted the request's trust root and whether the user is
         # even logged in.
         openid_response = openid_request.answer(False)
-        return displayResponse(request, openid_response)
+        return display_response(request, openid_response)
     else:
         # Store the incoming request object in the session so we can
         # get to it later.
-        setRequest(request, openid_request)
-        return showDecidePage(request, openid_request)
+        set_request(request, openid_request)
+        return show_decide_page(request, openid_request)
 
-def showDecidePage(request, openid_request):
+def show_decide_page(request, openid_request):
     """
     Render a page to the user so a trust decision can be made.
 
@@ -209,23 +207,23 @@ def showDecidePage(request, openid_request):
         request,
         'provider/trust.html',
         {'trust_root': trust_root,
-         'trust_handler_url':getViewURL(request, processTrustResult),
+         'trust_handler_url':get_view_url(request, process_trust_result),
          'trust_root_valid': trust_root_valid,
          'pape_request': pape_request,
          })
 
 @csrf_exempt
-def processTrustResult(request):
+def process_trust_result(request):
     """
     Handle the result of a trust decision and respond to the RP
     accordingly.
     """
     # Get the request from the session so we can construct the
     # appropriate response.
-    openid_request = getRequest(request)
+    openid_request = get_request(request)
 
     # The identifier that this server can vouch for
-    response_identity = getViewURL(request, profile_detail, {request.user.username})
+    response_identity = get_view_url(request, profile_detail, {request.user.username})
 
     # If the decision was to allow the verification, respond
     # accordingly.
@@ -256,16 +254,16 @@ def processTrustResult(request):
         pape_response.setAuthLevel(pape.LEVELS_NIST, 0)
         openid_response.addExtension(pape_response)
 
-    return displayResponse(request, openid_response)
+    return display_response(request, openid_response)
 
-def displayResponse(request, openid_response):
+def display_response(request, openid_response):
     """
     Display an OpenID response.  Errors will be displayed directly to
     the user; successful responses and other protocol-level messages
     will be sent using the proper mechanism (i.e., direct response,
     redirection, etc.).
     """
-    s = getServer(request)
+    s = get_server(request)
 
     # Encode the response into something that is renderable.
     try:
