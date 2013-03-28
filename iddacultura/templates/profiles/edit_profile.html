@@ -1,7 +1,7 @@
 {% extends "iddacultura/base.html" %}
 {% load bootstrap %}
 {% block title %}Edit Profile{% endblock %}
-{% block head %}<script src="{{ STATIC_URL }}js/edit_profile.js"></script>{% endblock %} 
+{% block head %}{{block.super}}<script src="{{ STATIC_URL }}js/edit_profile.js"></script>{% endblock %} 
 {% block content %}
 <h1>Editar perfil do usuário {{ user }}</h1>
 <form action="" method="POST">
