@@ -1,3 +1,7 @@
+{% extends "iddacultura/base.html" %}
+{% block title %}Lista de usuários{% endblock %}
+{% block content %}
 {% for p in object_list  %}
     <a href="{% url profiles_profile_detail p.user %}">{{ p.user }}</a>
 {% endfor %}
+{% endblock %}
