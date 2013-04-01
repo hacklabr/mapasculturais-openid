@@ -17,7 +17,7 @@ class UserProfileInline(admin.StackedInline):
     form = UserProfileForm
     
     class Media:
-        js = (STATIC_URL + 'js/edit_profile_admin.js',)
+        js = (STATIC_URL + 'js/jquery-1.9.1.min.js', STATIC_URL + 'js/edit_profile_admin.js')
 
 # Define a new User admin
 class UserAdmin(UserAdmin):
