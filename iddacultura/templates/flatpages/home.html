@@ -1,0 +1,5 @@
+{% extends "flatpages/default.html" %}
+{% block head %}
+    {{block.super}}
+    <meta http-equiv="x-xrds-location" content="{% absolute iddacultura.provider.views.op_xrds %}" />
+{% endblock %}

@@ -8,8 +8,6 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    url(r'^$', TemplateView.as_view(template_name="iddacultura/home.html")),
     url(r'^user_profile/$', user_profile),
     url(r'^occupations/', occupations),
 

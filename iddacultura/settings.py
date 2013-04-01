@@ -97,8 +97,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
 ROOT_URLCONF = 'iddacultura.urls'
@@ -126,6 +126,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
     'iddacultura',
     'django.contrib.admin',
     'registration',
@@ -173,5 +175,7 @@ BOOTSTRAP_JS_BASE_URL = BOOTSTRAP_BASE_URL + 'js/'
 BOOTSTRAP_JS_URL = BOOTSTRAP_JS_BASE_URL + 'bootstrap.min.js' 
 BOOTSTRAP_CSS_BASE_URL = BOOTSTRAP_BASE_URL + 'css/'
 BOOTSTRAP_CSS_URL = BOOTSTRAP_CSS_BASE_URL + 'bootstrap.css'
+
+SITE_ID = 1
 
 execfile(os.path.join(SITE_ROOT, 'settings_local.py'))

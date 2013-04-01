@@ -1,0 +1,1 @@
+[{"pk": 1, "model": "flatpages.flatpage", "fields": {"registration_required": false, "title": "P\u00e1gina inicial", "url": "/", "template_name": "", "sites": [1], "content": "P\u00e1gina inicial explicando como funciona o ID da Cultura.", "enable_comments": false}}]
