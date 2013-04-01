@@ -12,7 +12,7 @@ class UserRegistrationForm(RegistrationForm):
     adicionar o campo CPF
     """
     
-    cpf = BRCPFField()
+    cpf = BRCPFField(label = "CPF")
     
 
 class UserProfileForm(ModelForm):
@@ -22,6 +22,8 @@ class UserProfileForm(ModelForm):
     a ocupação do usuário. Usado no admin como na interface pública
     de edição do perfil do usuário.
     """
+    
+    cpf = BRCPFField(label = "CPF")
     
     def __init__(self, *args, **kwargs):
         super(UserProfileForm, self).__init__(*args, **kwargs)
