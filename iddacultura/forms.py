@@ -1,10 +1,31 @@
 # -*- coding: utf-8 -*-
 
+import re
+
 from registration.forms import RegistrationForm
 from django.contrib.localflavor.br.forms import BRCPFField
-from django.forms import ModelForm
+from django.forms import ModelForm, ValidationError
 from django import forms
 from iddacultura.models import User, UserProfile, UserOccupation
+
+class BRCPFFieldUnique(BRCPFField):
+    """
+    Extende a classe BRCPFField para forçar valores
+    únicos para o CPF e também para sempre salvar apenas
+    os números na base de dados sem pontos e hífem.
+    """
+    
+    def clean(self, value):
+        # remove pontos e hífem do cpf
+        value = re.sub("[-\.]", "", value)
+        
+        super(BRCPFFieldUnique, self).clean(value)
+        
+        # gera um erro se já houver um cpf com o mesmo valor na base de dados
+        if UserProfile.objects.filter(cpf = value).exists():
+            raise ValidationError('Já existe um usuário cadastrado com este CPF.')
+        
+        return value
 
 class UserProfileBaseForm(object):
     """
@@ -52,7 +73,7 @@ class UserRegistrationForm(UserProfileBaseForm, RegistrationForm):
     adicionar o campo CPF
     """
     
-    cpf = BRCPFField(label = "CPF")
+    cpf = BRCPFFieldUnique(label = "CPF")
     user_occupation_primary = forms.ChoiceField(label = "Grande grupo", choices = [(o.id, str(o)) for o in UserOccupation.objects.filter(type = 'primary')])
     user_occupation_secondary = forms.ChoiceField(label = "Sub-grupo principal")
     user_occupation_tertiary = forms.ChoiceField(label = "Sub-grupo")
@@ -68,7 +89,7 @@ class UserProfileForm(UserProfileBaseForm, ModelForm):
     de edição do perfil do usuário.
     """
 
-    cpf = BRCPFField(label = "CPF")
+    cpf = BRCPFFieldUnique(label = "CPF")
 
     
 class UserProfilePublicForm(UserProfileForm):
