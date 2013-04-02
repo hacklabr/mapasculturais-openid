@@ -74,7 +74,9 @@ class UserRegistrationForm(UserProfileBaseForm, RegistrationForm):
     """
     
     cpf = BRCPFFieldUnique(label = "CPF")
-    user_occupation_primary = forms.ChoiceField(label = "Grande grupo", choices = [(o.id, str(o)) for o in UserOccupation.objects.filter(type = 'primary')])
+    choices = [(o.id, str(o)) for o in UserOccupation.objects.filter(type = 'primary')]
+    choices.insert(0, (u'', 'Selecione'))
+    user_occupation_primary = forms.ChoiceField(label = "Grande grupo", choices = choices)
     user_occupation_secondary = forms.ChoiceField(label = "Sub-grupo principal")
     user_occupation_tertiary = forms.ChoiceField(label = "Sub-grupo")
     user_occupation_quartenary = forms.ChoiceField(label = "Família")
