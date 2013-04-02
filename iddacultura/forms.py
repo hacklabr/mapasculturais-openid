@@ -6,28 +6,16 @@ from django.forms import ModelForm
 from django import forms
 from iddacultura.models import User, UserProfile, UserOccupation
 
-class UserRegistrationForm(RegistrationForm):
+class UserProfileBaseForm(object):
     """
-    Extende o formulário de registro de usuário para
-    adicionar o campo CPF
+    Funcionalidade básico do formulário com o perfil do 
+    usuário compartilhada pelo formulário de registro do usuário
+    e pelo formulário de edição do perfil do usuário
     """
-    
-    cpf = BRCPFField(label = "CPF")
-    
-
-class UserProfileForm(ModelForm):
-    """
-    Extende o formulário de edição do perfil do usuário
-    para customizar o comportamento dos campos relacionados
-    a ocupação do usuário. Usado no admin como na interface pública
-    de edição do perfil do usuário.
-    """
-    
-    cpf = BRCPFField(label = "CPF")
     
     def __init__(self, *args, **kwargs):
-        super(UserProfileForm, self).__init__(*args, **kwargs)
-        
+        super(UserProfileBaseForm, self).__init__(*args, **kwargs)
+
         try:
             self.populate_occupation_options(kwargs, 'user_occupation_secondary', 'user_occupation_primary')
             self.populate_occupation_options(kwargs, 'user_occupation_tertiary', 'user_occupation_secondary')
@@ -44,9 +32,10 @@ class UserProfileForm(ModelForm):
     def populate_occupation_options(self, kwargs, field, parent_field):
         """
         Define as opções disponíveis para cada um dos campos
-        de ocupação que o usuário precisa escolher.
+        de ocupação que o usuário precisa escolher (do segundo nível
+        ao quinto nível).
         """
-
+        
         if kwargs.has_key('data') and kwargs['data'].has_key(field):
             child = UserOccupation.objects.get(pk = kwargs['data'][field])
             self.fields[field].choices = [(o.id, str(o)) for o in UserOccupation.objects.filter(parent = child.parent)]
@@ -56,6 +45,32 @@ class UserProfileForm(ModelForm):
         else:
             self.fields[field].widget.attrs['disabled'] = 'disabled'
 
+
+class UserRegistrationForm(UserProfileBaseForm, RegistrationForm):
+    """
+    Extende o formulário de registro de usuário para
+    adicionar o campo CPF
+    """
+    
+    cpf = BRCPFField(label = "CPF")
+    user_occupation_primary = forms.ChoiceField(label = "Grande grupo", choices = [(o.id, str(o)) for o in UserOccupation.objects.filter(type = 'primary')])
+    user_occupation_secondary = forms.ChoiceField(label = "Sub-grupo principal")
+    user_occupation_tertiary = forms.ChoiceField(label = "Sub-grupo")
+    user_occupation_quartenary = forms.ChoiceField(label = "Família")
+    user_occupation_quinary = forms.ChoiceField(label = "Ocupação")
+    
+
+class UserProfileForm(UserProfileBaseForm, ModelForm):
+    """
+    Extende o formulário de edição do perfil do usuário
+    para customizar o comportamento dos campos relacionados
+    a ocupação do usuário. Usado no admin como na interface pública
+    de edição do perfil do usuário.
+    """
+
+    cpf = BRCPFField(label = "CPF")
+
+    
 class UserProfilePublicForm(UserProfileForm):
     """
     Extende o formulário de edição do perfil do usuário

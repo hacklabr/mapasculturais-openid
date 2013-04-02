@@ -7,7 +7,7 @@ from registration.models import RegistrationProfile
 from django.contrib.sites.models import RequestSite
 from django.contrib.sites.models import Site
 
-from models import UserProfile
+from models import UserProfile, UserOccupation
 
 class RegBackend(DefaultBackend):
     """
@@ -35,6 +35,11 @@ class RegBackend(DefaultBackend):
         
         u = UserProfile.objects.get(user_id = new_user.id)
         u.cpf = kwargs['cpf']
+        u.user_occupation_primary = UserOccupation.objects.get(id = kwargs['user_occupation_primary'])
+        u.user_occupation_secondary = UserOccupation.objects.get(id = kwargs['user_occupation_secondary'])
+        u.user_occupation_tertiary = UserOccupation.objects.get(id = kwargs['user_occupation_tertiary'])
+        u.user_occupation_quartenary = UserOccupation.objects.get(id = kwargs['user_occupation_quartenary'])
+        u.user_occupation_quinary = UserOccupation.objects.get(id = kwargs['user_occupation_quinary'])
         u.save()
         
         return new_user
