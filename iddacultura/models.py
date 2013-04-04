@@ -53,6 +53,9 @@ class UserProfile(models.Model):
     user_occupation_quartenary = models.ForeignKey(UserOccupation, limit_choices_to = {'type': 'quartenary'}, related_name = 'occupation_quartenary', verbose_name = "Família", null = True)
     user_occupation_quinary = models.ForeignKey(UserOccupation, limit_choices_to = {'type': 'quinary'}, related_name = 'occupation_quinary', verbose_name = "Ocupação", null = True)
     
+    class Meta:
+        verbose_name = 'Perfil do usuário'
+    
     def get_absolute_url(self):
         return reverse('profiles_profile_detail', args=[unicode(self.user.username)])
     
