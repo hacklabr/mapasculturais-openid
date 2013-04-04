@@ -35,7 +35,6 @@ from openid.server.trustroot import verifyReturnTo
 from openid.yadis.discover import DiscoveryFailure
 from openid.consumer.discover import OPENID_IDP_2_0_TYPE, OPENID_2_0_TYPE
 from openid.extensions import sreg
-from openid.extensions import pape
 from openid.fetchers import HTTPFetchingError
 
 def get_openid_store():
@@ -201,15 +200,12 @@ def show_decide_page(request, openid_request):
     except HTTPFetchingError, err:
         trust_root_valid = "Unreachable"
 
-    pape_request = pape.Request.fromOpenIDRequest(openid_request)
-
     return direct_to_template(
         request,
         'provider/trust.html',
         {'trust_root': trust_root,
          'trust_handler_url':get_view_url(request, process_trust_result),
          'trust_root_valid': trust_root_valid,
-         'pape_request': pape_request,
          })
 
 @csrf_exempt
@@ -249,10 +245,6 @@ def process_trust_result(request):
         sreg_req = sreg.SRegRequest.fromOpenIDRequest(openid_request)
         sreg_resp = sreg.SRegResponse.extractResponse(sreg_req, sreg_data)
         openid_response.addExtension(sreg_resp)
-
-        pape_response = pape.Response()
-        pape_response.setAuthLevel(pape.LEVELS_NIST, 0)
-        openid_response.addExtension(pape_response)
 
     return display_response(request, openid_response)
 

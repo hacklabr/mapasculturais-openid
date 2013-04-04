@@ -4,8 +4,6 @@
   <!-- Trust root has been validated by OpenID 2 mechanism. -->
   <p>The site <tt>{{ trust_root|escape }}</tt> has requested verification
   of your OpenID.</p>
-
-  {% include "provider/pape_request_info.html" %}
 {% endifequal %}
 {% ifequal trust_root_valid "Invalid" %}
 <div class="error">
@@ -29,11 +27,7 @@
   extra caution in deciding whether to release information to this party,
   and ask <tt>{{ trust_root|escape }}</tt> to implement relying party
   verification for your future transactions.</p>
-
-  {% include "provider/pape_request_info.html" %}
 {% endifequal %}
-
-<!-- trust_root_valid is {{ trust_root_valid }} -->
 
 <div>
 <form method="post" action="{{ trust_handler_url }}">
