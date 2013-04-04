@@ -1,42 +1,36 @@
 {% block body %}
 
-{% ifequal trust_root_valid "Valid" %}
-  <!-- Trust root has been validated by OpenID 2 mechanism. -->
-  <p>The site <tt>{{ trust_root|escape }}</tt> has requested verification
-  of your OpenID.</p>
-{% endifequal %}
 {% ifequal trust_root_valid "Invalid" %}
 <div class="error">
-  <p>This request claims to be from {{ trust_root|escape }} but I have 
-  determined that <em>it is a pack of lies</em>.  Beware, if you release
-  information to them, they are likely to do unconscionable things with it,
-  being the lying liars that they are.</p>
-  <p>Please tell the <em>real</em> {{ trust_root|escape }} that someone is
-  trying to abuse your trust in their good name.</p>
+  <p>Esta requisição para autorizar o acesso usando o ID da Cultura diz ter sido originada no site {{ trust_root|escape }}
+  mas essa informação é falsa. Por isso não é recomendado autorizar o uso do ID da Cultura neste caso.</p>
+  <p>Por favor avise os administradores do verdadeiro {{ trust_root|escape }} que alguém está tentando se passar por eles.</p>
 </div>
 {% endifequal %}
 {% ifequal trust_root_valid "Unreachable" %}
-  <p>The site <tt>{{ trust_root|escape }}</tt> has requested verification
-  of your OpenID.  I have failed to reach it and thus cannot vouch for its
-  authenticity.  Perhaps it is on your local network.</p>
+  <p>O site <tt>{{ trust_root|escape }}</tt> solicitou autorização para usar a sua credencial do ID da Cultura mas não
+  foi possível estabelecer uma conexão com ele para confirmar a autenticidade. Verifique se o site em questão não é acessível
+  apenas na sua rede local.</p>
 {% endifequal %}
 {% ifequal trust_root_valid "DISCOVERY_FAILED" %}
   <p>The site <tt>{{ trust_root|escape }}</tt> has requested verification
   of your OpenID.  However, <tt>{{ trust_root|escape }}</tt> does not 
-  implement OpenID 2.0's relying party verification mechanism.  Please use
-  extra caution in deciding whether to release information to this party,
-  and ask <tt>{{ trust_root|escape }}</tt> to implement relying party
+  implement OpenID 2.0's relying party verification mechanism.  Please ask
+  <tt>{{ trust_root|escape }}</tt> to implement relying party
   verification for your future transactions.</p>
 {% endifequal %}
 
-<div>
-<form method="post" action="{{ trust_handler_url }}">
-  <p>Verify your identity to the relying party?</p>
-
-  <p><input type="checkbox" name="remember" value="yes"/><label for="remember">Remember your decision?</label></p>
-  <input type="submit" value="Yes (Allow)" name="allow" />
-  <input type="submit" value="No (Cancel)" name="cancel" />
-</form>
-</div>
-
+{% ifequal trust_root_valid "Valid" %}
+  <!-- Trust root has been validated by OpenID 2 mechanism. -->
+  <p>O site <tt>{{ trust_root|escape }}</tt> solicitou autorização para usar a sua credencial do ID da Cultura.</p>
+  <div>
+    <form method="post" action="{{ trust_handler_url }}">
+      <p>Você autoriza o uso da sua credencial para este site?</p>
+    
+      <p><input type="checkbox" name="remember" value="yes"/><label for="remember">Lembrar decisão?</label></p>
+      <input type="submit" value="Sim" name="allow" />
+      <input type="submit" value="Não" name="cancel" />
+    </form>
+  </div>
+{% endifequal %}
 {% endblock %}
