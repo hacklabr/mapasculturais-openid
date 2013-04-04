@@ -35,6 +35,7 @@ from openid.server.trustroot import verifyReturnTo
 from openid.yadis.discover import DiscoveryFailure
 from openid.consumer.discover import OPENID_IDP_2_0_TYPE, OPENID_2_0_TYPE
 from openid.extensions import sreg
+from openid.extensions import ax
 from openid.fetchers import HTTPFetchingError
 
 def get_openid_store():
@@ -71,14 +72,14 @@ def op_xrds(request):
     IDP-driven identifier selection.
     """
     return util.render_xrds(
-        request, [OPENID_IDP_2_0_TYPE, sreg.ns_uri], [get_view_url(request, endpoint)])
+        request, [OPENID_IDP_2_0_TYPE, sreg.ns_uri, ax.AXMessage.ns_uri], [get_view_url(request, endpoint)])
 
 def user_xrds(request, username):
     """
     Respond to requests for a specific user identity XRDS Document
     """
     return util.render_xrds(
-        request, [OPENID_2_0_TYPE, sreg.ns_uri], [get_view_url(request, endpoint)], username)
+        request, [OPENID_2_0_TYPE, sreg.ns_uri, ax.AXMessage.ns_uri], [get_view_url(request, endpoint)], username)
 
 def trust_page(request):
     """
@@ -239,12 +240,20 @@ def process_trust_result(request):
             'fullname': request.user.get_full_name(),
             'nickname': request.user.username,
             'email': request.user.email,
-            'postcode': request.user.get_profile().cpf,
         }
 
         sreg_req = sreg.SRegRequest.fromOpenIDRequest(openid_request)
         sreg_resp = sreg.SRegResponse.extractResponse(sreg_req, sreg_data)
         openid_response.addExtension(sreg_resp)
+
+        ax_req = ax.FetchRequest.fromOpenIDRequest(openid_request)
+        ax_resp = ax.FetchResponse(ax_req)
+        ax_resp.addValue('http://openid.net/schema/namePerson/first', request.user.first_name)
+        ax_resp.addValue('http://openid.net/schema/namePerson/last', request.user.last_name)
+        ax_resp.addValue('http://openid.net/schema/namePerson/friendly', request.user.username)
+        ax_resp.addValue('http://openid.net/schema/contact/internet/email', request.user.email)
+        ax_resp.addValue('http://id.culturadigital.br/schema/cpf', request.user.get_profile().cpf)
+        openid_response.addExtension(ax_resp)
 
     return display_response(request, openid_response)
 
