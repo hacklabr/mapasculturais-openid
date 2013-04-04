@@ -253,6 +253,11 @@ def process_trust_result(request):
         ax_resp.addValue('http://openid.net/schema/namePerson/friendly', request.user.username)
         ax_resp.addValue('http://openid.net/schema/contact/internet/email', request.user.email)
         ax_resp.addValue('http://id.culturadigital.br/schema/cpf', request.user.get_profile().cpf)
+        ax_resp.addValue('http://id.culturadigital.br/schema/occupation_primary', request.user.get_profile().user_occupation_primary.code)
+        ax_resp.addValue('http://id.culturadigital.br/schema/occupation_secondary', request.user.get_profile().user_occupation_secondary.code)
+        ax_resp.addValue('http://id.culturadigital.br/schema/occupation_tertiary', request.user.get_profile().user_occupation_tertiary.code)
+        ax_resp.addValue('http://id.culturadigital.br/schema/occupation_quartenary', request.user.get_profile().user_occupation_quartenary.code)
+        ax_resp.addValue('http://id.culturadigital.br/schema/occupation_quinary', request.user.get_profile().user_occupation_quinary.code)
         openid_response.addExtension(ax_resp)
 
     return display_response(request, openid_response)
