@@ -196,9 +196,9 @@ def show_decide_page(request, openid_request):
         # Stringify because template's ifequal can only compare to strings.
         trust_root_valid = verifyReturnTo(trust_root, return_to) \
                            and "Valid" or "Invalid"
-    except DiscoveryFailure, err:
+    except DiscoveryFailure:
         trust_root_valid = "DISCOVERY_FAILED"
-    except HTTPFetchingError, err:
+    except HTTPFetchingError:
         trust_root_valid = "Unreachable"
 
     return direct_to_template(
