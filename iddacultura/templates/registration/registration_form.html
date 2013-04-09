@@ -2,10 +2,10 @@
 {% block head %}{{block.super}}<script src="{{ STATIC_URL }}js/edit_profile.js"></script>{% endblock %}
 {% block title %}Criar nova conta{% endblock %}
 {% block content %}
-<table>
-    <form method='post' action=''>{% csrf_token %}
-        {{ form }}
-        <tr><td></td><td><input type="submit" value="Registrar" /></td>
-    </form>
-</table>
+    <table>
+        <form method='post' action=''>{% csrf_token %}
+            {{ form }}
+            <tr><td></td><td><input type="submit" value="Registrar" /></td>
+        </form>
+    </table>
 {% endblock %}
