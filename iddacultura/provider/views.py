@@ -167,6 +167,7 @@ def handle_check_id_request(request, openid_request):
 
     if request.user.userprofile.trusted_url(openid_request.trust_root):
         openid_response = openid_request.answer(True, identity = id_url)
+        add_user_data(request, openid_response)
         return display_response(request, openid_response)
 
     if openid_request.immediate:
@@ -236,31 +237,41 @@ def process_trust_result(request):
 
     # Send Simple Registration data in the response, if appropriate.
     if allowed:
-        sreg_data = {
-            'fullname': request.user.get_full_name(),
-            'nickname': request.user.username,
-            'email': request.user.email,
-        }
-
-        sreg_req = sreg.SRegRequest.fromOpenIDRequest(openid_request)
-        sreg_resp = sreg.SRegResponse.extractResponse(sreg_req, sreg_data)
-        openid_response.addExtension(sreg_resp)
-
-        ax_req = ax.FetchRequest.fromOpenIDRequest(openid_request)
-        ax_resp = ax.FetchResponse(ax_req)
-        ax_resp.addValue('http://openid.net/schema/namePerson/first', request.user.first_name)
-        ax_resp.addValue('http://openid.net/schema/namePerson/last', request.user.last_name)
-        ax_resp.addValue('http://openid.net/schema/namePerson/friendly', request.user.username)
-        ax_resp.addValue('http://openid.net/schema/contact/internet/email', request.user.email)
-        ax_resp.addValue('http://id.culturadigital.br/schema/cpf', request.user.get_profile().cpf)
-        ax_resp.addValue('http://id.culturadigital.br/schema/occupation_primary', request.user.get_profile().user_occupation_primary.code)
-        ax_resp.addValue('http://id.culturadigital.br/schema/occupation_secondary', request.user.get_profile().user_occupation_secondary.code)
-        ax_resp.addValue('http://id.culturadigital.br/schema/occupation_tertiary', request.user.get_profile().user_occupation_tertiary.code)
-        ax_resp.addValue('http://id.culturadigital.br/schema/occupation_quartenary', request.user.get_profile().user_occupation_quartenary.code)
-        ax_resp.addValue('http://id.culturadigital.br/schema/occupation_quinary', request.user.get_profile().user_occupation_quinary.code)
-        openid_response.addExtension(ax_resp)
+        add_user_data(request, openid_response)
 
     return display_response(request, openid_response)
+
+def add_user_data(request, openid_response):
+    """
+    Add user custom data to the request using sreg
+    and ax extensions
+    """
+    
+    openid_request = get_request(request)
+    
+    sreg_data = {
+        'fullname': request.user.get_full_name(),
+        'nickname': request.user.username,
+        'email': request.user.email,
+    }
+
+    sreg_req = sreg.SRegRequest.fromOpenIDRequest(openid_request)
+    sreg_resp = sreg.SRegResponse.extractResponse(sreg_req, sreg_data)
+    openid_response.addExtension(sreg_resp)
+
+    ax_req = ax.FetchRequest.fromOpenIDRequest(openid_request)
+    ax_resp = ax.FetchResponse(ax_req)
+    ax_resp.addValue('http://openid.net/schema/namePerson/first', request.user.first_name)
+    ax_resp.addValue('http://openid.net/schema/namePerson/last', request.user.last_name)
+    ax_resp.addValue('http://openid.net/schema/namePerson/friendly', request.user.username)
+    ax_resp.addValue('http://openid.net/schema/contact/internet/email', request.user.email)
+    ax_resp.addValue('http://id.culturadigital.br/schema/cpf', request.user.get_profile().cpf)
+    ax_resp.addValue('http://id.culturadigital.br/schema/occupation_primary', request.user.get_profile().user_occupation_primary.code)
+    ax_resp.addValue('http://id.culturadigital.br/schema/occupation_secondary', request.user.get_profile().user_occupation_secondary.code)
+    ax_resp.addValue('http://id.culturadigital.br/schema/occupation_tertiary', request.user.get_profile().user_occupation_tertiary.code)
+    ax_resp.addValue('http://id.culturadigital.br/schema/occupation_quartenary', request.user.get_profile().user_occupation_quartenary.code)
+    ax_resp.addValue('http://id.culturadigital.br/schema/occupation_quinary', request.user.get_profile().user_occupation_quinary.code)
+    openid_response.addExtension(ax_resp)
 
 def display_response(request, openid_response):
     """
