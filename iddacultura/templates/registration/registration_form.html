@@ -1,10 +1,15 @@
 {% extends "registration/registration_base.html" %}
+{% block head %}{{block.super}}<script src="{{ STATIC_URL }}js/edit_profile.js"></script>{% endblock %}
 {% block title %}Criar nova conta{% endblock %}
 {% block content %}
-<table>
-    <form method='post' action=''>{% csrf_token %}
-        {{ form }}
-        <tr><td></td><td><input type="submit" value="Registrar" /></td>
-    </form>
-</table>
+    {% if request.user.is_authenticated %}
+        <p>Você já está autenticado!</p>
+    {% else %}
+        <table>
+            <form method='post' action=''>{% csrf_token %}
+                {{ form }}
+                <tr><td></td><td><input type="submit" value="Registrar" /></td>
+            </form>
+        </table>
+    {% endif %}
 {% endblock %}

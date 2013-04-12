@@ -35,7 +35,7 @@ from openid.server.trustroot import verifyReturnTo
 from openid.yadis.discover import DiscoveryFailure
 from openid.consumer.discover import OPENID_IDP_2_0_TYPE, OPENID_2_0_TYPE
 from openid.extensions import sreg
-from openid.extensions import pape
+from openid.extensions import ax
 from openid.fetchers import HTTPFetchingError
 
 def get_openid_store():
@@ -72,14 +72,14 @@ def op_xrds(request):
     IDP-driven identifier selection.
     """
     return util.render_xrds(
-        request, [OPENID_IDP_2_0_TYPE, sreg.ns_uri], [get_view_url(request, endpoint)])
+        request, [OPENID_IDP_2_0_TYPE, sreg.ns_uri, ax.AXMessage.ns_uri], [get_view_url(request, endpoint)])
 
 def user_xrds(request, username):
     """
     Respond to requests for a specific user identity XRDS Document
     """
     return util.render_xrds(
-        request, [OPENID_2_0_TYPE, sreg.ns_uri], [get_view_url(request, endpoint)], username)
+        request, [OPENID_2_0_TYPE, sreg.ns_uri, ax.AXMessage.ns_uri], [get_view_url(request, endpoint)], username)
 
 def trust_page(request):
     """
@@ -167,6 +167,7 @@ def handle_check_id_request(request, openid_request):
 
     if request.user.userprofile.trusted_url(openid_request.trust_root):
         openid_response = openid_request.answer(True, identity = id_url)
+        add_user_data(request, openid_response)
         return display_response(request, openid_response)
 
     if openid_request.immediate:
@@ -196,12 +197,10 @@ def show_decide_page(request, openid_request):
         # Stringify because template's ifequal can only compare to strings.
         trust_root_valid = verifyReturnTo(trust_root, return_to) \
                            and "Valid" or "Invalid"
-    except DiscoveryFailure, err:
+    except DiscoveryFailure:
         trust_root_valid = "DISCOVERY_FAILED"
-    except HTTPFetchingError, err:
+    except HTTPFetchingError:
         trust_root_valid = "Unreachable"
-
-    pape_request = pape.Request.fromOpenIDRequest(openid_request)
 
     return direct_to_template(
         request,
@@ -209,7 +208,6 @@ def show_decide_page(request, openid_request):
         {'trust_root': trust_root,
          'trust_handler_url':get_view_url(request, process_trust_result),
          'trust_root_valid': trust_root_valid,
-         'pape_request': pape_request,
          })
 
 @csrf_exempt
@@ -239,22 +237,41 @@ def process_trust_result(request):
 
     # Send Simple Registration data in the response, if appropriate.
     if allowed:
-        sreg_data = {
-            'fullname': request.user.get_full_name(),
-            'nickname': request.user.username,
-            'email': request.user.email,
-            'postcode': request.user.get_profile().cpf,
-        }
-
-        sreg_req = sreg.SRegRequest.fromOpenIDRequest(openid_request)
-        sreg_resp = sreg.SRegResponse.extractResponse(sreg_req, sreg_data)
-        openid_response.addExtension(sreg_resp)
-
-        pape_response = pape.Response()
-        pape_response.setAuthLevel(pape.LEVELS_NIST, 0)
-        openid_response.addExtension(pape_response)
+        add_user_data(request, openid_response)
 
     return display_response(request, openid_response)
+
+def add_user_data(request, openid_response):
+    """
+    Add user custom data to the request using sreg
+    and ax extensions
+    """
+    
+    openid_request = get_request(request)
+    
+    sreg_data = {
+        'fullname': request.user.get_full_name(),
+        'nickname': request.user.username,
+        'email': request.user.email,
+    }
+
+    sreg_req = sreg.SRegRequest.fromOpenIDRequest(openid_request)
+    sreg_resp = sreg.SRegResponse.extractResponse(sreg_req, sreg_data)
+    openid_response.addExtension(sreg_resp)
+
+    ax_req = ax.FetchRequest.fromOpenIDRequest(openid_request)
+    ax_resp = ax.FetchResponse(ax_req)
+    ax_resp.addValue('http://openid.net/schema/namePerson/first', request.user.first_name)
+    ax_resp.addValue('http://openid.net/schema/namePerson/last', request.user.last_name)
+    ax_resp.addValue('http://openid.net/schema/namePerson/friendly', request.user.username)
+    ax_resp.addValue('http://openid.net/schema/contact/internet/email', request.user.email)
+    ax_resp.addValue('http://id.culturadigital.br/schema/cpf', request.user.get_profile().cpf)
+    ax_resp.addValue('http://id.culturadigital.br/schema/occupation_primary', request.user.get_profile().user_occupation_primary.code)
+    ax_resp.addValue('http://id.culturadigital.br/schema/occupation_secondary', request.user.get_profile().user_occupation_secondary.code)
+    ax_resp.addValue('http://id.culturadigital.br/schema/occupation_tertiary', request.user.get_profile().user_occupation_tertiary.code)
+    ax_resp.addValue('http://id.culturadigital.br/schema/occupation_quartenary', request.user.get_profile().user_occupation_quartenary.code)
+    ax_resp.addValue('http://id.culturadigital.br/schema/occupation_quinary', request.user.get_profile().user_occupation_quinary.code)
+    openid_response.addExtension(ax_resp)
 
 def display_response(request, openid_response):
     """

@@ -5,6 +5,6 @@ urlpatterns = patterns(
     (r'^$', 'endpoint'),
     (r'^xrds/$', 'op_xrds'),
     (r'^xrds/(?P<username>[^/]+)$', 'user_xrds'),
-    (r'^processTrustResult/$', 'process_trust_result'),
+    (r'^process_trust_result/$', 'process_trust_result'),
     (r'^trust/$', 'trust_page'),
 )

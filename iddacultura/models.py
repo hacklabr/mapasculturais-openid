@@ -44,7 +44,7 @@ class UserProfile(models.Model):
     """
     
     user = models.OneToOneField(User)
-    cpf = models.CharField(max_length = 50, verbose_name = "CPF")
+    cpf = models.CharField(max_length = 50, verbose_name = "CPF", unique = True)
     trusted_roots = models.ManyToManyField(TrustedRoot, blank = True, null = True, verbose_name = "Sites autorizados", help_text = "Lista de clientes OpenID autorizados.")
     
     user_occupation_primary = models.ForeignKey(UserOccupation, limit_choices_to = {'type': 'primary'}, related_name = 'occupation_primary', verbose_name = "Grande grupo", null = True)
@@ -52,6 +52,9 @@ class UserProfile(models.Model):
     user_occupation_tertiary = models.ForeignKey(UserOccupation, limit_choices_to = {'type': 'tertiary'}, related_name = 'occupation_tertiary', verbose_name = "Sub-grupo", null = True)
     user_occupation_quartenary = models.ForeignKey(UserOccupation, limit_choices_to = {'type': 'quartenary'}, related_name = 'occupation_quartenary', verbose_name = "Família", null = True)
     user_occupation_quinary = models.ForeignKey(UserOccupation, limit_choices_to = {'type': 'quinary'}, related_name = 'occupation_quinary', verbose_name = "Ocupação", null = True)
+    
+    class Meta:
+        verbose_name = 'Perfil do usuário'
     
     def get_absolute_url(self):
         return reverse('profiles_profile_detail', args=[unicode(self.user.username)])
