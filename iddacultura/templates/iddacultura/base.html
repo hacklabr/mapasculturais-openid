@@ -1,21 +1,51 @@
-<!doctype html>
+{% load staticfiles %}
+{% load login_form %}
+
+<!DOCTYPE html>
 <html>
     <head>
         {% block head %}
+            <meta charset="UTF-8" />
             <link rel="stylesheet" href="{{ BOOTSTRAP_CSS_URL }}">
-            <script src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+            <link rel="stylesheet" href="{% static "css/style.css" %}">
+            <script src="{% static "js/jquery-1.9.1.min.js" %}"></script>
             <title>{% block title %}{% endblock %}</title>
         {% endblock %}
     </head>
-    <body>
-        {% if request.user.is_authenticated %}
-            <a href='{% url profiles.views.edit_profile %}'>Editar perfil</a>
-            <a href='{% url auth_logout %}'>Sair</a>
-        {% else %}
-            <a href='{% url auth_login %}'>Entrar no site</a><br />
-            <a href="{% url registration_register %}">Criar novo usuário</a>
-        {% endif %}
-        <br /><br />
-        {% block content %}{% endblock %}
-    </body>
+    <div class="wrap">
+        <header id="header" class="clearfix">
+            <a href="#" title="ID da Cultura"><img src="{% static "images/minc.png" %}" alt="logo" class="logo" /></a>
+            <h1 class="title">ID da Cultura</h1>
+        </header>
+        <div class="content_all clearfix">
+            <section id="content" class="col-9">
+                {% block content %}{% endblock %}
+            </section>
+            <aside id="sidebar" class="col-3">
+                {% if request.user.is_authenticated %}
+                    <nav id="menu">
+                        <a href="/" class="active" title="Página inicial">Página inicial</a>
+                        <a href="{% url profiles.views.profile_detail request.user.username %}" title="Ver perfil">Ver perfil</a>
+                        <a href="{% url profiles.views.edit_profile %}" title="Editar perfil">Editar perfil</a>
+                        <a href="{% url django.contrib.auth.views.password_change %}" title="Alterar senha">Alterar senha</a>
+                        <a href="{% url auth_logout %}" title="Sair">Sair</a>
+                    </nav>
+                {% else %}
+                    <h1 class="title_login">Login</h1>
+                    <form action="" method="post" id="access_login">
+                        <label for="usuario">Usuário:</label>
+                        <input type="text" name="usuario" />
+        
+                        <label for="senha">Senha:</label>
+                        <input type="password" name="senha" />
+        
+                        <input type="submit" value="Entrar" name="enviar" />
+                    </form>
+                    <div class="clear"></div>
+                    <a href="{% url registration_register %}" title="Cadastrar-se" class="cadastrar_se">Cadastrar-se</a>
+                {% endif %}
+            </aside>
+            <footer id="footer" class="col-12 clear">Ministério da Cultura 2013 - Governo Federal</footer>
+        </div>
+    </div>
 </html>

@@ -3,14 +3,10 @@
 {% block title %}Edit Profile{% endblock %}
 {% block head %}{{block.super}}<script src="{{ STATIC_URL }}js/edit_profile.js"></script>{% endblock %} 
 {% block content %}
-<h1>Editar perfil do usuário {{ user }}</h1>
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form|bootstrap }}
-    <input id="submit" type="submit" name="submit" value="Atualizar" />
-</form>
-
-<br />
-<a href='{% url django.contrib.auth.views.password_change %}'>Trocar senha</a>
- 
+    <h1>Editar perfil do usuário {{ user }}</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <input id="submit" type="submit" name="submit" value="Atualizar" />
+    </form>
 {% endblock content %}

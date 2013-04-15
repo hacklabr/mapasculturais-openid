@@ -6,18 +6,18 @@
     <meta http-equiv="x-xrds-location" content="{% absolute iddacultura.provider.views.user_xrds profile.user.username %}" />
 {% endblock %}
 {% block content %}
-
-{% ifequal request.user.username profile.user.username %}
-	<p>Nome: {{ profile.user.get_full_name }}</p>
-	<p>E-mail: {{ profile.user.email }}</p>
-	<p>CPF: {{ profile.cpf }}</p>
-    <p>ID da Cultura: {% absolute profiles.views.profile_detail request.user.username %}</p>
-    <p>Grupo: {{ profile.user_occupation_primary }}</p>
-    <p>Sub-grupo principal: {{ profile.user_occupation_secondary }}</p>
-    <p>Sub-grupo: {{ profile.user_occupation_tertiary }}</p>
-    <p>Família: {{ profile.user_occupation_quartenary }}</p>
-    <p>Ocupação: {{ profile.user_occupation_quinary }}</p>
-{% else %}
-    <p>Identidade OpenID do usuário {{ profile.user.username }}</p>
-{% endifequal %}
+    <h1>Perfil do usuário {{ user }}</h1>
+    {% ifequal request.user.username profile.user.username %}
+    	<p>Nome: {{ profile.user.get_full_name }}</p>
+    	<p>E-mail: {{ profile.user.email }}</p>
+    	<p>CPF: {{ profile.cpf }}</p>
+        <p>ID da Cultura: {% absolute profiles.views.profile_detail request.user.username %}</p>
+        <p>Grupo: {{ profile.user_occupation_primary }}</p>
+        <p>Sub-grupo principal: {{ profile.user_occupation_secondary }}</p>
+        <p>Sub-grupo: {{ profile.user_occupation_tertiary }}</p>
+        <p>Família: {{ profile.user_occupation_quartenary }}</p>
+        <p>Ocupação: {{ profile.user_occupation_quinary }}</p>
+    {% else %}
+        <p>Identidade OpenID do usuário {{ profile.user.username }}</p>
+    {% endifequal %}
 {% endblock %}
