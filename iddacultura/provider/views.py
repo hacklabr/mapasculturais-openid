@@ -249,6 +249,9 @@ def add_user_data(request, openid_response):
     
     openid_request = get_request(request)
     
+    if openid_request == None:
+        return
+    
     sreg_data = {
         'fullname': request.user.get_full_name(),
         'nickname': request.user.username,
