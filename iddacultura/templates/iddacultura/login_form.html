@@ -5,10 +5,8 @@
     <form id="access_login" method="post" action="{% url django.contrib.auth.views.login %}">
         {% csrf_token %}
         
-        {% if request.GET.next %}
-           <input type="hidden" name="next" value="{{ request.GET.next }}" />
-        {% elif request.POST.next %}
-           <input type="hidden" name="next" value="{{ request.POST.next }}" />
+        {% if next %}
+           <input type="hidden" name="next" value="{{ next }}" />
         {% else %}
            <input type="hidden" name="next" value="{% url iddacultura.views.user_profile %}" />
         {% endif %}
