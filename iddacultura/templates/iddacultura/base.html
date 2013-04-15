@@ -14,7 +14,7 @@
     </head>
     <div class="wrap">
         <header id="header" class="clearfix">
-            <a href="#" title="ID da Cultura"><img src="{% static "images/minc.png" %}" alt="logo" class="logo" /></a>
+            <a href="{% url homepage %}" title="ID da Cultura"><img src="{% static "images/minc.png" %}" alt="logo" class="logo" /></a>
             <h1 class="title">ID da Cultura</h1>
         </header>
         {% block middle %}
@@ -26,7 +26,7 @@
                     <aside id="sidebar" class="col-3">
                         {% if request.user.is_authenticated %}
                             <nav id="menu">
-                                <a href="/" class="active" title="Página inicial">Página inicial</a>
+                                <a href="{% url homepage %}" class="active" title="Página inicial">Página inicial</a>
                                 <a href="{% url profiles.views.profile_detail request.user.username %}" title="Ver perfil">Ver perfil</a>
                                 <a href="{% url profiles.views.edit_profile %}" title="Editar perfil">Editar perfil</a>
                                 <a href="{% url django.contrib.auth.views.password_change %}" title="Alterar senha">Alterar senha</a>

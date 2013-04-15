@@ -18,3 +18,7 @@ urlpatterns = patterns('',
     url(r'^profiles/', include('profiles.urls')),
     url(r'^provider/', include('iddacultura.provider.urls')),
 )
+
+urlpatterns += patterns('django.contrib.flatpages.views',
+    url(r'^/?$', 'flatpage', {'url': '/'}, name='homepage'),
+)
