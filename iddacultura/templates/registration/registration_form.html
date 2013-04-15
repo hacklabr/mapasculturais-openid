@@ -5,6 +5,7 @@
     {% if request.user.is_authenticated %}
         <p>Você já está autenticado!</p>
     {% else %}
+        <h1>Cadastre-se</h1>
         <table>
             <form method='post' action=''>{% csrf_token %}
                 {{ form }}

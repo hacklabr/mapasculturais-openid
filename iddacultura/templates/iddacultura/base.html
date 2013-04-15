@@ -17,35 +17,30 @@
             <a href="#" title="ID da Cultura"><img src="{% static "images/minc.png" %}" alt="logo" class="logo" /></a>
             <h1 class="title">ID da Cultura</h1>
         </header>
-        <div class="content_all clearfix">
-            <section id="content" class="col-9">
-                {% block content %}{% endblock %}
-            </section>
-            <aside id="sidebar" class="col-3">
-                {% if request.user.is_authenticated %}
-                    <nav id="menu">
-                        <a href="/" class="active" title="Página inicial">Página inicial</a>
-                        <a href="{% url profiles.views.profile_detail request.user.username %}" title="Ver perfil">Ver perfil</a>
-                        <a href="{% url profiles.views.edit_profile %}" title="Editar perfil">Editar perfil</a>
-                        <a href="{% url django.contrib.auth.views.password_change %}" title="Alterar senha">Alterar senha</a>
-                        <a href="{% url auth_logout %}" title="Sair">Sair</a>
-                    </nav>
-                {% else %}
-                    <h1 class="title_login">Login</h1>
-                    <form action="" method="post" id="access_login">
-                        <label for="usuario">Usuário:</label>
-                        <input type="text" name="usuario" />
-        
-                        <label for="senha">Senha:</label>
-                        <input type="password" name="senha" />
-        
-                        <input type="submit" value="Entrar" name="enviar" />
-                    </form>
-                    <div class="clear"></div>
-                    <a href="{% url registration_register %}" title="Cadastrar-se" class="cadastrar_se">Cadastrar-se</a>
-                {% endif %}
-            </aside>
-            <footer id="footer" class="col-12 clear">Ministério da Cultura 2013 - Governo Federal</footer>
-        </div>
+        {% block middle %}
+            <div class="content_all clearfix">
+                <section id="content" class="col-9">
+                    {% block content %}{% endblock %}
+                </section>
+                {% block sidebar %}
+                    <aside id="sidebar" class="col-3">
+                        {% if request.user.is_authenticated %}
+                            <nav id="menu">
+                                <a href="/" class="active" title="Página inicial">Página inicial</a>
+                                <a href="{% url profiles.views.profile_detail request.user.username %}" title="Ver perfil">Ver perfil</a>
+                                <a href="{% url profiles.views.edit_profile %}" title="Editar perfil">Editar perfil</a>
+                                <a href="{% url django.contrib.auth.views.password_change %}" title="Alterar senha">Alterar senha</a>
+                                <a href="{% url auth_logout %}" title="Sair">Sair</a>
+                            </nav>
+                        {% else %}
+                            {% login_form %}
+                            <div class="clear"></div>
+                            <a href="{% url registration_register %}" title="Cadastrar-se" class="cadastrar_se">Cadastrar-se</a>
+                        {% endif %}
+                    </aside>
+                {% endblock %}
+                <footer id="footer" class="col-12 clear">Ministério da Cultura 2013 - Governo Federal</footer>
+            </div>
+        {% endblock %}
     </div>
 </html>

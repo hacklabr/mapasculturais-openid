@@ -1,0 +1,26 @@
+<h1 class="title_login">Login</h1>
+    {% if form.errors %}
+        <p>Usuário ou senha inválido.</p>
+    {% endif %}
+    <form id="access_login" method="post" action="{% url django.contrib.auth.views.login %}">
+        {% csrf_token %}
+        
+        {% if request.GET.next %}
+           <input type="hidden" name="next" value="{{ request.GET.next }}" />
+        {% elif request.POST.next %}
+           <input type="hidden" name="next" value="{{ request.POST.next }}" />
+        {% else %}
+           <input type="hidden" name="next" value="{% url iddacultura.views.user_profile %}" />
+        {% endif %}
+        
+        {{ form.username.label_tag }}
+        {{ form.username }}
+
+        {{ form.password.label_tag }}
+        {{ form.password }}
+
+        <input type="submit" value="Entrar" name="enviar" />
+    </form>
+
+    <p><a href="{% url auth_password_reset %}">Esqueceu sua senha?<a/></p>
+</form>
