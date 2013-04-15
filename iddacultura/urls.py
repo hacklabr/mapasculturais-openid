@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
+
 from django.conf.urls import patterns, include, url
-from django.views.generic import TemplateView
 from registration.views import register
 from forms import UserRegistrationForm, UserProfilePublicForm
 from iddacultura.views import user_profile, occupations
@@ -19,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^provider/', include('iddacultura.provider.urls')),
 )
 
+#TODO: por que é necessário colocar isso separado das demais urlpatterns?
 urlpatterns += patterns('django.contrib.flatpages.views',
     url(r'^/?$', 'flatpage', {'url': '/'}, name='homepage'),
 )

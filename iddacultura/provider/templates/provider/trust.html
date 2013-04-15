@@ -1,4 +1,6 @@
-{% block body %}
+{% extends "iddacultura/base_without_sidebar.html" %}
+{% block content %}
+    <h1>Autorizar site</h1>
     {% ifequal trust_root_valid "Invalid" %}
         <div class="error">
             <p>
