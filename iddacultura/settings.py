@@ -116,7 +116,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.core.context_processors.request',
     'absolute.context_processors.absolute',
-    'iddacultura.context_processors.bootstrap_files'
 )
 
 INSTALLED_APPS = (
@@ -133,7 +132,6 @@ INSTALLED_APPS = (
     'profiles',
     'iddacultura.provider',
     'absolute',
-    'bootstrapform',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -168,12 +166,6 @@ LOGGING = {
 AUTH_PROFILE_MODULE = 'iddacultura.UserProfile'
 
 ACCOUNT_ACTIVATION_DAYS = 7
-
-BOOTSTRAP_BASE_URL = 'http://twitter.github.com/bootstrap/assets/'
-BOOTSTRAP_JS_BASE_URL = BOOTSTRAP_BASE_URL + 'js/'
-BOOTSTRAP_JS_URL = BOOTSTRAP_JS_BASE_URL + 'bootstrap.min.js' 
-BOOTSTRAP_CSS_BASE_URL = BOOTSTRAP_BASE_URL + 'css/'
-BOOTSTRAP_CSS_URL = BOOTSTRAP_CSS_BASE_URL + 'bootstrap.css'
 
 SITE_ID = 1
 
