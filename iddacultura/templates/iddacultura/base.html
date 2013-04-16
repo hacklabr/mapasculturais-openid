@@ -1,5 +1,5 @@
 {% load staticfiles %}
-{% load login_form %}
+{% load sidebar %}
 
 <!DOCTYPE html>
 <html>
@@ -19,26 +19,15 @@
         </header>
         {% block middle %}
             <div class="content_all clearfix">
+                {% if request.user.is_authenticated %}
+                    {% sidebar %}
+                {% endif %}
                 <section id="content" class="col-9">
                     {% block content %}{% endblock %}
                 </section>
-                {% block sidebar %}
-                    <aside id="sidebar" class="col-3">
-                        {% if request.user.is_authenticated %}
-                            <nav id="menu">
-                                <a href="{% url homepage %}" class="active" title="Página inicial">Página inicial</a>
-                                <a href="{% url profiles.views.profile_detail request.user.username %}" title="Ver perfil">Ver perfil</a>
-                                <a href="{% url profiles.views.edit_profile %}" title="Editar perfil">Editar perfil</a>
-                                <a href="{% url django.contrib.auth.views.password_change %}" title="Alterar senha">Alterar senha</a>
-                                <a href="{% url auth_logout %}" title="Sair">Sair</a>
-                            </nav>
-                        {% else %}
-                            {% login_form %}
-                            <div class="clear"></div>
-                            <a href="{% url registration_register %}" title="Cadastrar-se" class="cadastrar_se">Cadastrar-se</a>
-                        {% endif %}
-                    </aside>
-                {% endblock %}
+                {% if not request.user.is_authenticated %}
+                    {% sidebar %}
+                {% endif %}
                 <footer id="footer" class="col-12 clear">Ministério da Cultura 2013 - Governo Federal</footer>
             </div>
         {% endblock %}
