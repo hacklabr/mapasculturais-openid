@@ -52,6 +52,8 @@ class UserRegistrationForm(UserProfileBaseForm, RegistrationForm):
     adicionar o campo CPF
     """
     
+    first_name = forms.CharField(label="Nome", help_text='',)
+    last_name = forms.CharField(label="Sobrenome", help_text='')
     cpf = BRCPFField(label = "CPF")
     choices = [(o.id, str(o)) for o in UserOccupation.objects.filter(type = 'primary')]
     choices.insert(0, (u'', 'Selecione'))

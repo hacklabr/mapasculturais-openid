@@ -6,6 +6,7 @@ from registration.models import RegistrationProfile
 
 from django.contrib.sites.models import RequestSite
 from django.contrib.sites.models import Site
+from django.contrib.auth.models import User
 
 from models import UserProfile, UserOccupation
 
@@ -27,11 +28,17 @@ class RegBackend(DefaultBackend):
             site = Site.objects.get_current()
         else:
             site = RequestSite(request)
+        
         new_user = RegistrationProfile.objects.create_inactive_user(username, email,
                                                                     password, site)
         signals.user_registered.send(sender=self.__class__,
                                      user=new_user,
                                      request=request)
+
+        u = User.objects.get(id = new_user.id)
+        u.first_name = kwargs['first_name']
+        u.last_name = kwargs['last_name']
+        u.save()
         
         u = UserProfile.objects.get(user_id = new_user.id)
         u.cpf = kwargs['cpf']
