@@ -1,10 +1,33 @@
 # -*- coding: utf-8 -*-
 
+import re
 from registration.forms import RegistrationForm
 from django.contrib.localflavor.br.forms import BRCPFField
-from django.forms import ModelForm
+from django.forms import ModelForm, ValidationError
 from django import forms
 from iddacultura.models import User, UserProfile, UserOccupation
+
+class BRCPFFieldUnique(BRCPFField):
+    """
+    Extende a classe BRCPFField para forçar valores
+    únicos para o CPF e também para sempre salvar apenas
+    os números na base de dados sem pontos e hífem.
+    
+    Usado no UserRegistrationForm que não extende o ModelForm
+    e por isso ignora o fato do campo cpf estar marcado como único.
+    """
+    
+    def clean(self, value):
+        # remove pontos e hífem do cpf
+        value = re.sub("[-\.]", "", value)
+        
+        super(BRCPFFieldUnique, self).clean(value)
+        
+        # gera um erro se já houver um cpf com o mesmo valor na base de dados
+        if UserProfile.objects.filter(cpf = value).exists():
+            raise ValidationError('Já existe um usuário cadastrado com este CPF.')
+        
+        return value
 
 class UserProfileBaseForm(object):
     """
@@ -49,12 +72,12 @@ class UserProfileBaseForm(object):
 class UserRegistrationForm(UserProfileBaseForm, RegistrationForm):
     """
     Extende o formulário de registro de usuário para
-    adicionar o campo CPF
+    mais campos.
     """
     
     first_name = forms.CharField(label="Nome", help_text='',)
     last_name = forms.CharField(label="Sobrenome", help_text='')
-    cpf = BRCPFField(label = "CPF")
+    cpf = BRCPFFieldUnique(label = "CPF")
     choices = [(o.id, str(o)) for o in UserOccupation.objects.filter(type = 'primary')]
     choices.insert(0, (u'', 'Selecione'))
     user_occupation_primary = forms.ChoiceField(label = "Grande grupo", choices = choices)
