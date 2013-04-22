@@ -8,8 +8,8 @@ del, dfn, em, font, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
+fieldset, form, label, legend/*,
+table, caption, tbody, tfoot, thead, tr, th, td */{
 	background: transparent;
 	border: 0;
 	margin: 0;
@@ -70,8 +70,8 @@ a img {
 .alpha {margin-left: 0;}
 .omega {margin-right: 0;}
 
-input[type="text"], input[type="submit"], textarea, select { background: #F8F8F8; border: 1px solid #DDDDDD; padding: 6px; font: 12px/22px Arial, Helvetica, sans-serif; }
-
+input[type="text"], input[type="submit"], input[type="password"], textarea, select { background: #F8F8F8; border: 1px solid #DDDDDD; padding: 6px; font: 12px/22px Arial, Helvetica, sans-serif; box-shadow: inset 2px 2px 4px #F2F2F2, inset -2px -2px 4px #F2F2F2; -webkit-box-shadow: inset 2px 2px 4px #F2F2F2, inset -2px -2px 4px #F2F2F2; -moz-box-shadow: inset 2px 2px 4px #F2F2F2, inset -2px -2px 4px #F2F2F2;  }
+input[type="submit"]:hover{ background: #E9E9E9; }
 /* HTML5 */
 section, article, header, footer, nav, aside, hgroup { display: block; }
 
@@ -117,20 +117,28 @@ abbr, acronym {	border-bottom: 1px dotted #666;	cursor: help; }
 sup, sub { height: 0; line-height: 1; position: relative; vertical-align: baseline; }
 sup { bottom: 1ex; }
 sub { top: .5ex; }
-/*input[type="text"], input[type="password"], textarea { background: #fff; border: 1px solid #ccc; padding: 6px; font: 12px/22px Arial, Helvetica, sans-serif; }*/
 a { color: #36c; text-decoration: none; outline: none; }
 a:visited { color: #69c; text-decoration: none; }
 a:active, a:hover {	text-decoration: underline; }
 
 /* Content all
 ---------------------------------------------------------------------------*/ 
-
+/*Default*/
+.centerdiv{
+    margin: auto;
+    width: 400px;
+}
 /*Header*/
 #header{
 	margin: 15px 0;
 }
 #header .logo{
 	float: left;
+}
+#header .user_welcome{
+    float: left;
+    color: #FFF;
+    margin: 28px 0 0 20px;
 }
 #header .title{
 	font-family: 'Arial', sans-serif;
@@ -158,13 +166,16 @@ a:active, a:hover {	text-decoration: underline; }
 #content input, #content textarea, #content select{
 	width: 98%;
 	display: block;
-	box-shadow: inset 1px 1px 5px #F1F1F1, inset 1px 1px 5px #F1F1F1;
 	margin-bottom: 5px;
 }
 #content input[type="submit"]{
 	width: auto;
 	cursor: pointer;
 	margin-top: 5px;
+}
+#content .styleforms_none input, #content .styleforms_none textarea, #content .styleforms_none select{
+    width: auto;
+    display: inline-block;
 }
 ul.list_user{
 	display: block;
@@ -188,31 +199,11 @@ ul.list_user li a:hover{
 }
 #access_login input[type="text"], #access_login input[type="password"]{
 	width: 94%;
-	padding: 5px;
-	border: solid 1px #ECECEC;
-	background: #F4F4F4;
-	background: -webkit-linear-gradient(top,#FFF,#F4F4F4);
-	background: -moz-linear-gradient(top,#FFF,#F4F4F4);
-	background: -o-linear-gradient(top,#FFF,#F4F4F4);
 	font-size: 16px;
 }
 #access_login input[type="submit"]{
-	background: #F4F4F4;
-	background: -webkit-linear-gradient(top,#FFF,#F4F4F4);
-	background: -moz-linear-gradient(top,#FFF,#F4F4F4);
-	background: -o-linear-gradient(top,#FFF,#F4F4F4);
-	font-size: 14px;
-	color: #888888;
-	padding: 8px 10px;
-	margin-top: 9px;
-	border: solid 1px #DDD;
-	cursor: pointer;
-}
-#access_login input[type="submit"]:hover{
-	background: #F2F2F2;
-	background: -webkit-linear-gradient(top,#F4F4F4, #FFF);
-	background: -moz-linear-gradient(top,#F4F4F4, #FFF);
-	background: -o-linear-gradient(top,#F4F4F4, #FFF);	
+    margin: 5px 0 0 0;
+    cursor: pointer;
 }
 #sidebar a.cadastrar_se{
 	width: 100%;
@@ -237,12 +228,27 @@ h1.title_login{
 	text-align: center;
 	margin: 10px 0 0 0; 
 }
+/*error*/
+ul.errorlist{
+    list-style: none;
+    margin: 0;
+}
+ul.errorlist li{
+    background: #ffc4c4;
+    padding: 5px 10px;
+    border: solid 2px rgb(252, 164, 164);
+    color: rgb(165, 30, 30);
+    margin: 0 0 15px 0;
+}
+.errorliststyle ul.errorlist li{
+    width: 95%;
+}
 /*menu*/
 #menu a{
 	display: block;
 	background: #FAFAFA;
 	color: #888;
-	font-size: 22px;
+	font-size: 17px;
 	padding: 10px;
 	border-bottom: solid 1px #E6E6E6; 
 	border-right: solid 1px #E6E6E6;
@@ -252,7 +258,7 @@ h1.title_login{
 	text-decoration: none;
 }
 #menu a.active{
-	background: #F1F1F1;
+	background: #E9E9E9;
 }
 /*footer*/
 #footer{

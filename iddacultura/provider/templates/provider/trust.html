@@ -29,12 +29,12 @@
     
     {% ifequal trust_root_valid "Valid" %}
           <!-- Trust root has been validated by OpenID 2 mechanism. -->
-        <p>O site <tt>{{ trust_root|escape }}</tt> solicitou autorização para usar a sua credencial do ID da Cultura.</p>
+        <p>O site <tt><i><b>{{ trust_root|escape }}</b></i></tt> solicitou autorização para usar a sua credencial do ID da Cultura.</p>
         <div>
-            <form method="post" action="{{ trust_handler_url }}">
-                <p>Você autoriza o uso da sua credencial para este site?</p>
-        
-                <p><input type="checkbox" name="remember" value="yes"/><label for="remember">Lembrar decisão?</label></p>
+            <form method="post" action="{{ trust_handler_url }}" class="styleforms_none">
+               <p>Você autoriza o uso da sua credencial para este site?</p>
+
+                <p><label for="remember">Lembrar decisão?</label> <input type="checkbox" name="remember" value="yes"/></p>
                 <input type="submit" value="Sim" name="allow" />
                 <input type="submit" value="Não" name="cancel" />
             </form>

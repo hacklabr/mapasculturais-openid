@@ -5,6 +5,8 @@
     {% if request.user.is_authenticated %}
         <p>Você já está autenticado!</p>
     {% else %}
+    <div class="centerdiv">
         {% login_form %}
+    </div>
     {% endif %}
 {% endblock %}

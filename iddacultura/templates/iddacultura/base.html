@@ -16,6 +16,9 @@
         <header id="header" class="clearfix">
             <a href="{% url homepage %}" title="ID da Cultura"><img src="{% static "images/minc.png" %}" alt="logo" class="logo" /></a>
             <h1 class="title">ID da Cultura</h1>
+            {% if request.user.is_authenticated %}
+            <span class="user_welcome">Olá <b>{{request.user.username}}</b></span>
+            {% endif %}
         </header>
         {% block middle %}
             <div class="content_all clearfix">
