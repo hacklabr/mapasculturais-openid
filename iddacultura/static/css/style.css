@@ -70,7 +70,7 @@ a img {
 .alpha {margin-left: 0;}
 .omega {margin-right: 0;}
 
-input[type="text"], input[type="submit"], input[type="password"], textarea, select { background: #F8F8F8; border: 1px solid #DDDDDD; padding: 6px; font: 12px/22px Arial, Helvetica, sans-serif; box-shadow: inset 2px 2px 4px #F2F2F2, inset -2px -2px 4px #F2F2F2; -webkit-box-shadow: inset 2px 2px 4px #F2F2F2, inset -2px -2px 4px #F2F2F2; -moz-box-shadow: inset 2px 2px 4px #F2F2F2, inset -2px -2px 4px #F2F2F2;  }
+input[type="text"], input[type="submit"], input[type="password"], textarea, select { background: #F8F8F8; border: 1px solid #DDDDDD; padding: 6px 0; font: 12px/22px Arial, Helvetica, sans-serif; box-shadow: inset 2px 2px 4px #F2F2F2, inset -2px -2px 4px #F2F2F2; -webkit-box-shadow: inset 2px 2px 4px #F2F2F2, inset -2px -2px 4px #F2F2F2; -moz-box-shadow: inset 2px 2px 4px #F2F2F2, inset -2px -2px 4px #F2F2F2; width: 100%;  }
 input[type="submit"]:hover{ background: #E9E9E9; }
 /* HTML5 */
 section, article, header, footer, nav, aside, hgroup { display: block; }
@@ -164,7 +164,6 @@ a:active, a:hover {	text-decoration: underline; }
 	margin-top: 10px;
 }
 #content input, #content textarea, #content select{
-	width: 98%;
 	display: block;
 	margin-bottom: 5px;
 }
@@ -198,12 +197,12 @@ ul.list_user li a:hover{
 	display: block;
 }
 #access_login input[type="text"], #access_login input[type="password"]{
-	width: 94%;
 	font-size: 16px;
 }
 #access_login input[type="submit"]{
     margin: 5px 0 0 0;
     cursor: pointer;
+    width: 80px;
 }
 #sidebar a.cadastrar_se{
 	width: 100%;
@@ -240,9 +239,7 @@ ul.errorlist li{
     color: rgb(165, 30, 30);
     margin: 0 0 15px 0;
 }
-.errorliststyle ul.errorlist li{
-    width: 95%;
-}
+
 /*menu*/
 #menu a{
 	display: block;

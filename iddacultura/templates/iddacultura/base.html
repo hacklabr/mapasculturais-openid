@@ -1,6 +1,5 @@
 {% load staticfiles %}
 {% load sidebar %}
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,9 +27,11 @@
                 <section id="content" class="col-9">
                     {% block content %}{% endblock %}
                 </section>
+
                 {% if not request.user.is_authenticated %}
                     {% sidebar %}
                 {% endif %}
+
                 <footer id="footer" class="col-12 clear">Ministério da Cultura 2013 - Governo Federal</footer>
             </div>
         {% endblock %}
