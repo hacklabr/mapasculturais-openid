@@ -10,38 +10,38 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend/*,
 table, caption, tbody, tfoot, thead, tr, th, td */{
-	background: transparent;
-	border: 0;
-	margin: 0;
-	padding: 0;
-	vertical-align: baseline;
+    background: transparent;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
 }
 body {
-	line-height: 1;
+    line-height: 1;
 }
 h1, h2, h3, h4, h5, h6 {
-	font-weight: normal;
+    font-weight: normal;
 }
 ol, ul {
-	list-style: none;
+    list-style: none;
 }
 blockquote {
-	quotes: none;
+    quotes: none;
 }
 blockquote:before, blockquote:after {
-	content: '';
-	content: none;
+    content: '';
+    content: none;
 }
 del {
-	text-decoration: line-through;
+    text-decoration: line-through;
 }
 /* tables still need 'cellspacing="0"' in the markup */
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 a img {
-	border: none;
+    border: none;
 }
 
 /* =Layout
@@ -96,7 +96,7 @@ body, input, textarea { color: #666; }
 hr { background-color: #ccc; border: 1px solid #fff; clear: both; height: 1px; margin-bottom: 22px; }
 
 /* Text elements */
-p {	margin-bottom: 22px; }
+p { margin-bottom: 22px; }
 ul { list-style: disc; margin: 0 0 22px 1.5em; }
 ol { list-style: decimal; margin: 0 0 22px 1.5em; }
 ol ol { list-style: upper-alpha; }
@@ -109,17 +109,17 @@ dd { margin-bottom: 22px; }
 strong { font-weight: bold; }
 cite, em, i { font-style: italic; }
 big { font-size: 131.25%; }
-ins { background: #ffc;	text-decoration: none; }
+ins { background: #ffc; text-decoration: none; }
 blockquote { font-style: italic; padding: 0 3em; color: #999; }
 blockquote cite, blockquote em, blockquote i { font-style: normal; }
 pre { background: #e6e6e6; line-height: 22px; margin-bottom: 22px; padding: 1.5em; }
-abbr, acronym {	border-bottom: 1px dotted #666;	cursor: help; }
+abbr, acronym { border-bottom: 1px dotted #666; cursor: help; }
 sup, sub { height: 0; line-height: 1; position: relative; vertical-align: baseline; }
 sup { bottom: 1ex; }
 sub { top: .5ex; }
 a { color: #36c; text-decoration: none; outline: none; }
 a:visited { color: #69c; text-decoration: none; }
-a:active, a:hover {	text-decoration: underline; }
+a:active, a:hover { text-decoration: underline; }
 
 /* Content all
 ---------------------------------------------------------------------------*/ 
@@ -130,10 +130,10 @@ a:active, a:hover {	text-decoration: underline; }
 }
 /*Header*/
 #header{
-	margin: 15px 0;
+    margin: 15px 0;
 }
 #header .logo{
-	float: left;
+    float: left;
 }
 #header .user_welcome{
     float: left;
@@ -141,63 +141,63 @@ a:active, a:hover {	text-decoration: underline; }
     margin: 28px 0 0 20px;
 }
 #header .title{
-	font-family: 'Arial', sans-serif;
-	float: right;
-	color: #FFF;
-	margin: 20px 0 0 0;
-	padding: 0;
-	font-size: 52px;
-	text-shadow: 2px 2px 0 #004022;
-	font-weight: normal;
-	clear: none;
+    font-family: 'Arial', sans-serif;
+    float: right;
+    color: #FFF;
+    margin: 20px 0 0 0;
+    padding: 0;
+    font-size: 52px;
+    text-shadow: 2px 2px 0 #004022;
+    font-weight: normal;
+    clear: none;
 }
 
 /*content*/
 .content_all{
-	background: #FFF;
-	display: block;
+    background: #FFF;
+    display: block;
 }
 .content_all h1{
-	color: #666;
+    color: #666;
 }
 #content{
-	margin-top: 10px;
+    margin-top: 10px;
 }
 #content input, #content textarea, #content select{
-	display: block;
-	margin-bottom: 5px;
+    display: block;
+    margin-bottom: 5px;
 }
 #content input[type="submit"]{
-	width: auto;
-	cursor: pointer;
-	margin-top: 5px;
+    width: auto;
+    cursor: pointer;
+    margin-top: 5px;
 }
 #content .styleforms_none input, #content .styleforms_none textarea, #content .styleforms_none select{
     width: auto;
     display: inline-block;
 }
 ul.list_user{
-	display: block;
-	list-style: none;
+    display: block;
+    list-style: none;
 }
 ul.list_user li{
-	margin: 10px 0;
+    margin: 10px 0;
 }
 ul.list_user li a{
-	text-decoration: none;
-	color: #333;
-	font-weight: bold;
-	display: block;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    display: block;
 }
 ul.list_user li a:hover{
-	color: #000;
+    color: #000;
 }
 /*Sidebar*/
 #access_login label, #access_login input{
-	display: block;
+    display: block;
 }
 #access_login input[type="text"], #access_login input[type="password"]{
-	font-size: 16px;
+    font-size: 16px;
 }
 #access_login input[type="submit"]{
     margin: 5px 0 0 0;
@@ -205,27 +205,27 @@ ul.list_user li a:hover{
     width: 80px;
 }
 #sidebar a.cadastrar_se{
-	width: 100%;
-	display: block;
-	background: #FDDD04;
-	background: -webkit-linear-gradient(top,#FDDD04,#D5BA02);
-	background: -moz-linear-gradient(top,#FDDD04,#D5BA02);
-	background: -o-linear-gradient(top,#FDDD04,#D5BA02);
-	box-shadow: inset 2px 1px 0 #FDE435;
-	-webkit-box-shadow: inset 1px 1px 0 #FDE435;
-	-moz-box-shadow: inset 1px 1px 0 #FDE435;
-	-o-box-shadow: inset 1px 1px 0 #FDE435;
-	text-shadow: 1px 1px 0 #C6AD03;
-	border: solid 1px #C1AA02;
-	text-align: center;
-	margin-top: 10px;
-	padding: 15px 0;
-	font-size: 22px;
-	color: #FFF;
+    width: 100%;
+    display: block;
+    background: #FDDD04;
+    background: -webkit-linear-gradient(top,#FDDD04,#D5BA02);
+    background: -moz-linear-gradient(top,#FDDD04,#D5BA02);
+    background: -o-linear-gradient(top,#FDDD04,#D5BA02);
+    box-shadow: inset 2px 1px 0 #FDE435;
+    -webkit-box-shadow: inset 1px 1px 0 #FDE435;
+    -moz-box-shadow: inset 1px 1px 0 #FDE435;
+    -o-box-shadow: inset 1px 1px 0 #FDE435;
+    text-shadow: 1px 1px 0 #C6AD03;
+    border: solid 1px #C1AA02;
+    text-align: center;
+    margin-top: 10px;
+    padding: 15px 0;
+    font-size: 22px;
+    color: #FFF;
 }
 h1.title_login{
-	text-align: center;
-	margin: 10px 0 0 0; 
+    text-align: center;
+    margin: 10px 0 0 0; 
 }
 /*error*/
 ul.errorlist{
@@ -242,25 +242,25 @@ ul.errorlist li{
 
 /*menu*/
 #menu a{
-	display: block;
-	background: #FAFAFA;
-	color: #888;
-	font-size: 17px;
-	padding: 10px;
-	border-bottom: solid 1px #E6E6E6; 
-	border-right: solid 1px #E6E6E6;
+    display: block;
+    background: #FAFAFA;
+    color: #888;
+    font-size: 17px;
+    padding: 10px;
+    border-bottom: solid 1px #E6E6E6; 
+    border-right: solid 1px #E6E6E6;
 }
 #menu a:hover{
-	background: #F3F3F3;
-	text-decoration: none;
+    background: #F3F3F3;
+    text-decoration: none;
 }
 #menu a.active{
-	background: #E9E9E9;
+    background: #E9E9E9;
 }
 /*footer*/
 #footer{
-	text-align: center;
-	border-top: solid 1px #ECECEC;
-	padding: 10px 0;
-	margin-top: 10px;
+    text-align: center;
+    border-top: solid 1px #ECECEC;
+    padding: 10px 0;
+    margin-top: 10px;
 }
