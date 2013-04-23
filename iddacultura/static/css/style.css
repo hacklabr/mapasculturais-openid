@@ -8,8 +8,7 @@ del, dfn, em, font, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend/*,
-table, caption, tbody, tfoot, thead, tr, th, td */{
+fieldset, form, label, legend {
     background: transparent;
     border: 0;
     margin: 0;
@@ -124,23 +123,23 @@ a:active, a:hover { text-decoration: underline; }
 /* Content all
 ---------------------------------------------------------------------------*/ 
 /*Default*/
-.centerdiv{
+.centerdiv {
     margin: auto;
     width: 400px;
 }
 /*Header*/
-#header{
+#header {
     margin: 15px 0;
 }
-#header .logo{
+#header .logo {
     float: left;
 }
-#header .user_welcome{
+#header .user_welcome {
     float: left;
     color: #FFF;
     margin: 28px 0 0 20px;
 }
-#header .title{
+#header .title {
     font-family: 'Arial', sans-serif;
     float: right;
     color: #FFF;
@@ -153,58 +152,58 @@ a:active, a:hover { text-decoration: underline; }
 }
 
 /*content*/
-.content_all{
+.content_all {
     background: #FFF;
     display: block;
 }
-.content_all h1{
+.content_all h1 {
     color: #666;
 }
-#content{
+#content {
     margin-top: 10px;
 }
-#content input, #content textarea, #content select{
+#content input, #content textarea, #content select {
     display: block;
     margin-bottom: 5px;
 }
-#content input[type="submit"]{
+#content input[type="submit"] {
     width: auto;
     cursor: pointer;
     margin-top: 5px;
 }
-#content .styleforms_none input, #content .styleforms_none textarea, #content .styleforms_none select{
+#content .styleforms_none input, #content .styleforms_none textarea, #content .styleforms_none select {
     width: auto;
     display: inline-block;
 }
-ul.list_user{
+ul.list_user {
     display: block;
     list-style: none;
 }
-ul.list_user li{
+ul.list_user li {
     margin: 10px 0;
 }
-ul.list_user li a{
+ul.list_user li a {
     text-decoration: none;
     color: #333;
     font-weight: bold;
     display: block;
 }
-ul.list_user li a:hover{
+ul.list_user li a:hover {
     color: #000;
 }
 /*Sidebar*/
-#access_login label, #access_login input{
+#access_login label, #access_login input {
     display: block;
 }
-#access_login input[type="text"], #access_login input[type="password"]{
+#access_login input[type="text"], #access_login input[type="password"] {
     font-size: 16px;
 }
-#access_login input[type="submit"]{
+#access_login input[type="submit"] {
     margin: 5px 0 0 0;
     cursor: pointer;
     width: 80px;
 }
-#sidebar a.cadastrar_se{
+#sidebar a.cadastrar_se {
     width: 100%;
     display: block;
     background: #FDDD04;
@@ -223,16 +222,16 @@ ul.list_user li a:hover{
     font-size: 22px;
     color: #FFF;
 }
-h1.title_login{
+h1.title_login {
     text-align: center;
     margin: 10px 0 0 0; 
 }
 /*error*/
-ul.errorlist{
+ul.errorlist {
     list-style: none;
     margin: 0;
 }
-ul.errorlist li{
+ul.errorlist li {
     background: #ffc4c4;
     padding: 5px 10px;
     border: solid 2px rgb(252, 164, 164);
@@ -241,7 +240,7 @@ ul.errorlist li{
 }
 
 /*menu*/
-#menu a{
+#menu a {
     display: block;
     background: #FAFAFA;
     color: #888;
@@ -250,15 +249,15 @@ ul.errorlist li{
     border-bottom: solid 1px #E6E6E6; 
     border-right: solid 1px #E6E6E6;
 }
-#menu a:hover{
+#menu a:hover {
     background: #F3F3F3;
     text-decoration: none;
 }
-#menu a.active{
+#menu a.active {
     background: #E9E9E9;
 }
 /*footer*/
-#footer{
+#footer {
     text-align: center;
     border-top: solid 1px #ECECEC;
     padding: 10px 0;

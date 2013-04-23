@@ -1,8 +1,8 @@
 <h1 class="title_login">Login</h1>
 {% if form.errors %}
-  <ul class="errorlist centererror">
-    <li>Usuário ou senha inválido.</li>
-</ul>
+    <ul class="errorlist centererror">
+        <li>Usuário ou senha inválido.</li>
+    </ul>
 {% endif %}
 <form id="access_login" method="post" action="{% url django.contrib.auth.views.login %}">
     {% csrf_token %}

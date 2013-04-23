@@ -8,9 +8,9 @@
 {% block content %}
     <h1>Perfil do usuário {{ user }}</h1>
     {% ifequal request.user.username profile.user.username %}
-    	<p><b>Nome</b>: {{ profile.user.get_full_name }}</p>
-    	<p><b>E-mail</b>: {{ profile.user.email }}</p>
-    	<p><b>CPF</b>: {{ profile.cpf }}</p>
+        <p><b>Nome</b>: {{ profile.user.get_full_name }}</p>
+        <p><b>E-mail</b>: {{ profile.user.email }}</p>
+        <p><b>CPF</b>: {{ profile.cpf }}</p>
         <p><b>Grupo</b>: {{ profile.user_occupation_primary }}</p>
         <p><b>Sub-grupo principal</b>: {{ profile.user_occupation_secondary }}</p>
         <p><b>Sub-grupo</b>: {{ profile.user_occupation_tertiary }}</p>
