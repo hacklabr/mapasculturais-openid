@@ -70,6 +70,24 @@ a img {
 .omega {margin-right: 0;}
 
 input[type="text"], input[type="submit"], input[type="password"], textarea, select { background: #F8F8F8; border: 1px solid #DDDDDD; padding: 6px 0; font: 12px/22px Arial, Helvetica, sans-serif; box-shadow: inset 2px 2px 4px #F2F2F2, inset -2px -2px 4px #F2F2F2; -webkit-box-shadow: inset 2px 2px 4px #F2F2F2, inset -2px -2px 4px #F2F2F2; -moz-box-shadow: inset 2px 2px 4px #F2F2F2, inset -2px -2px 4px #F2F2F2; width: 100%;  }
+input[type="submit"]{
+    width: auto !important;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+    margin-top: 8px;
+    background: #F0F0F0 !important;
+    background: -webkit-linear-gradient(top,#F3F3F3,#E1E1E1) !important;
+    background: -ms-linear-gradient(top,#F3F3F3,#E1E1E1) !important;
+    background: -moz-linear-gradient(top,#F3F3F3,#E1E1E1) !important;
+    background: -o-linear-gradient(top,#F3F3F3,#E1E1E1) !important;
+    text-shadow: 1px 1px 0 #FFF;
+}
+input[type="submit"]:active{
+    box-shadow: 0 0 0 #E8E8E8, inset 2px 2px 3px #E1E1E1;
+    -webkit-box-shadow: 0 0 0 #E8E8E8, inset 2px 2px 3px #E1E1E1;
+    -moz-box-shadow: 0 0 0 #E8E8E8, inset 2px 2px 3px #E1E1E1;
+}
 input[type="submit"]:hover{ background: #E9E9E9; }
 /* HTML5 */
 section, article, header, footer, nav, aside, hgroup { display: block; }
@@ -125,7 +143,7 @@ a:active, a:hover { text-decoration: underline; }
 /*Default*/
 .centerdiv {
     margin: auto;
-    width: 400px;
+    width: 220px;
 }
 /*Header*/
 #header {
@@ -166,11 +184,6 @@ a:active, a:hover { text-decoration: underline; }
     display: block;
     margin-bottom: 5px;
 }
-#content input[type="submit"] {
-    width: auto;
-    cursor: pointer;
-    margin-top: 5px;
-}
 #content .styleforms_none input, #content .styleforms_none textarea, #content .styleforms_none select {
     width: auto;
     display: inline-block;
@@ -197,11 +210,6 @@ ul.list_user li a:hover {
 }
 #access_login input[type="text"], #access_login input[type="password"] {
     font-size: 16px;
-}
-#access_login input[type="submit"] {
-    margin: 5px 0 0 0;
-    cursor: pointer;
-    width: 80px;
 }
 #sidebar a.cadastrar_se {
     width: 100%;
@@ -237,10 +245,11 @@ ul.errorlist li {
     border: solid 2px rgb(252, 164, 164);
     color: rgb(165, 30, 30);
     margin: 0 0 15px 0;
+    font-size: 12px;
 }
 
 /*menu*/
-#menu a {
+#menu a, #menu span {
     display: block;
     background: #FAFAFA;
     color: #888;
