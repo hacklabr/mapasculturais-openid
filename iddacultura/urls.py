@@ -11,8 +11,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^user_profile/$', user_profile),
     url(r'^occupations/', occupations),
-
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^accounts/logout/$', 'iddacultura.views.logout'),
     url(r'^accounts/register/$', register, {'backend': 'iddacultura.regbackend.RegBackend', 'form_class': UserRegistrationForm}, name='registration_register'),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^profiles/edit', 'profiles.views.edit_profile', {'form_class': UserProfilePublicForm}),

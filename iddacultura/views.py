@@ -4,6 +4,8 @@ import json
 from django.shortcuts import redirect
 from django.http import HttpResponse
 from models import UserOccupation
+from django.contrib.auth import views as auth_views
+from django.contrib import messages
 
 def user_profile(request):
     """
@@ -26,3 +28,13 @@ def occupations(request):
         occupations[occupation.id] = occupation.name
     
     return HttpResponse(json.dumps(occupations), content_type="application/json")
+
+def logout(request):
+    """
+    Adiciona mensagem a ser exibida na página de login
+    quando o usuário sai do sistema
+    """
+    
+    messages.add_message(request, messages.INFO, 'Você acabou de sair de sua conta!')
+        
+    return auth_views.logout_then_login(request)
