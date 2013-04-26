@@ -77,10 +77,10 @@ input[type="submit"]{
     cursor: pointer;
     margin-top: 8px;
     background: #F0F0F0 !important;
-    background: -webkit-linear-gradient(top,#F3F3F3,#E1E1E1) !important;
-    background: -ms-linear-gradient(top,#F3F3F3,#E1E1E1) !important;
-    background: -moz-linear-gradient(top,#F3F3F3,#E1E1E1) !important;
-    background: -o-linear-gradient(top,#F3F3F3,#E1E1E1) !important;
+    background: -webkit-linear-gradient(top,#F6F6F6,#D8D8D8) !important;
+    background: -ms-linear-gradient(top,#F6F6F6,#D8D8D8) !important;
+    background: -moz-linear-gradient(top,#F6F6F6,#D8D8D8) !important;
+    background: -o-linear-gradient(top,#F6F6F6,#D8D8D8) !important;
     text-shadow: 1px 1px 0 #FFF;
 }
 input[type="submit"]:active{
@@ -235,7 +235,7 @@ h1.title_login {
     margin: 10px 0 0 0; 
 }
 /*error*/
-ul.errorlist {
+ul.errorlist, ul.messages {
     list-style: none;
     margin: 0;
 }
@@ -247,7 +247,12 @@ ul.errorlist li {
     margin: 0 0 15px 0;
     font-size: 12px;
 }
-
+ul.messages li.info{
+    background: #fcfcc2;
+    padding: 5px 10px;
+    border: solid 2px #e5e500;
+    color: rgb(112, 112, 16);
+}
 /*menu*/
 #menu a, #menu span {
     display: block;
