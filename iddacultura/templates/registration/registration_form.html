@@ -8,7 +8,8 @@
         <div class="centerdiv">
             <h1>Cadastre-se</h1>
             <table>
-                <form method='post' action=''>{% csrf_token %}
+                <form method='post' action=''>
+                    {% csrf_token %}
                     {{ form }}
                     <tr><td></td><td><input type="submit" value="Registrar" /></td>
                 </form>
