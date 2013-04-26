@@ -3,9 +3,11 @@
 {% block head %}{{block.super}}<script src="{{ STATIC_URL }}js/edit_profile.js"></script>{% endblock %} 
 {% block content %}
     <h1>Editar perfil do usuário {{ user }}</h1>
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ form }}
-        <input id="submit" type="submit" name="submit" value="Atualizar" />
-    </form>
+    <table>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <tr><td></td><td><input id="submit" type="submit" name="submit" value="Atualizar" /></td>
+        </form>
+    </table>
 {% endblock content %}
