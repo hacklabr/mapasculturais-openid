@@ -60,9 +60,12 @@ class UserProfileBaseForm(object):
         """
         
         if kwargs.has_key('data') and kwargs['data'].has_key(field):
-            child = UserOccupation.objects.get(pk = kwargs['data'][field])
-            self.fields[field].choices = [(o.id, str(o)) for o in UserOccupation.objects.filter(parent = child.parent)]
-            self.fields[field].initial = kwargs['data'][field]
+            try:
+                child = UserOccupation.objects.get(pk = kwargs['data'][field])
+                self.fields[field].choices = [(o.id, str(o)) for o in UserOccupation.objects.filter(parent = child.parent)]
+                self.fields[field].initial = kwargs['data'][field]
+            except ValueError:
+                pass
         elif kwargs.has_key('instance') and getattr(kwargs['instance'], parent_field):
             self.fields[field].choices = [(o.id, str(o)) for o in UserOccupation.objects.filter(parent = getattr(kwargs['instance'], parent_field).code)]
         else:
