@@ -12,10 +12,13 @@ $(document).ready(function() {
                     childSelect.append($("<option></option>").attr("value", key).text(val));
                 })
                 childSelect.removeAttr('disabled');
-                if(/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())){
-                    childSelect.prepend("<option>----------------</option>");
-                    $("option").filter(":contains('Selecione')").remove();
+                
+                // corrige problema no chrome que coloca por último um <option> com valor vazio
+                if (/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())) {
+                    childSelect.children(":contains('Selecione')").remove();
+                    childSelect.prepend("<option value=''>Selecione</option>");
                 }
+                
                 // limpa e desabilita todos os selects que estão abaixo do childSelect na hierarquia
                 childSelect.parent().parent().nextAll().find('.user_occupation').each(function(key, e) {
                     if (!$(e).attr('disabled')) {
