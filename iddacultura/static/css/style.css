@@ -143,7 +143,11 @@ a:active, a:hover { text-decoration: underline; }
 /*Default*/
 .centerdiv {
     margin: auto;
-    width: 220px;
+    float: none !important;
+    display: block;
+}
+.centerdiv h1{
+    text-align: center;
 }
 /*Header*/
 #header {
