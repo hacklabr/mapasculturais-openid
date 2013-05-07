@@ -8,15 +8,14 @@ $(document).ready(function() {
             $('body').css('cursor', 'wait');
             $.getJSON('/occupations/?parent=' + $(this).val(), function(data) {
                 childSelect.children().remove();
-                if(/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())){
-                    childSelect.prepend("<option>--------</option>");
-                    childSelect.filter(":contains('Selecione')").remove();
-                }
                 $.each(data, function(key, val) {
                     childSelect.append($("<option></option>").attr("value", key).text(val));
                 })
                 childSelect.removeAttr('disabled');
-                $("option").filter(":contains('Selecione')").remove();
+                if(/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())){
+                    childSelect.prepend("<option>----------------</option>");
+                    $("option").filter(":contains('Selecione')").remove();
+                }
                 // limpa e desabilita todos os selects que estão abaixo do childSelect na hierarquia
                 childSelect.parent().parent().nextAll().find('.user_occupation').each(function(key, e) {
                     if (!$(e).attr('disabled')) {
