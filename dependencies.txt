@@ -7,5 +7,5 @@ django-profiles==0.2
 django-registration==0.8
 ipdb==0.7
 ipython==0.13.1
-python-openid==2.2.5
+-e git+https://github.com/hacklabr/python-openid.git@5a0f618873d4a0bd757ccb48df4ee7145acd130c#egg=python_openid-dev
 wsgiref==0.1.2
