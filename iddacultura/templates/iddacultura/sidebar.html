@@ -4,7 +4,7 @@
     <aside id="sidebar" class="col-3 left alpha">
         <nav id="menu">
             <span>Logado como <b><i>{% if user.is_authenticated %} {{user.username}} {% endif %}</i></b></span>
-            <a href="{% url homepage %}" class="active" title="Página inicial">Página inicial</a>
+            <a href="{% url homepage %}" title="Página inicial">Página inicial</a>
             <a href="{% url profiles.views.profile_detail user.username %}" title="Ver perfil">Ver perfil</a>
             <a href="{% url profiles.views.edit_profile %}" title="Editar perfil">Editar perfil</a>
             <a href="{% url django.contrib.auth.views.password_change %}" title="Alterar senha">Alterar senha</a>
