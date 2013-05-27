@@ -11,11 +11,6 @@
         <p><b>Nome</b>:<br /> {{ profile.user.get_full_name }}</p>
         <p><b>E-mail</b>:<br /> {{ profile.user.email }}</p>
         <p><b>CPF</b>:<br /> {{ profile.cpf }}</p>
-        <p><b>Grupo</b>:<br /> {{ profile.user_occupation_primary }}</p>
-        <p><b>Sub-grupo principal</b>:<br /> {{ profile.user_occupation_secondary }}</p>
-        <p><b>Sub-grupo</b>:<br /> {{ profile.user_occupation_tertiary }}</p>
-        <p><b>Família</b>:<br /> {{ profile.user_occupation_quartenary }}</p>
-        <p><b>Ocupação</b>:<br /> {{ profile.user_occupation_quinary }}</p>
     {% else %}
         <p>Identidade OpenID do usuário {{ profile.user.username }}</p>
     {% endifequal %}
