@@ -3,14 +3,13 @@
 from django.conf.urls import patterns, include, url
 from registration.views import register
 from forms import UserRegistrationForm, UserProfilePublicForm
-from iddacultura.views import user_profile, occupations
+from iddacultura.views import user_profile
 
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^user_profile/$', user_profile),
-    url(r'^occupations/', occupations),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/logout/$', 'iddacultura.views.logout'),
     url(r'^accounts/register/$', register, {'backend': 'iddacultura.regbackend.RegBackend', 'form_class': UserRegistrationForm}, name='registration_register'),

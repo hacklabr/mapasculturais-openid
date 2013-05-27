@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
-from iddacultura.models import UserProfile, UserOccupation
+from iddacultura.models import UserProfile
 from iddacultura.forms import UserProfileForm
 from iddacultura.settings import STATIC_URL
 
@@ -26,5 +26,3 @@ class UserProfileAdmin(admin.ModelAdmin):
 # Re-register UserAdmin
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
-
-admin.site.register(UserOccupation)
