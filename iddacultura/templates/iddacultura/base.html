@@ -18,14 +18,14 @@
         {% block middle %}
             <div class="content_all clearfix">
                 {% if request.user.is_authenticated %}
-                    {% sidebar %}
+                    {% sidebar request.path %}
                 {% endif %}
                 <section id="content" class="col-9">
                     {% block content %}{% endblock %}
                 </section>
 
                 {% if not request.user.is_authenticated %}
-                    {% sidebar %}
+                    {% sidebar request.path %}
                 {% endif %}
 
                 <footer id="footer" class="col-12 clear">Ministério da Cultura 2013 - Governo Federal</footer>
