@@ -198,7 +198,9 @@ def show_decide_page(request, openid_request):
         trust_root_valid = verifyReturnTo(trust_root, return_to) \
                            and "Valid" or "Invalid"
     except DiscoveryFailure:
-        trust_root_valid = "DISCOVERY_FAILED"
+        # suporta consumers que não implementam a relying party verification
+        #trust_root_valid = "DISCOVERY_FAILED"
+        trust_root_valid = 'Valid'
     except HTTPFetchingError:
         trust_root_valid = "Unreachable"
 
