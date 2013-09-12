@@ -6,7 +6,7 @@
     <meta http-equiv="x-xrds-location" content="{% absolute iddacultura.provider.views.user_xrds profile.user.username %}" />
 {% endblock %}
 {% block content %}
-    <h1>Perfil do usuário {{ user }}</h1>
+    <h1>Perfil do usuário {{ profile.user.username }}</h1>
     {% ifequal request.user.username profile.user.username %}
         <p><b>Nome</b>:<br /> {{ profile.user.get_full_name }}</p>
         <p><b>E-mail</b>:<br /> {{ profile.user.email }}</p>
