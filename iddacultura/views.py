@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import json
 from django.shortcuts import redirect
-from django.http import HttpResponse
 from django.contrib.auth import views as auth_views
 from django.contrib import messages
+
 
 def user_profile(request):
     """
@@ -13,12 +12,14 @@ def user_profile(request):
     """
     return redirect('/profiles/' + request.user.username + '/')
 
+
 def logout(request):
     """
     Adiciona mensagem a ser exibida na página de login
     quando o usuário sai do sistema
     """
-    
-    messages.add_message(request, messages.INFO, 'Você acabou de sair de sua conta!')
-        
+
+    messages.add_message(request, messages.INFO,
+        'Você acabou de sair de sua conta!')
+
     return auth_views.logout_then_login(request)
