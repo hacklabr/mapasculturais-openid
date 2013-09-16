@@ -215,7 +215,7 @@ ul.list_user li a:hover {
 #access_login input[type="text"], #access_login input[type="password"] {
     font-size: 16px;
 }
-#sidebar a.cadastrar_se {
+a.cadastrar_se {
     width: 100%;
     display: block;
     background: #FDDD04;

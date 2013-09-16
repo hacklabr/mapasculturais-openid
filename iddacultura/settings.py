@@ -166,8 +166,6 @@ LOGGING = {
 
 AUTH_PROFILE_MODULE = 'iddacultura.UserProfile'
 
-ACCOUNT_ACTIVATION_DAYS = 7
-
 SITE_ID = 1
 
 execfile(os.path.join(SITE_ROOT, 'settings_local.py'))

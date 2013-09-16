@@ -22,3 +22,11 @@
 </form>
 
 <p><a href="{% url auth_password_reset %}">Esqueceu sua senha?</a></p>
+
+<div class="clear"></div>
+
+{% if next %}
+    <a href="{% url registration_register %}?next={{ next|urlencode }}" title="Cadastrar-se" class="cadastrar_se">Cadastrar-se</a>
+{% else %}
+    <a href="{% url registration_register %}" title="Cadastrar-se" class="cadastrar_se">Cadastrar-se</a>
+{% endif %}

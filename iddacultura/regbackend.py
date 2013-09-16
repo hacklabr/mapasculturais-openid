@@ -1,17 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from registration.backends.default import DefaultBackend
-from registration import signals
-from registration.models import RegistrationProfile
-
-from django.contrib.sites.models import RequestSite
-from django.contrib.sites.models import Site
+from registration.backends.simple import SimpleBackend
 from django.contrib.auth.models import User
-
 from models import UserProfile
 
 
-class RegBackend(DefaultBackend):
+class RegBackend(SimpleBackend):
     """
     Extende a classe DefaultBackend para salvar os campos
     customizados do usuário como o CPF no momento do registro
@@ -24,21 +18,7 @@ class RegBackend(DefaultBackend):
         do usuário
         """
 
-        username = kwargs['username']
-        email = kwargs['email']
-        password = kwargs['password1']
-
-        if Site._meta.installed:
-            site = Site.objects.get_current()
-        else:
-            site = RequestSite(request)
-
-        new_user = RegistrationProfile.objects.create_inactive_user(
-            username, email, password, site)
-
-        signals.user_registered.send(sender=self.__class__,
-                                     user=new_user,
-                                     request=request)
+        new_user = super(RegBackend, self).register(request, **kwargs)
 
         u = User.objects.get(id=new_user.id)
         u.first_name = kwargs['first_name']
@@ -50,3 +30,16 @@ class RegBackend(DefaultBackend):
         u.save()
 
         return new_user
+
+    def post_registration_redirect(self, request, user):
+        """
+        Sobrescreve o método original para continuar o processo
+        de autenticação OpenID se o usuário estiver criando uma
+        conta para autorizar a autenticação em um cliente.
+        """
+        original = super(RegBackend, self).post_registration_redirect(request, user)
+
+        if 'next' in request.POST:
+            return (request.POST['next'], (), {})
+        else:
+            return original
