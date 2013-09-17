@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import re
-from registration.forms import RegistrationForm
+from registration.forms import RegistrationFormUniqueEmail
 from django.contrib.localflavor.br.forms import BRCPFField
 from django.forms import ModelForm, ValidationError
 from django import forms
@@ -32,7 +32,7 @@ class BRCPFFieldUnique(BRCPFField):
         return value
 
 
-class UserRegistrationForm(RegistrationForm):
+class UserRegistrationForm(RegistrationFormUniqueEmail):
     """
     Extende o formulário de registro de usuário para
     mais campos.
