@@ -6,6 +6,7 @@ from django.contrib.localflavor.br.forms import BRCPFField
 from django.forms import ModelForm, ValidationError
 from django import forms
 from iddacultura.models import User, UserProfile
+from captcha.fields import ReCaptchaField
 
 
 class BRCPFFieldUnique(BRCPFField):
@@ -41,6 +42,7 @@ class UserRegistrationForm(RegistrationFormUniqueEmail):
     first_name = forms.CharField(label="Nome", help_text='',)
     last_name = forms.CharField(label="Sobrenome", help_text='')
     cpf = BRCPFFieldUnique(label="CPF")
+    captcha = ReCaptchaField(attrs={'theme': 'white'})
 
 
 class UserProfileForm(ModelForm):

@@ -4,6 +4,7 @@ argparse==1.2.1
 distribute==0.6.30
 django-absolute==0.3
 django-profiles==0.2
+-e git+https://github.com/hacklabr/django-recaptcha.git@bbfbf843055596e9d3eeef161af7e57335dda505#egg=python_openid-dev
 django-registration==0.8
 ipdb==0.7
 ipython==0.13.1

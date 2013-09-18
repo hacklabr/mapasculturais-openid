@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'profiles',
     'iddacultura.provider',
     'absolute',
+    'captcha',
 )
 
 # A sample logging configuration. The only tangible logging

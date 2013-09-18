@@ -6,16 +6,16 @@
     {% else %}
         <div class="centerdiv col-5">
             <h1>Cadastre-se</h1>
-            <table>
-                <form method='post'>
+            <form method='post'>
+                <table>
                     {% csrf_token %}
                     {% if request.GET.next %}
                         <input type="hidden" name="next" value="{{ request.GET.next }}" />
                     {% endif %}
                     {{ form }}
                     <tr><td></td><td><input type="submit" value="Registrar" /></td></tr>
-                </form>
-            </table>
+                </table>
+            </form>
         </div>
     {% endif %}
 {% endblock %}
