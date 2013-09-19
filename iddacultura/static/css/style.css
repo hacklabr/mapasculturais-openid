@@ -188,6 +188,7 @@ a:active, a:hover { text-decoration: underline; }
     display: block;
     margin-bottom: 5px;
 }
+
 #content .styleforms_none input, #content .styleforms_none textarea, #content .styleforms_none select {
     width: auto;
     display: inline-block;
@@ -280,4 +281,9 @@ ul.messages li.info{
     border-top: solid 1px #ECECEC;
     padding: 10px 0;
     margin-top: 10px;
+}
+
+/* Captcha ref */
+.recaptchatable input {
+    display: inline-block !important; 
 }
