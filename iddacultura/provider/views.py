@@ -266,11 +266,12 @@ def add_user_data(request, openid_response):
 
     ax_req = ax.FetchRequest.fromOpenIDRequest(openid_request)
     ax_resp = ax.FetchResponse(ax_req)
-    ax_resp.addValue('http://openid.net/schema/namePerson/first', request.user.first_name)
-    ax_resp.addValue('http://openid.net/schema/namePerson/last', request.user.last_name)
-    ax_resp.addValue('http://openid.net/schema/namePerson/friendly', request.user.username)
-    ax_resp.addValue('http://openid.net/schema/contact/internet/email', request.user.email)
-    ax_resp.addValue('http://id.culturadigital.br/schema/cpf', request.user.get_profile().cpf)
+
+    ax_resp.addValue('http://axschema.org/namePerson/first', request.user.first_name)
+    ax_resp.addValue('http://axschema.org/namePerson/last', request.user.last_name)
+    ax_resp.addValue('http://axschema.org/namePerson/friendly', request.user.username)
+    ax_resp.addValue('http://axschema.org/contact/email', request.user.email)
+
     openid_response.addExtension(ax_resp)
 
 def display_response(request, openid_response):

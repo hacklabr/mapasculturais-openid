@@ -10,7 +10,6 @@
     {% ifequal request.user.username profile.user.username %}
         <p><b>Nome</b>:<br /> {{ profile.user.get_full_name }}</p>
         <p><b>E-mail</b>:<br /> {{ profile.user.email }}</p>
-        <p><b>CPF</b>:<br /> {{ profile.cpf }}</p>
     {% else %}
         <p>Identidade OpenID do usuário {{ profile.user.username }}</p>
     {% endifequal %}

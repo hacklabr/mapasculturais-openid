@@ -25,10 +25,6 @@ class RegBackend(SimpleBackend):
         u.last_name = kwargs['last_name']
         u.save()
 
-        u = UserProfile.objects.get(user_id=new_user.id)
-        u.cpf = kwargs['cpf']
-        u.save()
-
         return new_user
 
     def post_registration_redirect(self, request, user):

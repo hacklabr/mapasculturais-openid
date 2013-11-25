@@ -5,7 +5,6 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
 from iddacultura.models import UserProfile
-from iddacultura.forms import UserProfileForm
 
 
 class UserProfileInline(admin.StackedInline):
@@ -16,7 +15,6 @@ class UserProfileInline(admin.StackedInline):
     model = UserProfile
     can_delete = False
     verbose_name_plural = 'profile'
-    form = UserProfileForm
 
 
 class UserAdmin(UserAdmin):
@@ -25,9 +23,6 @@ class UserAdmin(UserAdmin):
     """
     inlines = (UserProfileInline, )
 
-
-class UserProfileAdmin(admin.ModelAdmin):
-    form = UserProfileForm
 
 # Re-register UserAdmin
 admin.site.unregister(User)

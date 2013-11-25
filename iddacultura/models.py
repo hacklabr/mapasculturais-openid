@@ -22,7 +22,6 @@ class UserProfile(models.Model):
     """
 
     user = models.OneToOneField(User)
-    cpf = models.CharField(max_length=50, verbose_name="CPF", unique=True)
     trusted_roots = models.ManyToManyField(TrustedRoot, blank=True, null=True,
         verbose_name="Sites autorizados",
         help_text="Lista de clientes OpenID autorizados.")
