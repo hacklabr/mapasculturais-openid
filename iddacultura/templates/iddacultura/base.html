@@ -10,25 +10,28 @@
             <title>{% block title %}{% endblock %}</title>
         {% endblock %}
     </head>
-    <div class="wrap">
-        <header id="header" class="clearfix">
-            <h1 class="title">ID Aberto da Cultura</h1>
-        </header>
-        {% block middle %}
-            <div class="content_all clearfix">
-                {% if request.user.is_authenticated %}
-                    {% sidebar request.path %}
-                {% endif %}
-                <section id="content" class="col-9">
-                    {% block content %}{% endblock %}
-                </section>
+    <body>
+        <section id="marca-dagua"></section>
+        <div class="wrap">
+            <header id="header" class="clearfix">
+                <h1 class="title">ID Aberto da Cultura</h1>
+            </header>
+            {% block middle %}
+                <div class="content_all clearfix">
+                    {% if request.user.is_authenticated %}
+                        {% sidebar request.path %}
+                    {% endif %}
+                    <section id="content" class="col-9">
+                        {% block content %}{% endblock %}
+                    </section>
 
-                {% if not request.user.is_authenticated %}
-                    {% sidebar request.path %}
-                {% endif %}
+                    {% if not request.user.is_authenticated %}
+                        {% sidebar request.path %}
+                    {% endif %}
 
-                <footer id="footer" class="col-12 clear">Ministério da Cultura 2013 - Governo Federal</footer>
-            </div>
-        {% endblock %}
-    </div>
+                    <footer id="footer" class="col-12 clear">Secretaria Municipal de Cultura do município de São Paulo</footer>
+                </div>
+            {% endblock %}
+        </div>
+    </body>
 </html>
