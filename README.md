@@ -10,14 +10,14 @@ Ambiente de desenvolvimento
 
 - sudo apt-get install python-setuptools python-virtualenv libmysqlclient-dev python-dev
 - cd ~/devel
-- mkdir ~/devel/iddacultura-provider-env
-- virtualenv ~/devel/iddacultura-provider-env
-- git clone git@git.hacklab.com.br:iddacultura-provider
-- source iddacultura-provider-env/bin/activate
-- cd iddacultura-provider
+- mkdir ~/devel/mapasculturais-openid-env
+- virtualenv ~/devel/mapasculturais-openid-env
+- git clone git@github.com:hacklabr/mapasculturais-openid.git
+- source mapasculturais-openid-env/bin/activate
+- cd mapasculturais-openid
 - easy_install -U distribute
 - pip install -r dependencies.txt
-- mysqladmin create iddacultura-provider
+- mysqladmin create mapasculturais-openid
 - cp iddacultura/settings_local.py.sample iddacultura/settings_local.py
 - ./manage.py syncdb
 - ./manage.py runserver
@@ -25,7 +25,7 @@ Ambiente de desenvolvimento
 Como usar
 ---------
 
-- source ~/devel/iddacultura-provider-env/bin/activate
+- source ~/devel/mapasculturais-openid-env/bin/activate
 - cd ~/devel/iddacultura-provider
 - ./manage.py runserver
 - Abrir no browser http://localhost:8000
