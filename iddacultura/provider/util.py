@@ -55,7 +55,7 @@ def get_openid_store(filestore_path, table_prefix):
         }
 
     types = {
-        'django.db.backends.postgresql': sqlstore.PostgreSQLStore,
+        'django.db.backends.postgresql_psycopg2': sqlstore.PostgreSQLStore,
         'django.db.backends.mysql': sqlstore.MySQLStore,
         'django.db.backends.sqlite3': sqlstore.SQLiteStore,
         }
