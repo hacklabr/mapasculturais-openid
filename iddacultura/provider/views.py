@@ -184,7 +184,7 @@ def handle_check_id_request(request, openid_request):
 
     if request.user.userprofile.trusted_url(openid_request.trust_root):
         openid_response = openid_request.answer(True, identity=id_url)
-        add_user_data(request, openid_response)
+        add_user_data(request, openid_response, openid_request)
         return display_response(request, openid_response)
 
     if openid_request.immediate:
@@ -259,18 +259,16 @@ def process_trust_result(request):
 
     # Send Simple Registration data in the response, if appropriate.
     if allowed:
-        add_user_data(request, openid_response)
+        add_user_data(request, openid_response, openid_request)
 
     return display_response(request, openid_response)
 
 
-def add_user_data(request, openid_response):
+def add_user_data(request, openid_response, openid_request):
     """
     Add user custom data to the request using sreg
     and ax extensions
     """
-
-    openid_request = get_request(request)
 
     if openid_request == None:
         return
