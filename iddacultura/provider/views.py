@@ -21,7 +21,7 @@ import urllib
 
 from iddacultura.provider import util
 from iddacultura.provider.util import get_view_url
-from iddacultura.models import TrustedRoot 
+from iddacultura.models import TrustedRoot
 
 from profiles.views import profile_detail
 
@@ -38,6 +38,7 @@ from openid.extensions import sreg
 from openid.extensions import ax
 from openid.fetchers import HTTPFetchingError
 
+
 def get_openid_store():
     """
     Return an OpenID store object fit for the currently-chosen
@@ -45,11 +46,13 @@ def get_openid_store():
     """
     return util.get_openid_store('/tmp/djopenid_s_store', 's_')
 
+
 def get_server(request):
     """
     Get a Server object to perform OpenID authentication.
     """
     return Server(get_openid_store(), get_view_url(request, endpoint))
+
 
 def set_request(request, openid_request):
     """
@@ -60,11 +63,13 @@ def set_request(request, openid_request):
     else:
         request.session['openid_request'] = None
 
+
 def get_request(request):
     """
     Get an openid request from the session, if any.
     """
     return request.session.get('openid_request')
+
 
 def op_xrds(request):
     """
@@ -72,14 +77,18 @@ def op_xrds(request):
     IDP-driven identifier selection.
     """
     return util.render_xrds(
-        request, [OPENID_IDP_2_0_TYPE, sreg.ns_uri, ax.AXMessage.ns_uri], [get_view_url(request, endpoint)])
+        request, [OPENID_IDP_2_0_TYPE, sreg.ns_uri, ax.AXMessage.ns_uri],
+        [get_view_url(request, endpoint)])
+
 
 def user_xrds(request, username):
     """
     Respond to requests for a specific user identity XRDS Document
     """
     return util.render_xrds(
-        request, [OPENID_2_0_TYPE, sreg.ns_uri, ax.AXMessage.ns_uri], [get_view_url(request, endpoint)], username)
+        request, [OPENID_2_0_TYPE, sreg.ns_uri, ax.AXMessage.ns_uri],
+        [get_view_url(request, endpoint)], username)
+
 
 def trust_page(request):
     """
@@ -89,7 +98,8 @@ def trust_page(request):
     return direct_to_template(
         request,
         'provider/trust.html',
-        {'trust_handler_url':get_view_url(request, process_trust_result)})
+        {'trust_handler_url': get_view_url(request, process_trust_result)})
+
 
 @csrf_exempt
 def endpoint(request):
@@ -123,20 +133,27 @@ def endpoint(request):
     # getting feedback from the user or by checking the session.
     if openid_request.mode in ["checkid_immediate", "checkid_setup"]:
         if not request.user or request.user.is_authenticated() == False:
-            #TODO: verificar porque o openid_request.encodeToURL() remove os parâmetros relacionados com a extensão SREG
-            return redirect_to_login(request.get_full_path() + '?' + urllib.urlencode(query))
-        
-        user_identity = request.build_absolute_uri(request.user.get_profile().get_absolute_url())
-        
-        if not openid_request.identity == user_identity and not openid_request.idSelect():
-            raise Exception, "User " + request.user.username + " is not the owner of " + openid_request.identity + " identity"
-        
+            # TODO: verificar porque o openid_request.encodeToURL()
+            # remove os parâmetros relacionados com a extensão SREG
+            return redirect_to_login(request.get_full_path() + '?' +
+                                     urllib.urlencode(query))
+
+        user_identity = request.build_absolute_uri(
+            request.user.get_profile().get_absolute_url())
+
+        if (not openid_request.identity == user_identity
+            and not openid_request.idSelect()):
+            raise Exception("User " + request.user.username +
+                            " is not the owner of " +
+                            openid_request.identity + " identity")
+
         return handle_check_id_request(request, openid_request)
     else:
         # We got some other kind of OpenID request, so we let the
         # server handle this.
         openid_response = s.handleRequest(openid_request)
         return display_response(request, openid_response)
+
 
 def handle_check_id_request(request, openid_request):
     """
@@ -145,9 +162,9 @@ def handle_check_id_request(request, openid_request):
     what Simple Registration information, if any, to send in the
     response.
     """
-    
+
     id_url = get_view_url(request, profile_detail, {request.user.username})
-    
+
     # If the request was an IDP-driven identifier selection request
     # (i.e., the IDP URL was entered at the RP), then return the
     # default identity URL for this server. In a full-featured
@@ -166,7 +183,7 @@ def handle_check_id_request(request, openid_request):
             return display_response(request, error_response)
 
     if request.user.userprofile.trusted_url(openid_request.trust_root):
-        openid_response = openid_request.answer(True, identity = id_url)
+        openid_response = openid_request.answer(True, identity=id_url)
         add_user_data(request, openid_response)
         return display_response(request, openid_response)
 
@@ -183,6 +200,7 @@ def handle_check_id_request(request, openid_request):
         # get to it later.
         set_request(request, openid_request)
         return show_decide_page(request, openid_request)
+
 
 def show_decide_page(request, openid_request):
     """
@@ -208,9 +226,10 @@ def show_decide_page(request, openid_request):
         request,
         'provider/trust.html',
         {'trust_root': trust_root,
-         'trust_handler_url':get_view_url(request, process_trust_result),
+         'trust_handler_url': get_view_url(request, process_trust_result),
          'trust_root_valid': trust_root_valid,
          })
+
 
 @csrf_exempt
 def process_trust_result(request):
@@ -223,7 +242,8 @@ def process_trust_result(request):
     openid_request = get_request(request)
 
     # The identifier that this server can vouch for
-    response_identity = get_view_url(request, profile_detail, {request.user.username})
+    response_identity = get_view_url(request, profile_detail,
+                                     {request.user.username})
 
     # If the decision was to allow the verification, respond
     # accordingly.
@@ -233,8 +253,8 @@ def process_trust_result(request):
     openid_response = openid_request.answer(allowed,
                                             identity=response_identity)
 
-    if request.POST.has_key('remember') and request.POST['remember'] == 'yes':
-        url = TrustedRoot.objects.get(url = openid_response.request.trust_root)
+    if 'remember' in request.POST and request.POST['remember'] == 'yes':
+        url = TrustedRoot.objects.get(url=openid_response.request.trust_root)
         request.user.userprofile.trusted_roots.add(url)
 
     # Send Simple Registration data in the response, if appropriate.
@@ -243,17 +263,18 @@ def process_trust_result(request):
 
     return display_response(request, openid_response)
 
+
 def add_user_data(request, openid_response):
     """
     Add user custom data to the request using sreg
     and ax extensions
     """
-    
+
     openid_request = get_request(request)
-    
+
     if openid_request == None:
         return
-    
+
     sreg_data = {
         'fullname': request.user.get_full_name(),
         'nickname': request.user.username,
@@ -267,12 +288,16 @@ def add_user_data(request, openid_response):
     ax_req = ax.FetchRequest.fromOpenIDRequest(openid_request)
     ax_resp = ax.FetchResponse(ax_req)
 
-    ax_resp.addValue('http://axschema.org/namePerson/first', request.user.first_name)
-    ax_resp.addValue('http://axschema.org/namePerson/last', request.user.last_name)
-    ax_resp.addValue('http://axschema.org/namePerson/friendly', request.user.username)
+    ax_resp.addValue('http://axschema.org/namePerson/first',
+                     request.user.first_name)
+    ax_resp.addValue('http://axschema.org/namePerson/last',
+                     request.user.last_name)
+    ax_resp.addValue('http://axschema.org/namePerson/friendly',
+                     request.user.username)
     ax_resp.addValue('http://axschema.org/contact/email', request.user.email)
 
     openid_response.addExtension(ax_resp)
+
 
 def display_response(request, openid_response):
     """
