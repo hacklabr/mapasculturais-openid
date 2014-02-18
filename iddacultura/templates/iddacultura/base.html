@@ -7,16 +7,33 @@
             <meta charset="UTF-8" />
             <link rel="stylesheet" href="{{ BOOTSTRAP_CSS_URL }}">
             <link rel="stylesheet" href="{% static "css/style.css" %}">
+            <link rel="stylesheet" href="{% static "css/elegant-font.css" %}">
             <title>{% block title %}{% endblock %}</title>
         {% endblock %}
     </head>
     <body>
         <section id="marca-dagua"></section>
+        <header id="main-header" class="clearfix">
+            <h1 id="logo-spcultura"><a href="http://mapasculturais.hacklab.com.br/"><img src="{% static "img/logo-spcultura.png" %}" alt="SP Cultura" /></a></h1>
+            <h2 class="alignleft">ID da Cultura</h2>
+
+            <nav id="about-nav" class="alignright clearfix">
+                <ul id="menu-secundario">
+                    <li><a href="#">Sobre o SP Cultura</a></li>
+                    <li><a href="#">Como usar</a></li>
+                </ul>
+                <h1 id="logo-smc"><a href="http://www.prefeitura.sp.gov.br" target="_blank"><img src="{% static "img/logo-prefeitura.png" %}" alt="Prefeitura de São Paulo"  /></a></h1>
+            </nav>
+            <!--<nav id="main-nav" class="alignright clearfix">
+                <ul class="menu abas-objetos clearfix">
+                    <li id="aba-agentes" >
+                        <a href="<?php echo $app->createUrl('busca'); ?>" class="icone icon_profile"></a>
+                        <a class="js-filtro">Agentes</a>
+                    </li>
+                </ul>
+            </nav>-->
+        </header>
         <div class="wrap">
-            <header id="header" class="clearfix">
-                <h2 id="mapasculturais_link"><a href="http://mapasculturais.hacklab.com.br/">SP Cultura</a></h2>
-                <h1 class="title">ID Aberto da Cultura</h1>
-            </header>
             {% block middle %}
                 <div class="content_all clearfix">
                     {% if request.user.is_authenticated %}
