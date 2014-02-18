@@ -26,6 +26,6 @@ Como usar
 ---------
 
 - source ~/devel/mapasculturais-openid-env/bin/activate
-- cd ~/devel/iddacultura-provider
+- cd ~/devel/mapasculturais-openid
 - ./manage.py runserver
 - Abrir no browser http://localhost:8000
