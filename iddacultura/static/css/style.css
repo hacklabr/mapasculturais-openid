@@ -299,6 +299,9 @@ a.icone:hover { text-decoration: none; }
 .submenu { display: none; position: absolute; top: 70px; margin: 0; padding: .75rem; list-style: none; font-size: .8rem; line-height: 1rem; background: #e2e2e2; box-shadow: 1px 1px 4px 0 rgba(0,0,0,.3); -webkit-box-shadow: 1px 1px 4px 0 rgba(0,0,0,.3); border-radius: 2px; }
 .submenu li { float: none; line-height: 1.5rem; }
 .menu .submenu a { display: block; font-weight: normal; }
+.logado { border-right: 1px solid #000; }
+.menu .entrar:hover { border-top: 6px solid #f90; }
+.menu .entrar:hover a { color: #f90; }
 
 /* Content all
 ---------------------------------------------------------------------------*/ 
@@ -437,25 +440,11 @@ ul.messages li.info{
 #menu a.active {
     background: #E9E9E9;
 }
-/*footer*/
-#footer {
-    text-align: center;
-    border-top: solid 1px #ECECEC;
-    padding: 10px 0;
-    margin-top: 10px;
-}
 
 /* Captcha ref */
 .recaptchatable input {
     display: inline-block !important; 
 }
-
-.botao, .botao-menor { display: inline-block; color: #fff; background: #f90; border-radius: 2px; font-family: "aleo", serif; border: 1px solid #f90; cursor: pointer; } 
-.botao { padding: .75rem; text-align: center; }
-.botao-menor { height: 1.875rem; padding: 0 .5rem; font-size: .875rem; line-height: 2rem; }
-.botao-de-icone { width: 1.375rem; line-height: 1.375rem !important; text-align: center; font-size: 1rem; border-radius: 2px; background-color: #f90; color: #fff; border: 1px solid #f90; }
-.botao:hover, .botao-menor:hover, .botao-de-icone:hover { border: 1px solid #e48203; text-decoration: none; box-shadow: rgba(0,0,0, .25) 0 1px 2px 0; }
-.botao-menor.selected, .botao-de-icone.selected, .editar, .editar:hover, .adicionar, .adicionar:hover { background: #000; border-color: #000; }
 
 #marca-dagua {
     position: fixed;

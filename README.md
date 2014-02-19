@@ -19,6 +19,8 @@ Ambiente de desenvolvimento
 - pip install -r dependencies.txt
 - mysqladmin create mapasculturais-openid
 - cp iddacultura/settings_local.py.sample iddacultura/settings_local.py
+- gedit iddacultura/settings_local.py
+- Inserir as chaves do recaptcha no final do arquivo (é preciso ter ou criar uma conta no site do Recaptcha)
 - ./manage.py syncdb
 - ./manage.py runserver
 

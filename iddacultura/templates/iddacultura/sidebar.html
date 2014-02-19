@@ -13,7 +13,16 @@
     </aside>
 {% else %}
     <aside id="sidebar" class="col-3">
-        <h1 class="title_login">Login</h1>
-        {% login_form %}
+        <h1>Cadastre-se</h1>
+        <form method='post'>
+            <table>
+                {% csrf_token %}
+                {% if request.GET.next %}
+                    <input type="hidden" name="next" value="{{ request.GET.next }}" />
+                {% endif %}
+                {{ form }}
+                <tr><td></td><td><input type="submit" value="Registrar" /></td></tr>
+            </table>
+        </form>
     </aside>
 {% endif %}
