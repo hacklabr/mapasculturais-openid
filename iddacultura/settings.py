@@ -16,11 +16,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'you_must_configure_settings_local',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
+        'NAME': 'base.db',
     }
 }
 
@@ -169,4 +165,7 @@ AUTH_PROFILE_MODULE = 'iddacultura.UserProfile'
 
 SITE_ID = 1
 
-execfile(os.path.join(SITE_ROOT, 'settings_local.py'))
+try:
+    from settings_local import *
+except ImportError:
+    print "Error importing settings_local.py configuration file"

@@ -1,4 +1,4 @@
-{% load login_form %}
+{% load registration_form %}
 
 {% if user.is_authenticated %}
     <aside id="sidebar" class="col-4">
@@ -9,6 +9,6 @@
     </aside>
 {% else %}
     <aside id="sidebar" class="col-4">
-        {% login_form %}
+        {% registration_form %}
     </aside>
 {% endif %}
