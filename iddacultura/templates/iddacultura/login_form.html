@@ -26,7 +26,7 @@
 <div class="clear"></div>
 
 {% if next %}
-    <a href="{% url registration_register %}?next={{ next|urlencode }}" title="Cadastrar-se" class="cadastrar_se botao">Cadastrar-se</a>
+    <a href="{% url registration_register %}?next={{ next|urlencode }}" title="Cadastre-se" class="botao">Cadastre-se</a>
 {% else %}
-    <a href="{% url registration_register %}" title="Cadastrar-se" class="cadastrar_se botao">Cadastrar-se</a>
+    <a href="{% url registration_register %}" title="Cadastre-se" class="botao">Cadastre-se</a>
 {% endif %}
