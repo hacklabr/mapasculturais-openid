@@ -15,40 +15,38 @@
         <section id="marca-dagua"></section>
         <header id="main-header" class="clearfix">
             <h1 id="logo-spcultura"><a href="http://mapasculturais.hacklab.com.br/"><img src="{% static "img/logo-spcultura.png" %}" alt="SP Cultura" /></a></h1>
-            
-
+            <h1 id="logo-iddacultura"><a href="{{ homepage }}" title="ID da Cultura">ID da Cultura</a></h1>
             <nav id="about-nav" class="alignright clearfix">
-                <ul id="menu-secundario">
-                    <li><a href="#">Sobre o SP Cultura</a></li>
-                    <li><a href="#">Como usar</a></li>
-                </ul>
                 <h1 id="logo-smc"><a href="http://www.prefeitura.sp.gov.br" target="_blank"><img src="{% static "img/logo-prefeitura.png" %}" alt="Prefeitura de São Paulo"  /></a></h1>
             </nav>
             <nav id="main-nav" class="alignright clearfix">
                 <ul class="menu logado clearfix">
                     <li class="entrar">
-                        <a class="icone icon_lock" href="{% url registration_register %}"></a>
-                        <a>Entrar</a>
+                    {% if not request.user.is_authenticated %}
+                        <a class="icone icon_lock" href="{% url auth_login %}"></a>
+                        <a href="{% url auth_login %}">Entrar</a>
+                    {% else %}                    
+                        {{user.username}} 
+                        <a class="icone icon_lock" href="{% url auth_logout %}"></a>
+                        <a href="{% url auth_logout %}">Sair</a>
+                    {% endif %}                        
                     </li>
                 </ul>
             </nav>
         </header>
-        <div class="wrap">
+        <div class="wrap clearfix">
             {% block middle %}
-                <div class="content_all clearfix">
+
                     {% if request.user.is_authenticated %}
                         {% sidebar request.path %}
                     {% endif %}
-                    <section id="content" class="col-9">
+                    <section id="content" class="col-8">
                         {% block content %}{% endblock %}
                     </section>
 
                     {% if not request.user.is_authenticated %}
                         {% sidebar request.path %}
                     {% endif %}
-
-                    
-                </div>
             {% endblock %}
         </div>
     </body>

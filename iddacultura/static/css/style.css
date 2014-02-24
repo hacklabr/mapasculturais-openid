@@ -132,7 +132,7 @@ a img {
 -------------------------------------------------------------- */
 
 .wrap { width: 960px; margin: 0 auto; padding: 0; clear: both; }
-.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 { float: left; margin-left: 10px; margin-right: 10px; display: inline; }
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 { float: left; margin-left: 10px; margin-right: 10px; display: inline; moz-box-sizing: border-box; box-sizing: border-box; padding: 1.5rem; }
 .col-1 { width: 60px; }
 .col-2 { width: 140px; }
 .col-3 { width: 220px; }
@@ -278,15 +278,14 @@ a.icone:hover { text-decoration: none; }
 #main-header { /*position: fixed; top: 0; width: 100%; z-index: 150;*/ border-top: 6px solid #000; background: #fff; }
 #main-header h1 { margin-bottom: 0; }
 #main-header h1 img { display: block; }
-#logo-spcultura { float: left; padding: .375rem 1.5rem; }
+#logo-spcultura { float: left; padding: .375rem 1.5rem; border-right: 1px solid #000; }
 #logo-spcultura img { width: 138px; }
+#logo-iddacultura { float: left; padding: 0 1.5rem 0.3rem; line-height: 4.2rem; font-size: 1.5rem; font-family: "Open Sans"; font-weight: bold; text-transform: uppercase; border-right: 1px solid #000; }
+#logo-iddacultura a { color: #f90; }
+#logo-iddacultura a:hover { text-decoration: none; color: #000; }
 #about-nav { padding: 0 1.5rem; }
 #logo-smc { clear: both; }
 #logo-smc img { width: 90px; margin: 0 auto; }
-#menu-secundario { float: right; margin: 0; list-style: none; font-size: .70rem; text-transform: uppercase; }
-#menu-secundario li { display: inline-block; margin-left: 10px; }
-#menu-secundario li:first-child { margin-left: 0; }
-#menu-secundario li a { font-weight: normal; }
 #main-nav a:hover { text-decoration: none; }
 .menu { position: relative; float: left; margin: -6px 0 0; border-left: 1px solid #000; }
 .menu li { position: relative; float: left; list-style-type: none; }

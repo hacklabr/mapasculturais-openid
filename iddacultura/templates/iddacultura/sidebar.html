@@ -1,7 +1,7 @@
 {% load login_form %}
 
 {% if user.is_authenticated %}
-    <aside id="sidebar" class="col-3 left alpha">
+    <aside id="sidebar" class="col-4">
         <nav id="menu">
             <span>Logado como <b><i>{% if user.is_authenticated %} {{user.username}} {% endif %}</i></b></span>
             <a href="{{ homepage }}" {% if path == homepage %} class="active" {% endif %} title="Página inicial">Página inicial</a>
@@ -12,17 +12,7 @@
         </nav>
     </aside>
 {% else %}
-    <aside id="sidebar" class="col-3">
-        <h1>Cadastre-se</h1>
-        <form method='post'>
-            <table>
-                {% csrf_token %}
-                {% if request.GET.next %}
-                    <input type="hidden" name="next" value="{{ request.GET.next }}" />
-                {% endif %}
-                {{ form }}
-                <tr><td></td><td><input type="submit" value="Registrar" /></td></tr>
-            </table>
-        </form>
+    <aside id="sidebar" class="col-4">
+        {% login_form %}
     </aside>
 {% endif %}
