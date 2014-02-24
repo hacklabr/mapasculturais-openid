@@ -204,32 +204,10 @@ label { color: #000; }
 input, textarea, button, select { padding: 3px 6px; background: #fff; border: 1px solid #ccc; border-radius: 2px; color: #666; font-family: "Open Sans", Arial, Helvetica, sans-serif; box-sizing: border-box; -moz-box-sizing: border-box; }
 input, textarea { font-size: .75rem; }
 input, button, select { height: 2rem; margin: 0 0 1.5rem; }
-input[type="submit"], button[type="submit"] { width: auto; padding: 0 .75rem; vertical-align: bottom; color: #fff; font-family: "aleo", serif; font-size: .875rem; background: #000; cursor: pointer; border: none; }
-input[type="submit"]:hover, button[type="submit"]:hover { box-shadow: rgba(0,0,0, .25) 0 1px 2px 0; -webkit-box-shadow: rgba(0,0,0, .25) 0 1px 2px 0; }
+input[type="submit"], button[type="submit"] { width: auto; padding: 0 .75rem; vertical-align: bottom; color: #fff; font-size: .75rem; font-weight: bold; background: #000; cursor: pointer; border: none; }
+input[type="submit"]:hover, button[type="submit"]:hover { background: #f90; box-shadow: rgba(0,0,0, .25) 0 1px 2px 0; -webkit-box-shadow: rgba(0,0,0, .25) 0 1px 2px 0; }
 input[type="radio"], input[type="checkbox"] { width: auto; height: auto; margin: 0; vertical-align: baseline; }
 input:focus, textarea:focus, button:focus, select:focus { outline: none; }
-
-/*input[type="text"], input[type="submit"], input[type="password"], textarea, select { background: #F8F8F8; border: 1px solid #DDDDDD; padding: 6px 0; font: 12px/22px Arial, Helvetica, sans-serif; box-shadow: inset 2px 2px 4px #F2F2F2, inset -2px -2px 4px #F2F2F2; -webkit-box-shadow: inset 2px 2px 4px #F2F2F2, inset -2px -2px 4px #F2F2F2; -moz-box-shadow: inset 2px 2px 4px #F2F2F2, inset -2px -2px 4px #F2F2F2; width: 100%;  }
-input[type="submit"]{
-    width: auto !important;
-    padding-left: 10px;
-    padding-right: 10px;
-    cursor: pointer;
-    margin-top: 8px;
-    background: #F0F0F0 !important;
-    background: -webkit-linear-gradient(top,#F6F6F6,#D8D8D8) !important;
-    background: -ms-linear-gradient(top,#F6F6F6,#D8D8D8) !important;
-    background: -moz-linear-gradient(top,#F6F6F6,#D8D8D8) !important;
-    background: -o-linear-gradient(top,#F6F6F6,#D8D8D8) !important;
-    text-shadow: 1px 1px 0 #FFF;
-}
-input[type="submit"]:active{
-    box-shadow: 0 0 0 #E8E8E8, inset 2px 2px 3px #E1E1E1;
-    -webkit-box-shadow: 0 0 0 #E8E8E8, inset 2px 2px 3px #E1E1E1;
-    -moz-box-shadow: 0 0 0 #E8E8E8, inset 2px 2px 3px #E1E1E1;
-}
-input[type="submit"]:hover{ background: #E9E9E9; }*/
-
 a { color: #000000; text-decoration: none; outline: none; font-weight: bold; }
 a:hover { text-decoration: underline; }
 img, embed, object, video { max-width: 100%; height: auto; }
@@ -308,29 +286,12 @@ a.icone:hover { text-decoration: none; }
 .menu .user-name .submenu a { color: #000; padding: .5rem; }
 .menu .user-name .submenu a:hover { color: #fff; }
 
-/* Content all
+/* Content
 ---------------------------------------------------------------------------*/ 
-/*Default*/
 .centerdiv { margin: auto; float: none !important; background: #fff; border-radius: 2px; }
 .centerdiv h1 { text-align: center; }
+#access_login input[type="text"], #access_login input[type="password"], #access_login label { display: block; width: 100%; }
 
-/*content*/
-.content_all {
-    /*background: #FFF; */
-    display: block;
-}
-/*
-.content_all h1 {
-    color: #666;
-}
-*/ 
-#content {
-    margin-top: 10px;
-}
-#content input, #content textarea, #content select {
-    display: block;
-    margin-bottom: 5px;
-}
 
 #content .styleforms_none input, #content .styleforms_none textarea, #content .styleforms_none select {
     width: auto;
@@ -352,36 +313,7 @@ ul.list_user li a {
 ul.list_user li a:hover {
     color: #000;
 }
-/*Sidebar*/
-#access_login label, #access_login input {
-    display: block;
-}
-#access_login input[type="text"], #access_login input[type="password"] {
-    font-size: 16px;
-}
-a.cadastrar_se {
-    width: 100%;
-    display: block;
-    background: #FDDD04;
-    background: -webkit-linear-gradient(top,#FDDD04,#D5BA02);
-    background: -moz-linear-gradient(top,#FDDD04,#D5BA02);
-    background: -o-linear-gradient(top,#FDDD04,#D5BA02);
-    box-shadow: inset 2px 1px 0 #FDE435;
-    -webkit-box-shadow: inset 1px 1px 0 #FDE435;
-    -moz-box-shadow: inset 1px 1px 0 #FDE435;
-    -o-box-shadow: inset 1px 1px 0 #FDE435;
-    text-shadow: 1px 1px 0 #C6AD03;
-    border: solid 1px #C1AA02;
-    text-align: center;
-    margin-top: 10px;
-    padding: 15px 0;
-    font-size: 22px;
-    color: #FFF;
-}
-h1.title_login {
-    text-align: center;
-    margin: 10px 0 0 0; 
-}
+
 /*error*/
 ul.errorlist, ul.messages {
     list-style: none;
