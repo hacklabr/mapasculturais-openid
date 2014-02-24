@@ -20,17 +20,24 @@
                 <h1 id="logo-smc"><a href="http://www.prefeitura.sp.gov.br" target="_blank"><img src="{% static "img/logo-prefeitura.png" %}" alt="Prefeitura de São Paulo"  /></a></h1>
             </nav>
             <nav id="main-nav" class="alignright clearfix">
-                <ul class="menu logado clearfix">
-                    <li class="entrar">
+                <ul class="menu logado clearfix">                    
                     {% if not request.user.is_authenticated %}
+                    <li class="entrar">
                         <a class="icone icon_lock" href="{% url auth_login %}"></a>
                         <a href="{% url auth_login %}">Entrar</a>
-                    {% else %}                    
-                        {{user.username}} 
-                        <a class="icone icon_lock" href="{% url auth_logout %}"></a>
-                        <a href="{% url auth_logout %}">Sair</a>
-                    {% endif %}                        
                     </li>
+                    {% else %}
+                    <li class="user-name">
+                        <a class="icone icon_id" href="#"></a>
+                        <a href="#">{{user.username}}</a>
+                        <ul class="submenu">
+                            <div class="setinha"></div>
+                            <li><a href="">SP Cultura</a></li>                            
+                            <li><a href="{% url auth_logout %}">Sair</a></li>
+                        </ul>                       
+                    </li>
+                    {% endif %}                      
+                    
                 </ul>
             </nav>
         </header>
