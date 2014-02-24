@@ -18,15 +18,16 @@
     {{ form.password.label_tag }}
     {{ form.password }}
 
-    <input type="submit" value="Entrar" name="enviar" />
+    <div class="textright"><input type="submit" value="Entrar" name="enviar" /></div>
 </form>
 
-<p><a href="{% url auth_password_reset %}">Esqueceu sua senha?</a></p>
+<div class="small">
+    <a href="{% url auth_password_reset %}">Esqueceu sua senha?</a> | 
+    {% if next %}
+    <a href="{% url registration_register %}?next={{ next|urlencode }}" title="Cadastre-se">Cadastre-se</a>
+    {% else %}
+        <a href="{% url registration_register %}" title="Cadastre-se">Cadastre-se</a>
+    {% endif %}
+</div>
 
-<div class="clear"></div>
 
-{% if next %}
-    <a href="{% url registration_register %}?next={{ next|urlencode }}" title="Cadastre-se" class="botao">Cadastre-se</a>
-{% else %}
-    <a href="{% url registration_register %}" title="Cadastre-se" class="botao">Cadastre-se</a>
-{% endif %}
