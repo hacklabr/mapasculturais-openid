@@ -2,11 +2,9 @@
 {% block title %}Edit Profile{% endblock %}
 {% block content %}
     <h3>Editar perfil do usuário {{ user }}</h3>
-    <table>
         <form action="" method="POST">
             {% csrf_token %}
-            {{ form }}
-            <tr><td></td><td><input id="submit" type="submit" name="submit" value="Atualizar" /></td>
+            {{ form.as_p }}
+            <div class="textright"><input id="submit" type="submit" name="submit" value="atualizar" /></div>
         </form>
-    </table>
 {% endblock content %}

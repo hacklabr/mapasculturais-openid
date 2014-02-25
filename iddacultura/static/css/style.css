@@ -200,10 +200,10 @@ address { font-style: normal; }
 sup, sub { height: 0; line-height: 1; position: relative; vertical-align: baseline; }
 sup { bottom: 1ex; }
 sub { top: .5ex; }
-label { color: #000; }
+label { display: block; width: 100%; color: #000; }
 input, textarea, button, select { padding: 3px 6px; background: #fff; border: 1px solid #ccc; border-radius: 2px; color: #666; font-family: "Open Sans", Arial, Helvetica, sans-serif; box-sizing: border-box; -moz-box-sizing: border-box; }
 input, textarea { font-size: .75rem; }
-input, button, select { height: 2rem; margin: 0 0 1.5rem; }
+input, button, select { height: 2rem; }
 input[type="submit"], button[type="submit"] { width: auto; padding: 0 .75rem; vertical-align: bottom; color: #fff; font-size: .75rem; font-weight: bold; background: #000; cursor: pointer; border: none; }
 input[type="submit"]:hover, button[type="submit"]:hover { background: #f90; box-shadow: rgba(0,0,0, .25) 0 1px 2px 0; -webkit-box-shadow: rgba(0,0,0, .25) 0 1px 2px 0; }
 input[type="radio"], input[type="checkbox"] { width: auto; height: auto; margin: 0; vertical-align: baseline; }
@@ -293,18 +293,11 @@ a.icone:hover { text-decoration: none; }
 ---------------------------------------------------------------------------*/ 
 .box-registro { margin-top: 1.5rem; color: #666; background: #fff; border-radius: 2px; box-shadow: 0 2px 2px 0 rgba(0,0,0,.15); -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,.15); }
 #content .box-registro { margin: auto; float: none !important; }
-#access_login input[type="text"], #access_login input[type="password"], #access_login label { display: block; width: 100%; }
+.box-registro input[type="text"], .box-registro input[type="password"] { width: 100%; }
 
 /* Cadastro
 ---------------------------------------------------------------------------*/ 
-table { margin: auto; }
-table th { min-width: 140px; padding-right: .75rem; vertical-align: top; text-align: right; font-weight: normal; }
-table input { width: 100%; }
-table input[type="submit"] { width: auto; margin-bottom: 0; margin-left: .75rem; vertical-align: middle; }
-table select { width: 60%; }
-#registro table { width: 100%; }
-#registro tbody, #registro tr, #registro th, #registro td { display: block; }
-#registro th { text-align: left; }
+
 /* Captcha ref */
 #recaptcha_widget_div { margin-bottom: 1.5rem; }
 .recaptchatable input { display: inline-block !important; }

@@ -11,14 +11,15 @@
     {% else %}
         <input type="hidden" name="next" value="{% url iddacultura.views.user_profile %}" />
     {% endif %}
-    
+    <p>
     {{ form.username.label_tag }}
     {{ form.username }}
-
+    </p>
+    <p>
     {{ form.password.label_tag }}
     {{ form.password }}
-
-    <div class="textright"><input type="submit" value="Entrar" name="enviar" /></div>
+    </p>
+    <p class="textright"><input type="submit" value="Entrar" name="enviar" /></p>
 </form>
 
 <div class="small">

@@ -7,14 +7,14 @@
         <div class="box-registro col-8">
             <h3 class="textcenter">Crie uma conta</h3>
             <form method='post'>
-                <table>
-                    {% csrf_token %}
-                    {% if request.GET.next %}
-                        <input type="hidden" name="next" value="{{ request.GET.next }}" />
-                    {% endif %}
-                    {{ form }}
-                    <tr><td></td><td class="textright"><input type="submit" value="criar conta" /></td></tr>
-                </table>
+                {% csrf_token %}
+                {% if request.GET.next %}
+                    <input type="hidden" name="next" value="{{ request.GET.next }}" />
+                {% endif %}
+                {{ form.as_p }}
+                <div class="textright">
+                    <input type="submit" value="criar conta" />
+                </div>
             </form>
         </div>
     {% endif %}
