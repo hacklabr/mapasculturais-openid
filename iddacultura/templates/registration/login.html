@@ -5,12 +5,12 @@
     <h2 class="textcenter">Entrar com o ID da Cultura</h2>   
     <div class="box-registro col-4">
     {% if request.user.is_authenticated %}
-        <p>Você já está autenticado!</p>
+        <p class="mensagem alerta textcenter">Você já está autenticado!</p>
     {% else %}
         {% if messages %}
-             <ul class="mensagem">
+             <ul class="messages">
                 {% for message in messages %}
-                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    <li{% if message.tags %} class="mensagem {{ message.tags }}"{% endif %}>{{ message }}</li>
                 {% endfor %}
             </ul>
         {% endif %}

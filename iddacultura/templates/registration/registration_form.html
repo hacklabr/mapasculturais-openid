@@ -2,9 +2,9 @@
 {% block title %}Criar nova conta{% endblock %}
 {% block content %}
     {% if request.user.is_authenticated %}
-        <p>Você já está autenticado!</p>
+        <p class="mensagem alerta">Você já está autenticado!</p>
     {% else %}
-        <div class="box-registro col-8">
+        <div class="box-registro col-7">
             <h3 class="textcenter">Crie uma conta</h3>
             <form method='post'>
                 {% csrf_token %}
