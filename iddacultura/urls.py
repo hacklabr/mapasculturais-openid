@@ -8,7 +8,8 @@ from iddacultura.views import user_profile
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^user_profile/$', user_profile),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/logout/$', 'iddacultura.views.logout'),
@@ -24,6 +25,7 @@ urlpatterns = patterns('',
 )
 
 #TODO: por que é necessário colocar isso separado das demais urlpatterns?
-urlpatterns += patterns('django.contrib.flatpages.views',
+urlpatterns += patterns(
+    'django.contrib.flatpages.views',
     url(r'^/?$', 'flatpage', {'url': '/'}, name='homepage'),
 )
