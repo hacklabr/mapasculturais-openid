@@ -1,8 +1,8 @@
+<div id="registro" class="box-registro col-4">
     {% if request.user.is_authenticated %}
         <p>Você já está autenticado!</p>
     {% else %}
-        <div class="centerdiv col-6">
-            <h1>Cadastre-se</h1>
+            <h5 class="textcenter">Crie uma conta</h5>
             <form method='post'>
                 <table>
                     {% csrf_token %}
@@ -10,8 +10,14 @@
                         <input type="hidden" name="next" value="{{ request.GET.next }}" />
                     {% endif %}
                     {{ form }}
-                    <tr><td></td><td><input type="submit" value="Registrar" /></td></tr>
+                    <tr>
+                        <td></td>
+                        <td class="textright">
+                            <a class="small" href="{% url auth_login %}">Já tenho uma conta</a>
+                            <input type="submit" value="criar conta" />                            
+                        </td>
+                    </tr>
                 </table>
             </form>
-        </div>
     {% endif %}
+</div>
