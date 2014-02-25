@@ -19,7 +19,8 @@ def logout(request):
     quando o usuário sai do sistema
     """
 
-    messages.add_message(request, messages.INFO,
+    messages.add_message(
+        request, messages.INFO,
         'Você acabou de sair de sua conta!')
 
     return auth_views.logout_then_login(request)

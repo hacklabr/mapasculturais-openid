@@ -2,7 +2,6 @@
 
 from registration.backends.simple import SimpleBackend
 from django.contrib.auth.models import User
-from models import UserProfile
 
 
 class RegBackend(SimpleBackend):

@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import re
 from registration.forms import RegistrationFormUniqueEmail
-from django.contrib.localflavor.br.forms import BRCPFField
-from django.forms import ModelForm, ValidationError
+from django.forms import ModelForm
 from django import forms
 from iddacultura.models import User, UserProfile
 from captcha.fields import ReCaptchaField
@@ -43,7 +41,7 @@ class UserProfilePublicForm(ModelForm):
             self.fields['last_name'].initial = self.instance.user.last_name
 
             self.fields.keyOrder = ['first_name', 'last_name', 'email',
-                'trusted_roots']
+                                    'trusted_roots']
         except User.DoesNotExist:
             pass
 
