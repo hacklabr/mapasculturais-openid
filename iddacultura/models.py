@@ -22,7 +22,8 @@ class UserProfile(models.Model):
     """
 
     user = models.OneToOneField(User)
-    trusted_roots = models.ManyToManyField(TrustedRoot, blank=True, null=True,
+    trusted_roots = models.ManyToManyField(
+        TrustedRoot, blank=True, null=True,
         verbose_name="Sites autorizados",
         help_text="Lista de clientes OpenID autorizados.")
 
@@ -30,7 +31,8 @@ class UserProfile(models.Model):
         verbose_name = 'Perfil do usuário'
 
     def get_absolute_url(self):
-        return reverse('profiles_profile_detail',
+        return reverse(
+            'profiles_profile_detail',
             args=[unicode(self.user.username)])
 
     def trusted_url(self, url):

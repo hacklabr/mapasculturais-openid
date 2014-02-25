@@ -7,6 +7,6 @@
             <a href="{{ editprofile }}" {% if path == editprofile %} class="active" {% endif %} title="Editar perfil">Editar perfil</a>
             <a href="{{ chpassword }}" {% if path == chpassword %} class="active" {% endif %} title="Alterar senha">Alterar senha</a>
     </aside>
-{% else %}    
+{% else %}
     {% registration_form %}
 {% endif %}
