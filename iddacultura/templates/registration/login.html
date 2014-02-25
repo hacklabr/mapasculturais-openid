@@ -2,18 +2,19 @@
 {% load login_form %}
 {% block title %}Login{% endblock %}
 {% block content %}
+    <h2 class="textcenter">Entrar com o ID da Cultura</h2>   
+    <div class="box-registro col-4">
     {% if request.user.is_authenticated %}
         <p>Você já está autenticado!</p>
     {% else %}
-        <div class="centerdiv sombra col-4">
-            {% if messages %}
-                <ul class="mensagem">
-                    {% for message in messages %}
-                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-            {% login_form %}
-        </div>
+        {% if messages %}
+             <ul class="mensagem">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% login_form %}
+    </div>
     {% endif %}
 {% endblock %}

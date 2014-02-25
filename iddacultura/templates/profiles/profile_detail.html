@@ -6,10 +6,11 @@
     <meta http-equiv="x-xrds-location" content="{% absolute iddacultura.provider.views.user_xrds profile.user.username %}" />
 {% endblock %}
 {% block content %}
-    <h1>Perfil do usuário {{ profile.user.username }}</h1>
+    <h3>Perfil do usuário</h3>
     {% ifequal request.user.username profile.user.username %}
-        <p><b>Nome</b>:<br /> {{ profile.user.get_full_name }}</p>
-        <p><b>E-mail</b>:<br /> {{ profile.user.email }}</p>
+        <p>Nome completo:<br /> {{ profile.user.get_full_name }}</p>
+        <p>Nome de usuário:<br /> {{ profile.user.username }}</p>
+        <p>E-mail:<br /> {{ profile.user.email }}</p>
     {% else %}
         <p>Identidade OpenID do usuário {{ profile.user.username }}</p>
     {% endifequal %}
