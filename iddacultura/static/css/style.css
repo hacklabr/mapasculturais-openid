@@ -145,14 +145,6 @@ a img {
 .col-10 { width: 780px; }
 .col-11 { width: 860px; }
 .col-12 { width: 940px; }
-.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
-.clear { clear: both; }
-.first { margin-left: 0; }
-.last { margin-right: 0; }
-.left{float: left !important;}
-.right{float: right !important;}
-.alpha {margin-left: 0;}
-.omega {margin-right: 0;}
 
 /* =Fonts
 -------------------------------------------------------------- */
@@ -170,7 +162,7 @@ h1 + h2, h2 + h3, h4 + h5, h5 + h6 { margin-top: 1.5rem /*24px*/; }
 
 /* =Global Elements
 -------------------------------------------------------------- */
-body { background: #f90 /*url(img/grid.png)*/; color: #fff; }
+body { background: #f90 /*url(img/grid.png)*/; color: #333; }
 /* body, input, textarea { color: #666; } */
 hr { background-color: #ccc; border: 1px solid #fff; clear: both; height: 1px; margin-bottom: 22px; }
 
@@ -215,7 +207,7 @@ img, embed, object, video { max-width: 100%; height: auto; }
 /* =General classes
 -------------------------------------------------------------- */
 .small { font-size: .75rem; }
-.big { font-size: 2rem; }
+.big { font-size: 1.7rem; }
 .bottom { margin-bottom: 0 !important; padding-bottom: 0; }
 .aligncenter { display: block; margin-right: auto; margin-left: auto; clear: both; }
 .alignleft { float: left; }
@@ -229,15 +221,15 @@ img, embed, object, video { max-width: 100%; height: auto; }
 .last { margin-right: 0; }
 .sombra { box-shadow: 0 2px 2px 0 rgba(0,0,0,.15); -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,.15); }
 .url { word-wrap: break-word; word-break: break-all; }
-.mensagem { margin-bottom: 1.5rem; padding: .25rem .75rem; border-radius: 2px; border-style: solid; border-width: 1px; font-size: .75rem; }
+.mensagem, ul.errorlist li { margin-bottom: 1.5rem; padding: .25rem .75rem; border-radius: 2px; border-style: solid; border-width: 1px; font-size: .75rem; }
 .mensagem.ajuda { background: #cff; border-color: #9be7ee; color: #3cc; }
-.mensagem.alerta { background: #ffc; border-color: #eed29b; color: #c93; }
-.mensagem.erro { background: #fcc; border-color: #ee9b9b; color: #c33; }
+.mensagem.alerta, li.info { background: #ffc; border-color: #eed29b; color: #c93; }
+.mensagem.erro, ul.errorlist li { background: #fcc; border-color: #ee9b9b; color: #c33; }
 .mensagem.sucesso { background: #cfc; border-color: #a6dfa6; color: #6c6; }
-.ajuda:before, .alerta:before, .erro:before, .sucesso:before { display: inline-block; width: 1rem; height: inherit; margin: 0 5px; font-size: 1rem; line-height: inherit; font-family: 'ElegantIcons'; vertical-align: top; text-transform: none; font-weight: normal; font-style: none; }
+.ajuda:before, .alerta:before, .erro:before, .sucesso:before, li.info:before, ul.errorlist li:before { display: inline-block; width: 1rem; height: inherit; margin: 0 5px; font-size: 1rem; line-height: inherit; font-family: 'ElegantIcons'; vertical-align: top; text-transform: none; font-weight: normal; font-style: none; }
 .ajuda:before { content: '\e007'; color: #3cc; }
-.alerta:before { content: '\e061'; color: #c93; }
-.erro:before { content: '\e061'; color: #c33; }
+.alerta:before, li.info:before { content: '\e061'; color: #c93; }
+.erro:before, ul.errorlist li:before { content: '\e061'; color: #c33; }
 .sucesso:before { content: '\e052'; color: #6c6; }
 /*avatar*/
 .avatar { float: left; margin-right: .75rem; margin-bottom: 1.5rem; background: #ccc; }
@@ -282,30 +274,39 @@ a.icone:hover { text-decoration: none; }
 .menu .entrar:hover, .menu .user-name:hover { border-top: 6px solid #f90; }
 .menu .entrar:hover a, .menu .user-name:hover a { color: #f90; }
 .menu .user-name { width: auto; min-width: 5rem; }
-.menu .user-name .setinha { left: 79px; top: -16px; border-color: transparent transparent #f90 transparent; }
-.menu .user-name .submenu { left: -36px; width: 150px; background: #f90; }
-.menu .user-name .submenu a { color: #000; padding: .5rem; }
+.menu .user-name .setinha { left: 79px; top: -16px; border-color: transparent transparent #000 transparent; }
+.menu .user-name .submenu { left: 50%; margin-left: -87px; width: 150px; background: #000; }
+.menu .user-name .submenu a { color: #f90; padding: .5rem; }
 .menu .user-name .submenu a:hover { color: #fff; }
 
 #marca-dagua { position: fixed; z-index: -1; left: 0; right: 0; top: 0; bottom: 0; background-image: url(../img/fundo.png); background-position: 80% bottom; background-repeat: no-repeat; }
 
-/* Content
+/* Forms
 ---------------------------------------------------------------------------*/ 
 .box-registro { margin-top: 1.5rem; color: #666; background: #fff; border-radius: 2px; box-shadow: 0 2px 2px 0 rgba(0,0,0,.15); -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,.15); }
 #content .box-registro { margin: auto; float: none !important; }
 .box-registro input[type="text"], .box-registro input[type="password"] { width: 100%; }
-
-/* Cadastro
----------------------------------------------------------------------------*/ 
-
+.form-perfil { width: 70%; }
+.form-perfil input[type="text"], .form-perfil input[type="password"] { width: 100%; }
+.form-perfil select { width: 60%; }
+.helptext { display: block; font-size: .75rem; color: #333; }
+/*error*/
+ul.errorlist, ul.messages { list-style: none; margin: 0; text-align: center; }
 /* Captcha ref */
+p + #recaptcha_widget_div { margin-top: -1.5rem; margin-bottom: 0; }
 #recaptcha_widget_div { margin-bottom: 1.5rem; }
 .recaptchatable input { display: inline-block !important; }
 
+
 /* Perfil
 ---------------------------------------------------------------------------*/
-#menu a { display: block; padding: .75rem; font-size: .875rem; }
+#sidebar { padding: 0; }
+#menu-perfil a { display: block; margin-bottom: 2px; padding: .75rem; font-size: .875rem; border-left: 4px solid #ccc; background: #eee; }
+#menu-perfil a.active, #menu-perfil a:hover { border-left: 4px solid #f90; }
 
+
+/* Não sei onde usa
+---------------------------------------------------------------------------*/
 #content .styleforms_none input, #content .styleforms_none textarea, #content .styleforms_none select {
     width: auto;
     display: inline-block;
@@ -327,25 +328,7 @@ ul.list_user li a:hover {
     color: #000;
 }
 
-/*error*/
-ul.errorlist, ul.messages {
-    list-style: none;
-    margin: 0;
-}
-ul.errorlist li {
-    background: #ffc4c4;
-    padding: 5px 10px;
-    border: solid 2px rgb(252, 164, 164);
-    color: rgb(165, 30, 30);
-    margin: 0 0 15px 0;
-    font-size: 12px;
-}
-ul.messages li.info{
-    background: #fcfcc2;
-    padding: 5px 10px;
-    border: solid 2px #e5e500;
-    color: rgb(112, 112, 16);
-}
+
 
 
 
