@@ -28,8 +28,8 @@
                     </li>
                     {% else %}
                     <li class="user-name">
-                        <a class="icone icon_id" href=""></a>
-                        <a href="">{{user.username}}</a>
+                        <a class="icone icon_id" href="/users/{{ request.user.username }}/"></a>
+                        <a href="/users/{{ request.user.username }}/">{{user.username}}</a>
                         <ul class="submenu">
                             <div class="setinha"></div>
                             <li><a href="">SP Cultura</a></li>
@@ -48,7 +48,7 @@
                     {% if request.user.is_authenticated %}
                         {% sidebar request.path %}
                     {% endif %}
-                    <section id="content" class="col-8">
+                    <section id="content" class="col-7">
                         {% block content %}{% endblock %}
                     </section>
 

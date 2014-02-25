@@ -1,8 +1,8 @@
 {% load registration_form %}
 
 {% if user.is_authenticated %}
-    <aside id="sidebar" class="box-registro col-4">
-        <nav id="menu">
+    <aside id="sidebar" class="col-5">
+        <nav id="menu-perfil" class="box-registro col-4 first">
             <a href="{{ viewprofile }}" {% if path == viewprofile %} class="active" {% endif %} title="Perfil">Perfil</a>
             <a href="{{ editprofile }}" {% if path == editprofile %} class="active" {% endif %} title="Editar perfil">Editar perfil</a>
             <a href="{{ chpassword }}" {% if path == chpassword %} class="active" {% endif %} title="Alterar senha">Alterar senha</a>
