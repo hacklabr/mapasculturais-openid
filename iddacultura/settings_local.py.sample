@@ -1,7 +1,7 @@
 #coding: utf-8
 
-import sys
-
+# import sys
+#
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
@@ -12,9 +12,9 @@ import sys
 #         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
 #     }
 # }
-
-if 'test' in sys.argv or 'test_coverage' in sys.argv:
-    DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
+#
+#if 'test' in sys.argv or 'test_coverage' in sys.argv:
+#    DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
