@@ -1,5 +1,5 @@
 from django import template
-from registration.forms import RegistrationForm
+from iddacultura.forms import UserRegistrationForm
 register = template.Library()
 
 
@@ -10,11 +10,9 @@ def registration_form(context):
     if 'form' in context:
         data['form'] = context['form']
     else:
-        data['form'] = RegistrationForm
+        data['form'] = UserRegistrationForm
 
     if 'next' in context:
         data['next'] = context['next']
 
     return data
-
-
