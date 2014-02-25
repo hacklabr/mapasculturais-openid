@@ -170,7 +170,7 @@ h1 + h2, h2 + h3, h4 + h5, h5 + h6 { margin-top: 1.5rem /*24px*/; }
 
 /* =Global Elements
 -------------------------------------------------------------- */
-body { background: #f90 /*url(img/grid.png)*/; }
+body { background: #f90 /*url(img/grid.png)*/; color: #fff; }
 /* body, input, textarea { color: #666; } */
 hr { background-color: #ccc; border: 1px solid #fff; clear: both; height: 1px; margin-bottom: 22px; }
 
@@ -215,6 +215,7 @@ img, embed, object, video { max-width: 100%; height: auto; }
 /* =General classes
 -------------------------------------------------------------- */
 .small { font-size: .75rem; }
+.big { font-size: 2rem; }
 .bottom { margin-bottom: 0 !important; padding-bottom: 0; }
 .aligncenter { display: block; margin-right: auto; margin-left: auto; clear: both; }
 .alignleft { float: left; }
@@ -263,7 +264,7 @@ a.icone:hover { text-decoration: none; }
 #logo-iddacultura a { color: #f90; }
 #logo-iddacultura a:hover { text-decoration: none; color: #000; }
 #about-nav { padding: 0 1.5rem; }
-#logo-smc { clear: both; }
+#logo-smc { clear: both; margin: .75rem 0; }
 #logo-smc img { width: 90px; margin: 0 auto; }
 #main-nav a:hover { text-decoration: none; }
 .menu { position: relative; float: left; margin: -6px 0 0; border-left: 1px solid #000; }
@@ -286,12 +287,31 @@ a.icone:hover { text-decoration: none; }
 .menu .user-name .submenu a { color: #000; padding: .5rem; }
 .menu .user-name .submenu a:hover { color: #fff; }
 
+#marca-dagua { position: fixed; z-index: -1; left: 0; right: 0; top: 0; bottom: 0; background-image: url(../img/fundo.png); background-position: 80% bottom; background-repeat: no-repeat; }
+
 /* Content
 ---------------------------------------------------------------------------*/ 
-.centerdiv { margin: auto; float: none !important; background: #fff; border-radius: 2px; }
-.centerdiv h1 { text-align: center; }
+.box-registro { margin-top: 1.5rem; color: #666; background: #fff; border-radius: 2px; box-shadow: 0 2px 2px 0 rgba(0,0,0,.15); -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,.15); }
+#content .box-registro { margin: auto; float: none !important; }
 #access_login input[type="text"], #access_login input[type="password"], #access_login label { display: block; width: 100%; }
 
+/* Cadastro
+---------------------------------------------------------------------------*/ 
+table { margin: auto; }
+table th { min-width: 140px; padding-right: .75rem; vertical-align: top; text-align: right; font-weight: normal; }
+table input { width: 100%; }
+table input[type="submit"] { width: auto; margin-bottom: 0; margin-left: .75rem; vertical-align: middle; }
+table select { width: 60%; }
+#registro table { width: 100%; }
+#registro tbody, #registro tr, #registro th, #registro td { display: block; }
+#registro th { text-align: left; }
+/* Captcha ref */
+#recaptcha_widget_div { margin-bottom: 1.5rem; }
+.recaptchatable input { display: inline-block !important; }
+
+/* Perfil
+---------------------------------------------------------------------------*/
+#menu a { display: block; padding: .75rem; font-size: .875rem; }
 
 #content .styleforms_none input, #content .styleforms_none textarea, #content .styleforms_none select {
     width: auto;
@@ -333,48 +353,6 @@ ul.messages li.info{
     border: solid 2px #e5e500;
     color: rgb(112, 112, 16);
 }
-/*menu*/
-#menu a, #menu span {
-    display: block;
-    background: #FAFAFA;
-    color: #888;
-    font-size: 17px;
-    padding: 10px;
-    border-bottom: solid 1px #E6E6E6; 
-    border-right: solid 1px #E6E6E6;
-}
-#menu a:hover {
-    background: #F3F3F3;
-    text-decoration: none;
-}
-#menu a.active {
-    background: #E9E9E9;
-}
 
-/* Captcha ref */
-.recaptchatable input {
-    display: inline-block !important; 
-}
 
-#marca-dagua {
-    position: fixed;
-    z-index: -1;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background-image: url(../img/fundo.png);
-    background-position: 80% bottom;
-    background-repeat: no-repeat;
-}
 
-#mapasculturais_link {
-    float: left;
-    padding: 20px 0 0 0;
-    margin: 0;
-}
-
-#mapasculturais_link a {
-    color: white;
-    text-decoration: underline;
-}
