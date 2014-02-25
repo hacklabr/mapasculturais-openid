@@ -9,10 +9,10 @@
                     <input type="hidden" name="next" value="{{ request.GET.next }}" />
                 {% endif %}
                 {{ form.as_p }}
-                <div class="clearfix">                   
+                <div class="clearfix">
                     <a class="alignleft small" href="{% url auth_login %}">Já tenho uma conta</a>
                     <input class="alignright" type="submit" value="criar conta" />
-                </div>  
+                </div>
             </form>
     {% endif %}
 </div>

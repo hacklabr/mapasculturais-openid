@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from django.core.urlresolvers import reverse
 from registration.backends.simple import SimpleBackend
 from django.contrib.auth.models import User
 
@@ -32,9 +33,8 @@ class RegBackend(SimpleBackend):
         de autenticação OpenID se o usuário estiver criando uma
         conta para autorizar a autenticação em um cliente.
         """
-        original = super(RegBackend, self).post_registration_redirect(request, user)
-
         if 'next' in request.POST:
             return (request.POST['next'], (), {})
         else:
-            return original
+            return (reverse('profiles_profile_detail',
+                            kwargs={'username': request.user.username}), (), {})

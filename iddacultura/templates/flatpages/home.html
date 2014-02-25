@@ -1,6 +1,26 @@
 {% extends "flatpages/default.html" %}
 {% load absolute %}
+{% load sidebar %}
 {% block head %}
     {{block.super}}
     <meta http-equiv="x-xrds-location" content="{% absolute iddacultura.provider.views.op_xrds %}" />
+{% endblock %}
+{% block middle %}
+
+        {% if request.user.is_authenticated %}
+        <aside id="sidebar" class="col-5">
+            <h1> você já esta logado</h1>
+        </aside>
+        {% endif %}
+        <section id="content" class="col-7">
+            <h2>ID da Cultura</h2>
+            <p class="big">Uma única conta, vários serviços</p>
+            <p>O ID da Cultura é um provedor de <a href="http://openid.net/">OpenID</a>, ou seja, um sistema de identificação aberto que permite o acesso à vários sites através de uma única conta de usuário.</p>
+            <p>É um sistema rápido, fácil e seguro que a <a href="http://www.prefeitura.sp.gov.br">Secretaria Municipal de Cultura de São Paulo</a> adotou para que os usuários se cadastrem e acessem o <a href="http://mapasculturais.hacklab.com.br/">SPCultura</a>. No futuro, esse mesmo sistema poderá ser usado em outros serviços da prefeitura ou de organizações que estabeleçam um convênio com a prefeitura, facilitando a vida dos paulistanos.</p>
+            <p>Faça um cadastro através do formulário ao lado e comece a usar os serviços do SPCultura!</p>
+        </section>
+
+        {% if not request.user.is_authenticated %}
+            {% sidebar request.path %}
+        {% endif %}
 {% endblock %}
