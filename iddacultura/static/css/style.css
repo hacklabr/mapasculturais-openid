@@ -237,6 +237,8 @@ img, embed, object, video { max-width: 100%; height: auto; }
 .botao, .botao-grande { display: inline-block; border-radius: 2px; cursor: pointer; font-family: "Open Sans", sans-serif; }
 .botao:hover, .botao-grande:hover { box-shadow: rgba(0,0,0, .25) 0 1px 2px 0; -webkit-box-shadow: rgba(0,0,0, .25) 0 1px 2px 0;text-decoration: none; }
 .botao { height: 1.875rem; padding: 0 .5rem; font-size: .75rem; line-height: 1.875rem; }
+.botao.principal { color: #fff; background: #f90; border: 1px solid #f90; }
+.botao.principal:hover { border-color: #e48203; }
 .botao-grande { padding: .5rem; font-size: .875rem; text-align: center; color: #fff; background: #000; }
 .botao-grande:hover { background: #f90; border-color: #f90; }
 .setinha { position: absolute; width: 0px; height: 0px; border-style: solid; border-width: 8px; line-height: 0px; border-color: transparent transparent #000 transparent; }

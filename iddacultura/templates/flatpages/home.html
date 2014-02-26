@@ -7,11 +7,7 @@
 {% endblock %}
 {% block middle %}
 
-        {% if request.user.is_authenticated %}
-        <aside id="sidebar" class="col-5">
-            <h1> você já esta logado</h1>
-        </aside>
-        {% endif %}
+        
         <section id="content" class="col-7">
             <h2>ID da Cultura</h2>
             <p class="big">Uma única conta, vários serviços</p>
@@ -22,5 +18,11 @@
 
         {% if not request.user.is_authenticated %}
             {% sidebar request.path %}
+        {% else %}
+            <div id="registro" class="box-registro col-5">
+                <h5 class="textcenter">Crie uma conta</h5>
+                <p>Você já possui uma conta e está autenticado!</p>
+                <div class="textright"><a class="botao-grande" href="{% url profiles_profile_detail request.user.username %}">Ver meu perfil</a></div>
+            </div>
         {% endif %}
 {% endblock %}
