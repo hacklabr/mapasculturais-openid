@@ -219,6 +219,7 @@ img, embed, object, video { max-width: 100%; height: auto; }
 .clear { clear: both; }
 .first { margin-left: 0; }
 .last { margin-right: 0; }
+.oculto { display: none; }
 .sombra { box-shadow: 0 2px 2px 0 rgba(0,0,0,.15); -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,.15); }
 .url { word-wrap: break-word; word-break: break-all; }
 .mensagem, ul.errorlist li { margin-bottom: 1.5rem; padding: .25rem .75rem; border-radius: 2px; border-style: solid; border-width: 1px; font-size: .75rem; }
@@ -292,6 +293,7 @@ a.icone:hover { text-decoration: none; }
 .form-perfil input[type="text"], .form-perfil input[type="password"] { width: 100%; }
 .form-perfil select { width: 60%; }
 .helptext { display: block; font-size: .75rem; color: #333; }
+label[for="id_trusted_roots"], #id_trusted_roots, .helptext { display: none; }
 /*error*/
 ul.errorlist, ul.messages { list-style: none; margin: 0; text-align: center; }
 /* Captcha ref */
