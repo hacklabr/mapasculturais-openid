@@ -293,6 +293,7 @@ a.icone:hover { text-decoration: none; }
 .form-perfil input[type="text"], .form-perfil input[type="password"] { width: 100%; }
 .form-perfil select { width: 60%; }
 .helptext { display: block; font-size: .75rem; color: #333; }
+/*ocultado provisoriamente enquanto só tem o spcultura*/
 label[for="id_trusted_roots"], #id_trusted_roots, .helptext { display: none; }
 /*error*/
 ul.errorlist, ul.messages { list-style: none; margin: 0; text-align: center; }
