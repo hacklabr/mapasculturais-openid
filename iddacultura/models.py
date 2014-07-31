@@ -11,6 +11,7 @@ class TrustedRoot(models.Model):
     Lista de trusted root URLs
     """
     url = models.URLField()
+    always_trusted = models.BooleanField(u"Confiar sempre", default=False)
 
     def __unicode__(self):
         return self.url
@@ -45,6 +46,10 @@ class UserProfile(models.Model):
             # nunca nenhum usuário usou esse OpenID consumer, adiciona ele
             # a lista e retorna false
             TrustedRoot(url=url).save()
+
+        elif urls.filter(always_trusted=True).count() > 0:
+            return True
+
         else:
             for trusted_root in self.trusted_roots.all():
                 if url == trusted_root.url:
