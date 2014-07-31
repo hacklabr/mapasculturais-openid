@@ -149,7 +149,7 @@ a img {
 /* =Fonts
 -------------------------------------------------------------- */
 body { font: 100%/150% /*16px/24px*/ "Open Sans", Arial, Helvetica, sans-serif; }
-pre { font-family: Verdana, sans-serif; font-size: 0.75rem /*12px*/; } 
+pre { font-family: Verdana, sans-serif; font-size: 0.75rem /*12px*/; }
 code { font-family: "Courier New", monospace; font-size: 0.75rem /*12px*/; }
 h1,h2,h3,h4,h5,h6 { margin-bottom: 1.5rem /*24px*/; font-weight: bold; font-family: "aleo", serif; color: #000; }
 h1 { font-size: 2.25rem /*36px*/; line-height: 3rem /*48px*/; }
@@ -246,7 +246,7 @@ img, embed, object, video { max-width: 100%; height: auto; }
 /*ícones*/
 .icone { display: inline-block; vertical-align: middle; }
 a.icone:hover { text-decoration: none; }
-
+.text-error { color: #c33; }
 
 /* =Header
 -------------------------------------------------------------- */
@@ -285,7 +285,7 @@ a.icone:hover { text-decoration: none; }
 #marca-dagua { position: fixed; z-index: -1; left: 0; right: 0; top: 0; bottom: 0; background-image: url(../img/fundo.png); background-position: 80% bottom; background-repeat: no-repeat; }
 
 /* Forms
----------------------------------------------------------------------------*/ 
+---------------------------------------------------------------------------*/
 .box-registro { margin-top: 1.5rem; color: #666; background: #fff; border-radius: 2px; box-shadow: 0 2px 2px 0 rgba(0,0,0,.15); -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,.15); }
 #content .box-registro { margin: auto; float: none !important; }
 .box-registro input[type="text"], .box-registro input[type="password"] { width: 100%; }
