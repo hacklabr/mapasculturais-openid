@@ -14,7 +14,7 @@
     <body>
         <section id="marca-dagua"></section>
         <header id="main-header" class="clearfix">
-            <h1 id="logo-spcultura"><a href="http://mapasculturais.hacklab.com.br/"><img src="{% static "img/logo-spcultura.png" %}" alt="SP Cultura" /></a></h1>
+            <h1 id="logo-spcultura"><a href="http://spcultura.prefeitura.sp.gov.br/"><img src="{% static "img/logo-spcultura.png" %}" alt="SP Cultura" /></a></h1>
             <h1 id="logo-iddacultura"><a href="{% url homepage %}" title="ID da Cultura">ID da Cultura</a></h1>
             <nav id="about-nav" class="alignright clearfix">
                 <h1 id="logo-smc"><a href="http://www.prefeitura.sp.gov.br" target="_blank"><img src="{% static "img/logo-prefeitura.png" %}" alt="Prefeitura de São Paulo"  /></a></h1>
@@ -32,7 +32,7 @@
                         <a href="{% url profiles_profile_detail request.user.username %}">{{user.username}}</a>
                         <ul class="submenu">
                             <div class="setinha"></div>
-                            <li><a href="http://mapasculturais.hacklab.com.br/">SP Cultura</a></li>
+                            <li><a href="http://spcultura.prefeitura.sp.gov.br/">SP Cultura</a></li>
 
                             <li><a href="{% url auth_logout %}">Sair</a></li>
                         </ul>
