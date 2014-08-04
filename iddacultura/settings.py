@@ -5,6 +5,8 @@ import os
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
+ALLOWED_HOSTS = ['*']
+
 ADMINS = (
     ('Admin Name', 'admin@email.com'),
 )

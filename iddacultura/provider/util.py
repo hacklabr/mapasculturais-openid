@@ -90,7 +90,8 @@ def get_view_url(req, view_name_or_obj, args=None, kwargs=None):
     full_path = req.META.get('SCRIPT_NAME', '') + relative_url
     return urljoin(get_base_url(req), full_path)
 
-def get_base_url(req):
+
+def get_base_url(request):
     """
     Given a Django web request object, returns the OpenID 'trust root'
     for that request; namely, the absolute URL to the site root which
@@ -98,31 +99,16 @@ def get_base_url(req):
     proper scheme and authority.  It will lack a port if the port is
     standard (80, 443).
     """
-    name = req.META['HTTP_HOST']
-    try:
-        name = name[:name.index(':')]
-    except:
-        pass
+    host = request.get_host()
 
-    try:
-        port = int(req.META['SERVER_PORT'])
-    except:
-        port = 80
-
-    proto = req.META['SERVER_PROTOCOL']
-
-    if 'HTTPS' in proto:
+    if request.is_secure():
         proto = 'https'
     else:
         proto = 'http'
 
-    if port in [80, 443] or not port:
-        port = ''
-    else:
-        port = ':%s' % (port,)
-
-    url = "%s://%s%s/" % (proto, name, port)
+    url = "%s://%s/" % (proto, host)
     return url
+
 
 def normal_dict(request_data):
     """
