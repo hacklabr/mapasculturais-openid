@@ -5,7 +5,7 @@
 {% endif %}
 <form id="access_login" method="post" action="{% url django.contrib.auth.views.login %}">
     {% csrf_token %}
-    
+
     {% if next %}
         <input type="hidden" name="next" value="{{ next }}" />
     {% else %}
@@ -23,12 +23,11 @@
 </form>
 
 <div class="small">
-    <a href="{% url auth_password_reset %}">Esqueceu sua senha?</a> | 
+    <a href="{% url auth_password_reset %}">Esqueceu sua senha?</a> |
     {% if next %}
     <a href="{% url registration_register %}?next={{ next|urlencode }}" title="Cadastre-se">Cadastre-se</a>
     {% else %}
         <a href="{% url registration_register %}" title="Cadastre-se">Cadastre-se</a>
     {% endif %}
 </div>
-
 

@@ -2,6 +2,7 @@
 
 from django.shortcuts import redirect
 from django.contrib.auth import views as auth_views
+from django.views.generic.base import TemplateView
 from django.contrib import messages
 
 
@@ -24,3 +25,7 @@ def logout(request):
         'Você acabou de sair de sua conta!')
 
     return auth_views.logout_then_login(request)
+
+
+class HomeView(TemplateView):
+    template_name = 'iddacultura/home.html'

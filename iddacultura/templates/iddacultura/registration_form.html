@@ -1,18 +1,14 @@
 <div id="registro" class="box-registro col-5">
-    {% if request.user.is_authenticated %}
-        <p class="mensagem alerta">Você já está autenticado!</p>
-    {% else %}
-            <h5 class="textcenter">Crie uma conta</h5>
-            <form method='post' action='{% url registration_register %}'>
-                {% csrf_token %}
-                {% if request.GET.next %}
-                    <input type="hidden" name="next" value="{{ request.GET.next }}" />
-                {% endif %}
-                {{ form.as_p }}
-                <div class="clearfix">
-                    <a class="alignleft small" href="{% url auth_login %}">Já tenho uma conta</a>
-                    <input class="alignright" type="submit" value="criar conta" />
-                </div>
-            </form>
-    {% endif %}
+    <h5 class="textcenter">Crie uma conta</h5>
+    <form method='post' action='{% url registration_register %}'>
+        {% csrf_token %}
+        {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}" />
+        {% endif %}
+        {{ form.as_p }}
+        <div class="clearfix">
+            <a class="alignleft small" href="{% url auth_login %}">Já tenho uma conta</a>
+            <input class="alignright" type="submit" value="criar conta" />
+        </div>
+    </form>
 </div>
