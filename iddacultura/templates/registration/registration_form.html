@@ -1,33 +1,16 @@
-{% extends "registration/registration_base.html" %}
+{% extends "iddacultura/base.html" %}
+{% load registration_form %}
+
 {% block title %}Criar nova conta{% endblock %}
-{% block content %}
-    {% if request.user.is_authenticated %}
-        <p class="mensagem alerta">Você já está autenticado!</p>
-    {% else %}
-        <div class="box-registro col-7">
-            <h3 class="textcenter">Crie uma conta</h3>
-            <form method='post'>
-                {% csrf_token %}
-                {% if request.GET.next %}
-                    <input type="hidden" name="next" value="{{ request.GET.next }}" />
-                {% endif %}
 
-                {{post_form.non_field_errors}}
-
-                {% for field in form %}
-                    <p>
-                        {{ field.label_tag }}
-                        {% for error in field.errors %}
-                            <span class="text-error">{{error}}</span>
-                        {% endfor %}
-                        {{ field }}
-                        <small>{{field.help_text}}</small>
-                    </p>
-                {% endfor %}
-                <div class="textright">
-                    <input type="submit" value="criar conta" />
-                </div>
-            </form>
-        </div>
-    {% endif %}
+{% block right_bar %}
+        {% if not request.user.is_authenticated %}
+            {% registration_form %}
+        {% else %}
+            <div id="registro" class="box-registro col-5">
+                <h5 class="textcenter">Crie uma conta</h5>
+                <p>Você já possui uma conta e está autenticado!</p>
+                <div class="textright"><a class="botao-grande" href="{% url profiles_profile_detail request.user.username %}">Ver meu perfil</a></div>
+            </div>
+        {% endif %}
 {% endblock %}
