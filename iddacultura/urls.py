@@ -4,6 +4,8 @@ from django.conf.urls import patterns, include, url
 from registration.views import register
 from forms import UserRegistrationForm, UserProfilePublicForm
 from iddacultura.views import user_profile, HomeView
+from django.conf.urls.static import static
+import iddacultura
 
 from django.contrib import admin
 admin.autodiscover()
@@ -29,4 +31,4 @@ urlpatterns = patterns(
     url(r'^users/', include('profiles.urls')),
 
     url(r'^provider/', include('iddacultura.provider.urls')),
-)
+) + static(iddacultura.settings.STATIC_URL, document_root=iddacultura.settings.STATIC_ROOT)
