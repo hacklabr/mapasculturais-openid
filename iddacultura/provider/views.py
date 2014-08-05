@@ -23,7 +23,7 @@ from iddacultura.provider import util
 from iddacultura.provider.util import get_view_url
 from iddacultura.models import TrustedRoot
 
-from profiles.views import profile_detail
+from iddacultura.views import ProfileDetailView
 
 from django import http
 from django.views.generic.simple import direct_to_template
@@ -163,7 +163,7 @@ def handle_check_id_request(request, openid_request):
     response.
     """
 
-    id_url = get_view_url(request, profile_detail, {request.user.username})
+    id_url = get_view_url(request, ProfileDetailView.as_view(), {request.user.username})
 
     # If the request was an IDP-driven identifier selection request
     # (i.e., the IDP URL was entered at the RP), then return the

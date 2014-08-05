@@ -10,10 +10,10 @@ def sidebar(context, path):
     data['path'] = path
     data['homepage'] = reverse('homepage')
     data['viewprofile'] = reverse(
-        'profiles.views.profile_detail',
+        'profiles_profile_detail',
         args=[context['user']]
     )
-    data['editprofile'] = reverse('profiles.views.edit_profile')
+    data['editprofile'] = reverse('profiles_edit_profile')
     data['chpassword'] = reverse('django.contrib.auth.views.password_change')
 
     if 'user' in context:

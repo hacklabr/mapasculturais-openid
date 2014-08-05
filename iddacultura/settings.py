@@ -128,7 +128,7 @@ INSTALLED_APPS = (
     'iddacultura',
     'django.contrib.admin',
     'registration',
-    'profiles',
+    # 'profiles',
     'iddacultura.provider',
     'absolute',
     'captcha',

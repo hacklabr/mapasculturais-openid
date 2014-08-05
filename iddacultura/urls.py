@@ -2,8 +2,8 @@
 
 from django.conf.urls import patterns, include, url
 from registration.views import register
-from forms import UserRegistrationForm, UserProfilePublicForm
-from iddacultura.views import user_profile, HomeView
+from forms import UserRegistrationForm
+from iddacultura.views import user_profile, HomeView, ProfileDetailView, ProfileEditView, ProfileListView
 
 from django.contrib import admin
 admin.autodiscover()
@@ -24,9 +24,9 @@ urlpatterns = patterns(
 
     url(r'^user_profile/$', user_profile),
 
-    url(r'^users/edit', 'profiles.views.edit_profile',
-        {'form_class': UserProfilePublicForm}),
-    url(r'^users/', include('profiles.urls')),
+    url(r'^users/edit', ProfileEditView.as_view(), name='profiles_edit_profile'),
+    url(r'^users/(?P<username>[\w.+-]+)/', ProfileDetailView.as_view(), name='profiles_profile_detail'),
+    url(r'^users/', ProfileListView.as_view()),
 
     url(r'^provider/', include('iddacultura.provider.urls')),
 )

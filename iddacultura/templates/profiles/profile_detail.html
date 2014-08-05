@@ -3,15 +3,15 @@
 {% block title %}Perfil do usuário{% endblock %}
 {% block head %}
     {{block.super}}
-    <meta http-equiv="x-xrds-location" content="{% absolute iddacultura.provider.views.user_xrds profile.user.username %}" />
+    <meta http-equiv="x-xrds-location" content="{% absolute iddacultura.provider.views.user_xrds object.username %}" />
 {% endblock %}
 {% block content %}
-    <h3>Perfil do usuário {{ profile.user.username }}</h3>
-    {% ifequal request.user.username profile.user.username %}
-        <p>Nome completo:<br /> {{ profile.user.get_full_name }}</p>
-        <p>Nome de usuário:<br /> {{ profile.user.username }}</p>
-        <p>E-mail:<br /> {{ profile.user.email }}</p>
+    <h3>Perfil do usuário {{ object.username }}</h3>
+    {% ifequal request.user.username object.username %}
+        <p>Nome completo:<br /> {{ object.get_full_name }}</p>
+        <p>Nome de usuário:<br /> {{ object.username }}</p>
+        <p>E-mail:<br /> {{ object.email }}</p>
     {% else %}
-        <p>Identidade OpenID do usuário {{ profile.user.username }}</p>
+        <p>Identidade OpenID do usuário {{ object.username }}</p>
     {% endifequal %}
 {% endblock %}
