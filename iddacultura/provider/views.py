@@ -136,7 +136,7 @@ def endpoint(request):
             return redirect_to_login(request.get_full_path() + '?' +
                                      urllib.urlencode(query))
 
-        user_identity = get_view_url(request, 'profiles_profile_detail', {'username': request.user.username})
+        user_identity = get_view_url(request, 'profiles_profile_detail', args=[request.user.username])
 
         if (not openid_request.identity == user_identity
             and not openid_request.idSelect()):
@@ -160,7 +160,7 @@ def handle_check_id_request(request, openid_request):
     response.
     """
 
-    id_url = get_view_url(request, 'profiles_profile_detail', {'username': request.user.username})
+    id_url = get_view_url(request, 'profiles_profile_detail', args=[request.user.username])
 
     # If the request was an IDP-driven identifier selection request
     # (i.e., the IDP URL was entered at the RP), then return the
@@ -239,7 +239,7 @@ def process_trust_result(request):
     openid_request = get_request(request)
 
     # The identifier that this server can vouch for
-    response_identity = get_view_url(request, 'profiles_profile_detail', {'username': request.user.username})
+    response_identity = get_view_url(request, 'profiles_profile_detail', args=[request.user.username])
 
     # If the decision was to allow the verification, respond
     # accordingly.
