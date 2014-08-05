@@ -23,8 +23,6 @@ from iddacultura.provider import util
 from iddacultura.provider.util import get_view_url
 from iddacultura.models import TrustedRoot
 
-from iddacultura.views import ProfileDetailView
-
 from django import http
 from django.views.generic.simple import direct_to_template
 from django.views.decorators.csrf import csrf_exempt
@@ -138,8 +136,7 @@ def endpoint(request):
             return redirect_to_login(request.get_full_path() + '?' +
                                      urllib.urlencode(query))
 
-        user_identity = request.build_absolute_uri(
-            request.user.get_profile().get_absolute_url())
+        user_identity = get_view_url(request, 'profiles_profile_detail', {'username': request.user.username})
 
         if (not openid_request.identity == user_identity
             and not openid_request.idSelect()):
