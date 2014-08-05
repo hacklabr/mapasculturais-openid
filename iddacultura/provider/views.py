@@ -163,7 +163,7 @@ def handle_check_id_request(request, openid_request):
     response.
     """
 
-    id_url = get_view_url(request, ProfileDetailView.as_view(), {request.user.username})
+    id_url = get_view_url(request, 'profiles_profile_detail', {'username': request.user.username})
 
     # If the request was an IDP-driven identifier selection request
     # (i.e., the IDP URL was entered at the RP), then return the
@@ -242,8 +242,7 @@ def process_trust_result(request):
     openid_request = get_request(request)
 
     # The identifier that this server can vouch for
-    response_identity = get_view_url(request, profile_detail,
-                                     {request.user.username})
+    response_identity = get_view_url(request, 'profiles_profile_detail', {'username': request.user.username})
 
     # If the decision was to allow the verification, respond
     # accordingly.

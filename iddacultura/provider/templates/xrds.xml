@@ -12,7 +12,7 @@
       <URI>{{ endpoint_url }}</URI>
     {% endfor %}
     {% if username %}
-      <LocalID>{% absolute profiles.views.profile_detail username %}</LocalID>
+      <LocalID>{% absolute profiles_profile_detail username %}</LocalID>
     {% endif %}
     </Service>
   </XRD>
