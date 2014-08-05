@@ -12,6 +12,7 @@ Ambiente de desenvolvimento
 - cd ~/devel
 - mkdir ~/devel/mapasculturais-openid-env
 - virtualenv ~/devel/mapasculturais-openid-env
+  -  [for arch linux] virtualenv -p \`which python2\`  ~/devel/mapasculturais-openid-env
 - git clone git@github.com:hacklabr/mapasculturais-openid.git
 - source mapasculturais-openid-env/bin/activate
 - cd mapasculturais-openid
