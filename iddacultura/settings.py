@@ -2,6 +2,15 @@
 
 import os
 
+AUTH_USER_MODEL = 'iddacultura.IDUser'
+
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_BLACKLIST = ['edit', ]
+ACCOUNT_LOGOUT_ON_GET = True
+
+LOGIN_REDIRECT_URL = '/user_profile/'
+
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
@@ -117,6 +126,14 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
 )
 
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -124,14 +141,14 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'django.contrib.flatpages',
     'iddacultura',
     'django.contrib.admin',
-    'registration',
-    # 'profiles',
+    'allauth',
+    'allauth.account',
+    'braces',
     'iddacultura.provider',
-    'absolute',
     'captcha',
+    'absolute',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -162,8 +179,6 @@ LOGGING = {
         },
     }
 }
-
-AUTH_PROFILE_MODULE = 'iddacultura.UserProfile'
 
 SITE_ID = 1
 

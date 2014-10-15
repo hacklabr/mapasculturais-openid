@@ -4,12 +4,12 @@ from iddacultura.provider import views
 import util
 
 from django.http import HttpRequest
-from django.contrib.sessions.middleware import SessionMiddleware
 
 from openid.server.server import CheckIDRequest
 from openid.message import Message
 from openid.yadis.constants import YADIS_CONTENT_TYPE
 from openid.yadis.services import applyFilter
+
 
 def dummyRequest():
     request = HttpRequest()
@@ -17,6 +17,7 @@ def dummyRequest():
     request.META['HTTP_HOST'] = 'example.invalid'
     request.META['SERVER_PROTOCOL'] = 'HTTP'
     return request
+
 
 class TestProcessTrustResult(TestCase):
     def setUp(self):
@@ -35,7 +36,6 @@ class TestProcessTrustResult(TestCase):
         self.openid_request = CheckIDRequest.fromMessage(message, op_endpoint)
 
         views.set_request(self.request, self.openid_request)
-
 
     def test_allow(self):
         self.request.POST['allow'] = 'Yes'
@@ -60,7 +60,6 @@ class TestProcessTrustResult(TestCase):
         self.failIf('openid.sreg.postcode=12345' in finalURL, finalURL)
 
 
-
 class TestShowDecidePage(TestCase):
     def test_unreachableRealm(self):
         self.request = dummyRequest()
@@ -82,7 +81,6 @@ class TestShowDecidePage(TestCase):
         response = views.show_decide_page(self.request, self.openid_request)
         self.failUnless('trust_root_valid is Unreachable' in response.content,
                         response)
-
 
 
 class TestGenericXRDS(TestCase):

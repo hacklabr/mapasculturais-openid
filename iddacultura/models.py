@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
-from django.contrib.auth.models import User
-from django.db.models.signals import post_save
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import AbstractUser
 
 
 class TrustedRoot(models.Model):
@@ -17,19 +16,18 @@ class TrustedRoot(models.Model):
         return self.url
 
 
-class UserProfile(models.Model):
+class IDUser(AbstractUser):
     """
     Adiciona campos extras para os usuários
     """
 
-    user = models.OneToOneField(User)
     trusted_roots = models.ManyToManyField(
         TrustedRoot, blank=True, null=True,
         verbose_name="Sites autorizados",
         help_text="Lista de clientes OpenID autorizados.")
 
-    class Meta:
-        verbose_name = 'Perfil do usuário'
+    class Meta(AbstractUser.Meta):
+        swappable = 'AUTH_USER_MODEL'
 
     def get_absolute_url(self):
         return reverse(
@@ -57,11 +55,4 @@ class UserProfile(models.Model):
         return False
 
     def __unicode__(self):
-        return self.user.username
-
-
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
-
-post_save.connect(create_user_profile, sender=User)
+        return self.username

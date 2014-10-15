@@ -24,7 +24,7 @@ from iddacultura.provider.util import get_view_url
 from iddacultura.models import TrustedRoot
 
 from django import http
-from django.views.generic.simple import direct_to_template
+from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.views import redirect_to_login
 
@@ -93,10 +93,9 @@ def trust_page(request):
     Display the trust page template, which allows the user to decide
     whether to approve the OpenID verification.
     """
-    return direct_to_template(
+    return TemplateView.as_view(template_name='provider/trust.html')(
         request,
-        'provider/trust.html',
-        {'trust_handler_url': get_view_url(request, process_trust_result)})
+        trust_handler_url=get_view_url(request, process_trust_result))
 
 
 @csrf_exempt
@@ -114,23 +113,19 @@ def endpoint(request):
         openid_request = s.decodeRequest(query)
     except ProtocolError, why:
         # This means the incoming request was invalid.
-        return direct_to_template(
+        return TemplateView.as_view(template_name='provider/endpoint.html')(
             request,
-            'provider/endpoint.html',
-            {'error': str(why)})
+            error=str(why))
 
     # If we did not get a request, display text indicating that this
     # is an endpoint.
     if openid_request is None:
-        return direct_to_template(
-            request,
-            'provider/endpoint.html',
-            {})
+        return TemplateView.as_view(template_name='provider/endpoint.html')(request)
 
     # We got a request; if the mode is checkid_*, we will handle it by
     # getting feedback from the user or by checking the session.
     if openid_request.mode in ["checkid_immediate", "checkid_setup"]:
-        if not request.user or request.user.is_authenticated() == False:
+        if not request.user or not request.user.is_authenticated():
             # TODO: verificar porque o openid_request.encodeToURL()
             # remove os parâmetros relacionados com a extensão SREG
             return redirect_to_login(request.get_full_path() + '?' +
@@ -138,8 +133,8 @@ def endpoint(request):
 
         user_identity = get_view_url(request, 'profiles_profile_detail', args=[request.user.username])
 
-        if (not openid_request.identity == user_identity
-            and not openid_request.idSelect()):
+        if not openid_request.identity == user_identity \
+           and not openid_request.idSelect():
             raise Exception("User " + request.user.username +
                             " is not the owner of " +
                             openid_request.identity + " identity")
@@ -179,7 +174,7 @@ def handle_check_id_request(request, openid_request):
 
             return display_response(request, error_response)
 
-    if request.user.userprofile.trusted_url(openid_request.trust_root):
+    if request.user.trusted_url(openid_request.trust_root):
         openid_response = openid_request.answer(True, identity=id_url)
         add_user_data(request, openid_response, openid_request)
         return display_response(request, openid_response)
@@ -211,7 +206,7 @@ def show_decide_page(request, openid_request):
     try:
         # Stringify because template's ifequal can only compare to strings.
         trust_root_valid = verifyReturnTo(trust_root, return_to) \
-                           and "Valid" or "Invalid"
+            and "Valid" or "Invalid"
     except DiscoveryFailure:
         # suporta consumers que não implementam a relying party verification
         #trust_root_valid = "DISCOVERY_FAILED"
@@ -219,13 +214,11 @@ def show_decide_page(request, openid_request):
     except HTTPFetchingError:
         trust_root_valid = "Unreachable"
 
-    return direct_to_template(
+    return TemplateView.as_view(template_name='provider/trust.html')(
         request,
-        'provider/trust.html',
-        {'trust_root': trust_root,
-         'trust_handler_url': get_view_url(request, process_trust_result),
-         'trust_root_valid': trust_root_valid,
-         })
+        trust_root=trust_root,
+        trust_handler_url=get_view_url(request, process_trust_result),
+        trust_root_valid=trust_root_valid)
 
 
 @csrf_exempt
@@ -266,7 +259,7 @@ def add_user_data(request, openid_response, openid_request):
     and ax extensions
     """
 
-    if openid_request == None:
+    if openid_request is None:
         return
 
     sreg_data = {
@@ -308,10 +301,9 @@ def display_response(request, openid_response):
     except EncodingError, why:
         # If it couldn't be encoded, display an error.
         text = why.response.encodeToKVForm()
-        return direct_to_template(
+        return TemplateView.as_view(template_name='provider/endpoint.html')(
             request,
-            'provider/endpoint.html',
-            {'error': cgi.escape(text)})
+            error=cgi.escape(text))
 
     # Construct the appropriate django framework response.
     r = http.HttpResponse(webresponse.body)

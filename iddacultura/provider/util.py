@@ -6,18 +6,16 @@ Utility code for the Django example consumer and server.
 from urlparse import urljoin
 
 from django.db import connection
-from django.template.context import RequestContext
-from django.template import loader
-from django import http
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse as reverseURL
-from django.views.generic.simple import direct_to_template
+from django.views.generic import TemplateView
 
 from django.conf import settings
 
 from openid.store.filestore import FileOpenIDStore
 from openid.store import sqlstore
 from openid.yadis.constants import YADIS_CONTENT_TYPE
+
 
 def get_openid_store(filestore_path, table_prefix):
     """
@@ -41,7 +39,7 @@ def get_openid_store(filestore_path, table_prefix):
     The result of this function should be passed to the Consumer
     constructor as the store parameter.
     """
-    if not settings.DATABASES.get('default', {'ENGINE':None}).get('ENGINE'):
+    if not settings.DATABASES.get('default', {'ENGINE': None}).get('ENGINE'):
         return FileOpenIDStore(filestore_path)
 
     # Possible side-effect: create a database connection if one isn't
@@ -61,7 +59,7 @@ def get_openid_store(filestore_path, table_prefix):
         }
 
     try:
-        s = types[settings.DATABASES.get('default', {'ENGINE':None}).get('ENGINE')](connection.connection,
+        s = types[settings.DATABASES.get('default', {'ENGINE': None}).get('ENGINE')](connection.connection,
                                             **tablenames)
     except KeyError:
         raise ImproperlyConfigured, \
@@ -84,6 +82,7 @@ def get_openid_store(filestore_path, table_prefix):
         pass
 
     return s
+
 
 def get_view_url(req, view_name_or_obj, args=None, kwargs=None):
     relative_url = reverseURL(view_name_or_obj, args=args, kwargs=kwargs)
@@ -121,13 +120,19 @@ def normal_dict(request_data):
     """
     return dict((k, v) for k, v in request_data.iteritems())
 
-def render_xrds(request, type_uris, endpoint_urls, username = None):
+
+xrds_view = TemplateView.as_view(template_name='xrds.xml')
+
+
+def render_xrds(request, type_uris, endpoint_urls, username=None):
     """Render an XRDS page with the specified type URIs and endpoint
     URLs in one service block, and return a response with the
     appropriate content-type.
     """
-    response = direct_to_template(
-        request, 'xrds.xml',
-        {'type_uris':type_uris, 'endpoint_urls':endpoint_urls, 'username': username})
+    response = xrds_view(
+        request,
+        type_uris=type_uris,
+        endpoint_urls=endpoint_urls,
+        username=username)
     response['Content-Type'] = YADIS_CONTENT_TYPE
     return response
