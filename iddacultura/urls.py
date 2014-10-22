@@ -23,4 +23,5 @@ urlpatterns = patterns(
     url(r'^users/$', ProfileListView.as_view()),
 
     url(r'^provider/', include('iddacultura.provider.urls')),
+    url(r'^openid/', include('openid_provider.urls')),
 )

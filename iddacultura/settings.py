@@ -149,6 +149,7 @@ INSTALLED_APPS = (
     'iddacultura.provider',
     'captcha',
     'absolute',
+    'openid_provider',
 )
 
 # A sample logging configuration. The only tangible logging
