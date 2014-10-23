@@ -10,6 +10,7 @@
 
 {% block right_bar %}
         {% if not request.user.is_authenticated %}
+            {% include "iddacultura/registration_form.html" %}
         {% else %}
             <div id="registro" class="box-registro col-5">
                 <h5 class="textcenter">Crie uma conta</h5>
