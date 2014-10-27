@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from registration.forms import RegistrationFormUniqueEmail
 # from django.forms import ModelForm
 from django import forms
 # from iddacultura.models import User, UserProfile
@@ -9,7 +8,7 @@ import settings
 from django.core.exceptions import ImproperlyConfigured
 
 
-class UserRegistrationForm(RegistrationFormUniqueEmail):
+class UserRegistrationForm(object):
     """
     Extende o formulário de registro de usuário para
     mais campos.
