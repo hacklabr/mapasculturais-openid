@@ -5,3 +5,4 @@ django-absolute==0.3
 -e git+https://github.com/hacklabr/python-openid.git@5a0f618873d4a0bd757ccb48df4ee7145acd130c#egg=python_openid-dev
 django-braces==1.3.1
 django-allauth==0.18.0
+django_extensions

@@ -150,6 +150,7 @@ INSTALLED_APPS = (
     'captcha',
     'absolute',
     'openid_provider',
+    'django_extensions',
 )
 
 # A sample logging configuration. The only tangible logging
