@@ -3,13 +3,13 @@
         <li>Usuário ou senha inválido.</li>
     </ul>
 {% endif %}
-<form id="access_login" method="post" action="{% url django.contrib.auth.views.login %}">
+<form id="access_login" method="post" action="">
     {% csrf_token %}
 
     {% if next %}
         <input type="hidden" name="next" value="{{ next }}" />
     {% else %}
-        <input type="hidden" name="next" value="{% url iddacultura.views.user_profile %}" />
+        <input type="hidden" name="next" value="{% url "iddacultura.views.user_profile" %}" />
     {% endif %}
     <p>
     {{ form.username.label_tag }}
@@ -23,11 +23,11 @@
 </form>
 
 <div class="small">
-    <a href="{% url auth_password_reset %}">Esqueceu sua senha?</a> |
+    <a href="">Esqueceu sua senha?</a> |
     {% if next %}
-    <a href="{% url registration_register %}?next={{ next|urlencode }}" title="Cadastre-se">Cadastre-se</a>
+    <a href="" title="Cadastre-se">Cadastre-se</a>
     {% else %}
-        <a href="{% url registration_register %}" title="Cadastre-se">Cadastre-se</a>
+        <a href="" title="Cadastre-se">Cadastre-se</a>
     {% endif %}
 </div>
 
