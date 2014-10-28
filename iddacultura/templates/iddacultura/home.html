@@ -16,7 +16,7 @@
             <div id="registro" class="box-registro col-5">
                 <h5 class="textcenter">Crie uma conta</h5>
                 <p>Você já possui uma conta e está autenticado!</p>
-                <div class="textright"><a class="botao-grande" href="{% url profiles_profile_detail request.user.username %}">Ver meu perfil</a></div>
+                <div class="textright"><a class="botao-grande" href="{% url 'profiles_profile_detail' request.user.username %}">Ver meu perfil</a></div>
             </div>
         {% endif %}
 {% endblock %}

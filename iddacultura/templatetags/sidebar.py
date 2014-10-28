@@ -14,7 +14,7 @@ def sidebar(context, path):
         args=[context['user']]
     )
     data['editprofile'] = reverse('profiles_edit_profile')
-    data['chpassword'] = reverse('django.contrib.auth.views.password_change')
+    data['chpassword'] = reverse('account_change_password')
 
     if 'user' in context:
         data['user'] = context['user']

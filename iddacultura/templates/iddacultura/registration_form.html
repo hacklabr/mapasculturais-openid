@@ -1,28 +1,9 @@
 <div id="registro" class="box-registro col-5">
     <h5 class="textcenter">Crie uma conta</h5>
-    <form method='post' action=''>
-        {% csrf_token %}
-        {% if request.GET.next %}
-            <input type="hidden" name="next" value="{{ request.GET.next }}" />
-        {% endif %}
+    <form method='post' method="post" action='{% url "account_signup" %}'>
 
         {% csrf_token %}
-        {% if request.GET.next %}
-            <input type="hidden" name="next" value="{{ request.GET.next }}" />
-        {% endif %}
-
-        {{post_form.non_field_errors}}
-
-        {% for field in form %}
-            <p>
-                {{ field.label_tag }}
-                {% for error in field.errors %}
-                    <span class="text-error">{{error}}</span>
-                {% endfor %}
-                {{ field }}
-                <small>{{field.help_text}}</small>
-            </p>
-        {% endfor %}
+        {{ form.as_p }}
 
         <div class="clearfix">
             <a class="alignleft small" href="">Já tenho uma conta</a>
