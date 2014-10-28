@@ -8,7 +8,7 @@ import settings
 from django.core.exceptions import ImproperlyConfigured
 
 
-class UserRegistrationForm(object):
+class UserRegistrationForm(forms.Form):
     """
     Extende o formulário de registro de usuário para
     mais campos.
@@ -26,7 +26,6 @@ class UserRegistrationForm(object):
 
         if not (settings.RECAPTCHA_PUBLIC_KEY and settings.RECAPTCHA_PRIVATE_KEY):
             raise ImproperlyConfigured('É necessário definir as chaves do ReCaptcha no settings_local.py')
-
 
 # class UserPublicForm(ModelForm):
 #     """
