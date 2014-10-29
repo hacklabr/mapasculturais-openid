@@ -8,7 +8,9 @@ ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_BLACKLIST = ['edit', ]
 ACCOUNT_LOGOUT_ON_GET = True
-ACCOUNT_FORMS = {'signup': 'iddacultura.forms.OpenIDSignupForm'}
+ACCOUNT_FORMS = {'signup': 'iddacultura.forms.OpenIDSignupForm',
+                 'login': 'iddacultura.forms.LoginForm'
+                 }
 
 LOGIN_REDIRECT_URL = '/user_profile/'
 

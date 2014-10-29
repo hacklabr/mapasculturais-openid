@@ -23,8 +23,8 @@
                 <ul class="menu logado clearfix">
                     {% if not request.user.is_authenticated %}
                     <li class="entrar">
-                        <a class="icone icon_lock" href="{% url "openid-provider-root" %}"></a>
-                        <a href="{% url "openid-provider-root" %}">Entrar</a>
+                        <a class="icone icon_lock" href="{% url 'account_login' %}"></a>
+                        <a href="{% url 'account_login' %}">Entrar</a>
                     </li>
                     {% else %}
                     <li class="user-name">
