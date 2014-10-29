@@ -24,7 +24,7 @@ APP_SECRET=9a6a249b9c50f6062bc6b1dfdfab66e2
 APP_ID=302841666574002
 
 sqlite3 base.db << EOF
-UPDATE django_site SET DOMAIN = '127.0.0.1:8000', name = 'Vort' WHERE id=1;
+UPDATE django_site SET DOMAIN = '127.0.0.1:8000', name = 'Mapas Culturais OpenID' WHERE id=1;
 INSERT INTO socialaccount_socialapp (provider, name, secret, client_id, 'key') VALUES ('facebook', 'Facebook', '$APP_SECRET', 'APP_ID', '');
 INSERT INTO socialaccount_socialapp_sites (socialapp_id, site_id) VALUES (1,1);
 EOF
