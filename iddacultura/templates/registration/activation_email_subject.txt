@@ -1,1 +1,0 @@
-Cadastro de nova conta para {{ site.name }}
