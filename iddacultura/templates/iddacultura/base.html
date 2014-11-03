@@ -43,20 +43,7 @@
             </nav>
         </header>
         <div class="wrap clearfix">
-            {% block middle %}
-                    {% block left_bar %}
-                    {% endblock %}
-                    <section id="content" class="col-7">
-                        {% block content %}
-                        <h2>ID da Cultura</h2>
-                        <p class="big">Uma única conta, vários serviços</p>
-                        <p>O ID da Cultura é um provedor de <a href="http://openid.net/">OpenID</a>, ou seja, um sistema de identificação aberto que permite o acesso a vários sites através de uma única conta de usuário.</p>
-                        <p>É um sistema rápido, fácil e seguro que a <a href="http://www.prefeitura.sp.gov.br">Secretaria Municipal de Cultura de São Paulo</a> adotou para que os usuários se cadastrem e acessem o <a href="http://spcultura.prefeitura.sp.gov.br/">SPCultura</a>. No futuro, esse mesmo sistema poderá ser usado em outros serviços municipais na área cultural ou de organizações que estabeleçam um convênio com a Prefeitura, facilitando a vida dos paulistanos.</p>
-                        <p>Faça um cadastro através do formulário ao lado e comece a usar os serviços do SPCultura!</p>
-                        {% endblock %}
-                    </section>
-                    {% block right_bar %}
-                    {% endblock %}
+            {% block content_base %}
             {% endblock %}
         </div>
     </body>
