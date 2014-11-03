@@ -1,8 +1,17 @@
 {% extends "iddacultura/base.html" %}
-{% load sidebar %}
 
-{% block left_bar %}
+{% block content_base %}
 {% if request.user.is_authenticated %}
-    {% sidebar request.path %}
+    {% url 'profiles_profile_detail' user as profile %}
+    {% url 'profiles_edit_profile' as edit %}
+    {% url 'account_change_password' as change_pass %}
+    <aside id="sidebar" class="col-5">
+        <nav id="menu-perfil" class="box-registro col-4 first">
+            <a href="{% url 'profiles_profile_detail' user %}" {% if request.path == profile %} class="active" {% endif %} title="Perfil">Perfil</a>
+            <a href="{% url 'profiles_edit_profile' %}" {% if request.path == edit %} class="active" {% endif %} title="Editar perfil">Editar perfil</a>
+            <a href="{% url 'account_change_password' %}" {% if request.path == change_pass %} class="active" {% endif %} title="Alterar senha">Alterar senha</a>
+        </nav>
+    </aside>
 {% endif %}
+{% block content %}{% endblock %}
 {% endblock %}
