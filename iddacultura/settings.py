@@ -2,8 +2,6 @@
 
 import os
 
-AUTH_USER_MODEL = 'iddacultura.IDUser'
-
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_BLACKLIST = ['edit', ]
