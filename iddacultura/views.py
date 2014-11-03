@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from allauth.account.forms import LoginForm, UserForm
-
 from django.shortcuts import redirect
 from django.contrib.auth import views as auth_views
 # TODO: Remover
@@ -76,8 +74,3 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
 class ProfileListView(ListView):
     model = get_user_model()
     template_name = 'profiles/profile_list.html'
-
-
-# TODO: Mudar para TemplateView
-def login_view(request):
-    return render_to_response('iddacultura/login.html', {'form': LoginForm}, context_instance=RequestContext(request))
