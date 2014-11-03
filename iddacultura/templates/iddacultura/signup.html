@@ -1,0 +1,17 @@
+{% extends "iddacultura/base_right_bar.html" %}
+
+{% block content %}
+<div id="registro" class="box-registro col-5">
+    <h5 class="textcenter">Crie uma conta</h5>
+    <form method='post' method="post" action='{% url "account_signup" %}'>
+
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div class="clearfix">
+            <a class="alignleft small" href="{% url 'account_login' %}">Já tenho uma conta</a>
+            <input class="alignright" type="submit" value="criar conta" />
+        </div>
+    </form>
+</div>
+{% endblock %}

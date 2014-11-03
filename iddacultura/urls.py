@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.conf.urls import patterns, include, url
-from iddacultura.views import user_profile, HomeView, ProfileDetailView, ProfileEditView, ProfileListView
+from iddacultura.views import user_profile, home_view, ProfileDetailView, ProfileEditView, ProfileListView
 
 from django.contrib import admin
 admin.autodiscover()
@@ -9,7 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
 
-    url(r'^/?$', HomeView.as_view(), name='homepage'),
+    url(r'^/?$', home_view, name='homepage'),
 
     url(r'^admin/', include(admin.site.urls)),
 
