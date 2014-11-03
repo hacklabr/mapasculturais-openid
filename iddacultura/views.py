@@ -2,8 +2,7 @@
 
 from django.shortcuts import redirect
 from django.contrib.auth import views as auth_views
-# TODO: Remover
-# from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView
 from django.views.generic import DetailView, ListView, UpdateView
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -37,22 +36,23 @@ def logout(request):
     return auth_views.logout_then_login(request)
 
 
-def home_view(request):
-# TODO: Testar se é possível usar um template_name condicional com o TemplateView
-    if (request.user.is_authenticated()):
-        return user_autenticated_view(request)
-    else:
-        return signup_view(request)
+class HomeView(TemplateView):
 
+    def get(self, request, *args, **kwargs):
+        return self.get_response(request)
 
-# TODO: Mudar para TemplateView
-def signup_view(request):
-    return render_to_response("account/signup.html", {'form': OpenIDSignupForm}, context_instance=RequestContext(request))
+    def post(self, request, *args, **kwargs):
+        return self.get_response(request)
 
+    def get_response(self, request):
+        if (request.user.is_authenticated()):
+            template_name = "iddacultura/user_autenticated.html"
+            form_class = None
+        else:
+            template_name = "account/signup.html"
+            form_class = OpenIDSignupForm
 
-# TODO: Mudar para TemplateView
-def user_autenticated_view(request):
-    return render_to_response("iddacultura/user_autenticated.html", {'form': None}, context_instance=RequestContext(request))
+        return render_to_response(template_name, {'form': form_class}, context_instance=RequestContext(request))
 
 
 class ProfileDetailView(DetailView):
