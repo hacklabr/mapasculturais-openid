@@ -1,10 +1,13 @@
 {% extends "iddacultura/base_left_bar.html" %}
 {% load absolute %}
+
 {% block title %}Perfil do usuário{% endblock %}
+
 {% block head %}
     {{block.super}}
     <meta http-equiv="x-xrds-location" content="{% absolute 'iddacultura.provider.views.user_xrds' object.username %}" />
 {% endblock %}
+
 {% block content %}
     <h3>Perfil do usuário {{ object.username }}</h3>
     {% ifequal request.user.username object.username %}
