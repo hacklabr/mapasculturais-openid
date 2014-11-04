@@ -45,8 +45,7 @@ class HomeView(TemplateView):
 
     def get_response(self, request):
         if (request.user.is_authenticated()):
-            template_name = "iddacultura/user_autenticated.html"
-            form_class = None
+            return redirect('/users/' + request.user.username + '/')
         else:
             template_name = "account/signup.html"
             form_class = OpenIDSignupForm
