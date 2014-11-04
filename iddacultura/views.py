@@ -6,8 +6,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic import DetailView, ListView, UpdateView
 from django.contrib import messages
 from django.contrib.auth import get_user_model
-
-from braces.views import LoginRequiredMixin
+from django.contrib.auth.models import User
 
 from django.template.response import RequestContext
 from django.shortcuts import render_to_response
@@ -62,10 +61,10 @@ class ProfileDetailView(DetailView):
     template_name = 'profiles/profile_detail.html'
 
 
-class ProfileEditView(LoginRequiredMixin, UpdateView):
-    model = get_user_model()
+class ProfileEditView(UpdateView):
+    model = User
     template_name = 'profiles/edit_profile.html'
-    form_class = UserForm
+    fields = ['first_name', 'last_name', 'email', ]
 
     def get_object(self):
         return self.request.user
