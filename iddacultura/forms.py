@@ -5,7 +5,7 @@ from django import forms
 from django.core.exceptions import ImproperlyConfigured
 from django.conf import settings
 
-from allauth.account.forms import SignupForm
+from allauth.account.forms import LoginForm, SignupForm
 
 from captcha.fields import ReCaptchaField
 
@@ -31,3 +31,11 @@ class OpenIDSignupForm(SignupForm):
 
         if not (settings.RECAPTCHA_PUBLIC_KEY and settings.RECAPTCHA_PRIVATE_KEY):
             raise ImproperlyConfigured(recaptcha_not_setup_message)
+
+
+class OpenIDLoginForm(LoginForm):
+
+    def __init__(self, *args, **kwargs):
+        super(OpenIDLoginForm, self).__init__(*args, **kwargs)
+
+        del self.fields['remember']
