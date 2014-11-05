@@ -1,15 +1,19 @@
 # -*- coding: utf-8 -*-
 
+from allauth.account.views import PasswordChangeView
+
 from django.shortcuts import redirect
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView, ListView, UpdateView
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse_lazy
 
-from django.template.response import RequestContext
 from django.shortcuts import render_to_response
+from django.template.response import RequestContext
 
 from iddacultura.forms import OpenIDSignupForm
 
@@ -72,3 +76,16 @@ class ProfileEditView(UpdateView):
 class ProfileListView(ListView):
     model = get_user_model()
     template_name = 'profiles/profile_list.html'
+
+
+class LoginAfterPasswordChangeView(PasswordChangeView):
+
+    @property
+    def success_url(self):
+        return reverse_lazy('password_changed_ok')
+
+login_after_password_change = login_required(LoginAfterPasswordChangeView.as_view())
+
+
+def password_changed_ok(request):
+    return render_to_response("iddacultura/password_changed_ok.html", context_instance=RequestContext(request))
