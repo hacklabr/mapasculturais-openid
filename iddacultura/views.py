@@ -51,10 +51,7 @@ class HomeView(TemplateView):
         if (request.user.is_authenticated()):
             return redirect('/users/' + request.user.username + '/')
         else:
-            template_name = "account/signup.html"
-            form_class = OpenIDSignupForm
-
-        return render_to_response(template_name, {'form': form_class}, context_instance=RequestContext(request))
+            return render_to_response("account/signup.html", {'form': OpenIDSignupForm}, context_instance=RequestContext(request))
 
 
 class ProfileDetailView(DetailView):
