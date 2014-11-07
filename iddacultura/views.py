@@ -67,19 +67,17 @@ class ProfileEditView(UpdateView):
     fields = ['first_name', 'last_name', 'email', ]
 
     def get(self, request, *args, **kwargs):
-        return self.get_response(request, True, args, kwargs)
+        return self.get_response(request, "get", args, kwargs)
 
     def post(self, request, *args, **kwargs):
-        return self.get_response(request, False, args, kwargs)
+        return self.get_response(request, "post", args, kwargs)
 
-    def get_response(self, request, is_get, *args, **kwargs):
+    def get_response(self, request, caller_name, *args, **kwargs):
         if (not request.user.is_authenticated()):
             return redirect('homepage')
         else:
-            if (is_get):
-                return super(ProfileEditView, self).get(request, args, kwargs)
-            else:
-                return super(ProfileEditView, self).post(request, args, kwargs)
+            caller_in_super_class = getattr(super(ProfileEditView, self), caller_name)
+            return caller_in_super_class(request, args, kwargs)
 
     def get_object(self):
         return self.request.user
