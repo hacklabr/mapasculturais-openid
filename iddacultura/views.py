@@ -66,6 +66,21 @@ class ProfileEditView(UpdateView):
     template_name = 'profiles/edit_profile.html'
     fields = ['first_name', 'last_name', 'email', ]
 
+    def get(self, request, *args, **kwargs):
+        return self.get_response(request, True, args, kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.get_response(request, False, args, kwargs)
+
+    def get_response(self, request, is_get, *args, **kwargs):
+        if (not request.user.is_authenticated()):
+            return redirect('homepage')
+        else:
+            if (is_get):
+                return super(ProfileEditView, self).get(request, args, kwargs)
+            else:
+                return super(ProfileEditView, self).post(request, args, kwargs)
+
     def get_object(self):
         return self.request.user
 
