@@ -7,7 +7,6 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_BLACKLIST = ['edit', ]
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_FORMS = {'signup': 'iddacultura.forms.OpenIDSignupForm',
-                 'login': 'iddacultura.forms.OpenIDLoginForm',
                  }
 
 LOGIN_REDIRECT_URL = '/user_profile/'
