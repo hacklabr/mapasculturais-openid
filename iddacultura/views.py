@@ -58,12 +58,12 @@ class ProfileDetailView(DetailView):
     model = get_user_model()
     slug_field = 'username'
     slug_url_kwarg = 'username'
-    template_name = 'profiles/profile_detail.html'
+    template_name = 'iddacultura/profile_detail.html'
 
 
 class ProfileEditView(UpdateView):
     model = User
-    template_name = 'profiles/edit_profile.html'
+    template_name = 'iddacultura/edit_profile.html'
     fields = ['first_name', 'last_name', 'email', ]
 
     def get(self, request, *args, **kwargs):
