@@ -1,9 +1,0 @@
-{% extends "iddacultura/base_without_sidebar.html" %}
-{% block content %}
-    {% if error %}
-        O seguinte erro ocorreu no servidor OpenID:
-        <p>
-            {{ error|escape }}
-        </p>
-    {% endif %}
-{% endblock %}

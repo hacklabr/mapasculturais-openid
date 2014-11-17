@@ -143,13 +143,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'iddacultura',
     'django.contrib.admin',
+    'iddacultura',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'braces',
-    'iddacultura.provider',
     'captcha',
     'absolute',
     'openid_provider',
@@ -190,6 +189,6 @@ SOCIALACCOUNT_QUERY_EMAIL = True
 SITE_ID = 1
 
 try:
-    from settings_local import *
+    from iddacultura.settings_local import *
 except ImportError:
     print "Error importing settings_local.py configuration file"

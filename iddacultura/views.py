@@ -4,18 +4,18 @@ from allauth.account.views import PasswordChangeView
 
 from django.shortcuts import redirect
 from django.contrib.auth import views as auth_views
-from django.views.generic.base import TemplateView
-from django.views.generic import DetailView, ListView, UpdateView
+from django.views.generic import DetailView, ListView, UpdateView, FormView
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
 
 from django.shortcuts import render_to_response
 from django.template.response import RequestContext
 
 from iddacultura.forms import OpenIDSignupForm
+
+User = get_user_model()
 
 
 def user_profile(request):
@@ -39,23 +39,19 @@ def logout(request):
     return auth_views.logout_then_login(request)
 
 
-class HomeView(TemplateView):
+class HomeView(FormView):
+    template_name = 'account/signup.html'
+    form_class = OpenIDSignupForm
 
     def get(self, request, *args, **kwargs):
-        return self.get_response(request)
-
-    def post(self, request, *args, **kwargs):
-        return self.get_response(request)
-
-    def get_response(self, request):
-        if (request.user.is_authenticated()):
+        if request.user.is_authenticated():
             return redirect('/users/' + request.user.username + '/')
         else:
-            return render_to_response("account/signup.html", {'form': OpenIDSignupForm}, context_instance=RequestContext(request))
+            return super(HomeView, self).get(request, *args, **kwargs)
 
 
 class ProfileDetailView(DetailView):
-    model = get_user_model()
+    model = User
     slug_field = 'username'
     slug_url_kwarg = 'username'
     template_name = 'iddacultura/profile_detail.html'

@@ -5,7 +5,7 @@
 
 {% block head %}
     {{block.super}}
-    <meta http-equiv="x-xrds-location" content="{% absolute 'iddacultura.provider.views.user_xrds' object.username %}" />
+    <meta http-equiv="x-xrds-location" content="{% absolute 'openid-provider-identity' object.openid_set.first.openid %}" />
 {% endblock %}
 
 {% block content %}
