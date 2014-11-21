@@ -32,6 +32,7 @@ ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_FORMS = {
     'signup': 'iddacultura.forms.OpenIDSignupForm',
 }
+OPENID_FAILED_DISCOVERY_AS_VALID = True
 
 SOCIALACCOUNT_QUERY_EMAIL = True
 
@@ -145,8 +146,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'absolute.context_processors.absolute',
     'django.contrib.messages.context_processors.messages',
-    "allauth.account.context_processors.account",
-    "allauth.socialaccount.context_processors.socialaccount",
+    'allauth.account.context_processors.account',
+    'allauth.socialaccount.context_processors.socialaccount',
 )
 
 AUTHENTICATION_BACKENDS = (
