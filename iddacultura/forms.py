@@ -1,15 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
-
-from django.core.exceptions import ImproperlyConfigured
-from django.conf import settings
-
 from allauth.account.forms import SignupForm
-
 from captcha.fields import ReCaptchaField
-
-recaptcha_not_setup_message = 'É necessário definir as chaves do ReCaptcha no settings_local.py'
 
 
 class OpenIDSignupForm(SignupForm):
@@ -25,9 +18,3 @@ class OpenIDSignupForm(SignupForm):
     last_name = forms.CharField(label="Sobrenome", help_text='')
 
     captcha = ReCaptchaField(attrs={'theme': 'white'})
-
-    def __init__(self, *args, **kwargs):
-        super(OpenIDSignupForm, self).__init__(*args, **kwargs)
-
-        if not (settings.RECAPTCHA_PUBLIC_KEY and settings.RECAPTCHA_PRIVATE_KEY):
-            raise ImproperlyConfigured(recaptcha_not_setup_message)

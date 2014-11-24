@@ -1,26 +1,47 @@
 # Django settings for iddacultura project.
 
-import os
+from os import environ
+from os.path import abspath, basename, dirname, join
+from django.core.exceptions import ImproperlyConfigured
+
+
+def get_env_setting(setting):
+    """ Get the environment setting or return exception """
+    try:
+        return environ[setting]
+    except KeyError:
+        error_msg = "Set the %s env variable" % setting
+        raise ImproperlyConfigured(error_msg)
+
+DJANGO_ROOT = dirname(dirname(abspath(__file__)))
+SITE_ROOT = dirname(DJANGO_ROOT)
+SITE_NAME = basename(DJANGO_ROOT)
+SITE_ID = 1
+
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+
+RECAPTCHA_PUBLIC_KEY = get_env_setting('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = get_env_setting('RECAPTCHA_PRIVATE_KEY')
+
 
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_BLACKLIST = ['edit', ]
 ACCOUNT_LOGOUT_ON_GET = True
-ACCOUNT_FORMS = {'signup': 'iddacultura.forms.OpenIDSignupForm',
-                 }
+ACCOUNT_FORMS = {
+    'signup': 'iddacultura.forms.OpenIDSignupForm',
+}
+
+SOCIALACCOUNT_QUERY_EMAIL = True
 
 LOGIN_REDIRECT_URL = '/user_profile/'
-
-DEBUG = False
-TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['*']
 
 ADMINS = (
     ('Admin Name', 'admin@email.com'),
 )
-
-SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
 MANAGERS = ADMINS
 
@@ -67,7 +88,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = os.path.join(SITE_ROOT, 'static/')
+STATIC_ROOT = join(SITE_ROOT, '../static/')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -184,11 +205,3 @@ LOGGING = {
     }
 }
 
-SOCIALACCOUNT_QUERY_EMAIL = True
-
-SITE_ID = 1
-
-try:
-    from iddacultura.settings_local import *
-except ImportError:
-    print "Error importing settings_local.py configuration file"

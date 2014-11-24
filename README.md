@@ -13,13 +13,17 @@ Ambiente de desenvolvimento
 - mkdir ~/devel/mapasculturais-openid-env
 - virtualenv ~/devel/mapasculturais-openid-env
   -  [for arch linux] virtualenv -p \`which python2\`  ~/devel/mapasculturais-openid-env
-- git clone git@github.com:hacklabr/mapasculturais-openid.git
+- gedit mapasculturais-openid-env/bin/postactivate
+- Inserir as chaves do recaptcha no fim do arquivo (é preciso ter ou criar uma conta no site do Recaptcha):
+
+```
+	export RECAPTCHA_PUBLIC_KEY=XXX
+	export RECAPTCHA_PRIVATE_KEY=XXX
+```
 - source mapasculturais-openid-env/bin/activate
+- git clone git@github.com:hacklabr/mapasculturais-openid.git
 - cd mapasculturais-openid
 - pip install -r requirements.txt
-- cp iddacultura/settings_local.py.sample iddacultura/settings_local.py
-- gedit iddacultura/settings_local.py
-- Inserir as chaves do recaptcha no final do arquivo (é preciso ter ou criar uma conta no site do Recaptcha)
 - ./manage.py syncdb
 - ./manage.py runserver
 
