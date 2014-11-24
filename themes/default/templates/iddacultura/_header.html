@@ -1,9 +1,21 @@
 {% load staticfiles %}
 <header id="main-header" class="clearfix">
-    <h1 id="brand-logo"><a href="{{ return_url }}" title="{{ site_name }}"><img src="{% static 'img/logo-spcultura.png' %}" alt="{{ site_name }}" /></a></h1>
-    <h1 id="logo-iddacultura"><a href="{% url "homepage" %}" title="ID da Cultura">ID da Cultura</a></h1>
+    <h1 id="{% if brand_logo %}brand-logo{% else %}brand-text{% endif %}">
+        <a href="{{ return_url }}" title="{{ site_name }}">
+            {% if brand_logo %}
+            <img src="{% static brand_logo %}" alt="{{ site_name }}" />
+            {% else %}
+            Mapas Culturais
+            {% endif %}
+        </a>
+    </h1>
+    <h1 id="logo-iddacultura"><a href="{% url 'homepage' %}" title="ID da Cultura">ID da Cultura</a></h1>
     <nav id="about-nav" class="alignright clearfix">
-        <h1 id="logo-smc"><a href="http://www.prefeitura.sp.gov.br" target="_blank"><img src="{% static "img/logo-prefeitura.png" %}" alt="Prefeitura de São Paulo"  /></a></h1>
+        <h1 id="logo-smc">
+            <a href="http://www.prefeitura.sp.gov.br" target="_blank" title="{{ nome_org }}">
+                <img src="{% static "img/marca-da-org.png" %}" alt="{{ nome_org }}"  />
+            </a>
+        </h1>
     </nav>
     <nav id="main-nav" class="alignright clearfix">
         <ul class="menu logado clearfix">
