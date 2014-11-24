@@ -56,6 +56,10 @@ class ProfileDetailView(DetailView):
     slug_url_kwarg = 'username'
     template_name = 'iddacultura/profile_detail.html'
 
+    def get_context_data(self, **kwargs):
+        kwargs = {'default_openid': self.object.openid_set.get(default=True).openid}
+        return super(ProfileDetailView, self).get_context_data(**kwargs)
+
 
 class ProfileEditView(UpdateView):
     model = User
