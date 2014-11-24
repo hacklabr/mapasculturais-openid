@@ -22,7 +22,7 @@ SITE_ID = 1
 # Theme related options
 #
 THEMES_DIR = join(SITE_ROOT, 'themes')
-THEME = os.getenv('THEME', 'spcultura')  # don't forget to re-run collectstatic if you change the theme
+THEME = os.getenv('THEME', 'default')  # don't forget to re-run collectstatic if you change the theme
 
 
 DEBUG = False
@@ -32,7 +32,10 @@ RECAPTCHA_PUBLIC_KEY = get_env_setting('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = get_env_setting('RECAPTCHA_PRIVATE_KEY')
 
 
-ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_BLACKLIST = ['edit', ]
 ACCOUNT_LOGOUT_ON_GET = True
