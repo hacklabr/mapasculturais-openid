@@ -251,11 +251,11 @@ a.icone:hover { text-decoration: none; }
 /* =Header
 -------------------------------------------------------------- */
 #main-header { /*position: fixed; top: 0; width: 100%; z-index: 150;*/ border-top: 6px solid #000; background: #fff; }
-#main-header h1 { margin-bottom: 0; }
+#main-header h1 { margin-bottom: 0; line-height: 4.2rem; font-size: 1.5rem; font-family: "Open Sans"; font-weight: bold; text-transform: uppercase; }
 #main-header h1 img { display: block; }
-#logo-spcultura { float: left; padding: .375rem 1.5rem; border-right: 1px solid #000; }
-#logo-spcultura img { width: 138px; }
-#logo-iddacultura { float: left; padding: 0 1.5rem 0.3rem; line-height: 4.2rem; font-size: 1.5rem; font-family: "Open Sans"; font-weight: bold; text-transform: uppercase; border-right: 1px solid #000; }
+#brand-logo { float: left; padding: .375rem 1.5rem; border-right: 1px solid #000; }
+#brand-logo img { width: 138px; }
+#logo-iddacultura { float: left; padding: 0 1.5rem 0.3rem; border-right: 1px solid #000; }
 #logo-iddacultura a { color: #f90; }
 #logo-iddacultura a:hover { text-decoration: none; color: #000; }
 #about-nav { padding: 0 1.5rem; }

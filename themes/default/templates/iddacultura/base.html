@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+            <meta charset="UTF-8" />
+            <link rel="stylesheet" href="{% static "css/style.css" %}">
+            <link rel="stylesheet" href="{% static "css/elegant-font.css" %}">
+            <title>{% block title %}{% endblock %}</title>
+        {% endblock %}
+        {% block extrahead %}
+        {% endblock %}
+    </head>
+    <body>
+        <section id="marca-dagua"></section>
+        {% include 'iddacultura/_header.html' %}
+        <div class="wrap clearfix">
+            {% block content_base %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

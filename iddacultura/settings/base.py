@@ -1,6 +1,6 @@
 # Django settings for iddacultura project.
 
-from os import environ
+import os
 from os.path import abspath, basename, dirname, join
 from django.core.exceptions import ImproperlyConfigured
 
@@ -8,15 +8,22 @@ from django.core.exceptions import ImproperlyConfigured
 def get_env_setting(setting):
     """ Get the environment setting or return exception """
     try:
-        return environ[setting]
+        return os.environ[setting]
     except KeyError:
         error_msg = "Set the %s env variable" % setting
         raise ImproperlyConfigured(error_msg)
 
 DJANGO_ROOT = dirname(dirname(abspath(__file__)))
 SITE_ROOT = dirname(DJANGO_ROOT)
-SITE_NAME = basename(DJANGO_ROOT)
+SITE_NAME = 'SPPP'
 SITE_ID = 1
+
+#
+# Theme related options
+#
+THEMES_DIR = join(SITE_ROOT, 'themes')
+THEME = os.getenv('THEME', 'spcultura')  # don't forget to re-run collectstatic if you change the theme
+
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -100,6 +107,8 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(THEMES_DIR, THEME, 'static'),
+    os.path.join(THEMES_DIR, 'default', 'static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -138,6 +147,8 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates"
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(THEMES_DIR, THEME, 'templates'),
+    os.path.join(THEMES_DIR, 'default', 'templates'),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
