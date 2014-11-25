@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
-from allauth.account.forms import SignupForm
 from allauth.utils import set_form_field_order
 from captcha.fields import ReCaptchaField
+from openid_provider.models import OpenID
 
 
-class OpenIDSignupForm(SignupForm):
+class OpenIDSignupForm(forms.Form):
     """
     Extende o formulário de registro de usuário para
     mais campos.
@@ -26,6 +26,8 @@ class OpenIDSignupForm(SignupForm):
             merged_field_order.remove(field)
             merged_field_order.insert(0, field)
 
+        merged_field_order.remove('captcha')
+        merged_field_order.append('captcha')
         set_form_field_order(self, merged_field_order)
 
         return ret
@@ -36,4 +38,3 @@ class OpenIDSignupForm(SignupForm):
         user.save()
         oid = OpenID(user=user, default=True)
         oid.save()
-        return super(OpenIDSignupForm, self).signup(request, user)

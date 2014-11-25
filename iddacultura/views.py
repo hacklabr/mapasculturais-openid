@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from allauth.account.views import PasswordChangeView
+from allauth.account.forms import SignupForm
 
 from django.shortcuts import redirect
 from django.contrib.auth import views as auth_views
@@ -12,8 +13,6 @@ from django.core.urlresolvers import reverse_lazy
 
 from django.shortcuts import render_to_response
 from django.template.response import RequestContext
-
-from iddacultura.forms import OpenIDSignupForm
 
 User = get_user_model()
 
@@ -41,7 +40,7 @@ def logout(request):
 
 class HomeView(FormView):
     template_name = 'account/signup.html'
-    form_class = OpenIDSignupForm
+    form_class = SignupForm
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated():
