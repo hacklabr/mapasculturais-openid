@@ -1,0 +1,35 @@
+{% extends "openid_provider/base.html" %}
+
+{% block content %}
+<h3>Permitir</h3>
+
+<div class="clearfix">
+{% ifequal trust_root_valid "Valid" %}
+    <!-- Trust root has been validated by OpenID 2 mechanism. -->
+    <p>O site <tt>{{ trust_root|escape }}</tt> quer utilizar o seu ID da Cultura.</p>
+{% endifequal %}
+{% ifequal trust_root_valid "Invalid" %}
+    <div class="error">
+        <p>Um pedido para usar o seu ID da Cultura supostamente de {{ trust_root|escape }} foi identificado
+        como falso.  Tenha cuidado e não autorize o uso de sua identidade para este site!.</p>
+        <p>Por favor comunique os verdadeiros responsáveis por {{ trust_root|escape }} de que alguém está tentando se passar por eles.</p>
+    </div>
+{% endifequal %}
+{% ifequal trust_root_valid "Unreachable" %}
+    <p>O site <tt>{{ trust_root|escape }}</tt> quer utilizar seu ID da Cultura.
+    Eu não consegui acessá-lo e por isso não posso verificar a autenticidade do pedido. Talvez ele esteja na sua rede local.</p>
+{% endifequal %}
+{% ifequal trust_root_valid "DISCOVERY_FAILED" %}
+    <p>O site <tt>{{ trust_root|escape }}</tt> está pedindo autorização para utilizar seu ID da Cultura.</p>
+    <p>Você será redirecionado para <tt>{{ return_to|escape }}</tt></p>
+{% endifequal %}
+
+    <form method="post">{% csrf_token %}
+        Deseja utilizar o seu ID da Cultura para entrar neste site?
+        <br/>
+        <input type="hidden" name="decide_page" value="True" />
+        <input type="submit" value="Permitir o uso do meu ID da Cultura" name="allow" />
+        <input type="submit" value="Não permitir" name="cancel" />
+    </form>
+</div>
+{% endblock %}
