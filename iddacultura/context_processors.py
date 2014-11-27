@@ -1,10 +1,11 @@
 # coding: utf-8
+from .models import SiteConfig
+from django.contrib.sites.models import get_current_site
 
-def sitedata(request):
-    return {
-        'return_url': 'http://www.slashdot.org/',
-        'site_name': 'asfasdf',
-        'nome_org': 'Prefeitura de São Paulo',
-        'brand_logo': '',
-        # 'brand_logo': 'img/logo-spcultura.png',
-    }
+
+def site_data(request):
+    try:
+        site_conf = SiteConfig.objects.get(site=get_current_site(request))
+    except:
+        site_conf = None
+    return {'site_conf': site_conf}

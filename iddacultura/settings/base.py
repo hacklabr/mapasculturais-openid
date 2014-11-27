@@ -15,8 +15,7 @@ def get_env_setting(setting):
 
 DJANGO_ROOT = dirname(dirname(abspath(__file__)))
 SITE_ROOT = dirname(DJANGO_ROOT)
-SITE_NAME = 'SPPP'
-SITE_ID = 1
+SITE_ID = 1  # will change based on domain
 
 #
 # Theme related options
@@ -69,8 +68,6 @@ TIME_ZONE = 'America/Sao_Paulo'
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'pt-BR'
-
-SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -136,6 +133,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'iddacultura.middleware.MultiSiteMiddleware',
 )
 
 ROOT_URLCONF = 'iddacultura.urls'
@@ -159,7 +157,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'allauth.account.context_processors.account',
     'allauth.socialaccount.context_processors.socialaccount',
-    'iddacultura.context_processors.sitedata',
+    'iddacultura.context_processors.site_data',
 )
 
 AUTHENTICATION_BACKENDS = (
