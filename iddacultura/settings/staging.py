@@ -11,3 +11,5 @@ DATABASES = {
         'NAME': 'openid-staging',
     }
 }
+
+STATIC_ROOT = join(SITE_ROOT, '../webfiles-staging/static/')
