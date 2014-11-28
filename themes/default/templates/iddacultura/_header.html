@@ -1,9 +1,9 @@
 {% load staticfiles %}
 <header id="main-header" class="clearfix">
-    <h1 id="{% if brand_logo %}brand-logo{% else %}brand-text{% endif %}">
+    <h1 id="{% if site_conf.brand_logo %}brand-logo{% else %}brand-text{% endif %}">
         <a href="{{ site_conf.default_url }}" title="{{ site_conf.default_name }}">
             {% if site_conf.brand_logo %}
-            <img src="{% static 'img/brand_logo.png' %}" alt="{{ site_conf.default_name }}" />
+            <img src="{% static 'img/brand-logo.png' %}" alt="{{ site_conf.default_name }}" />
             {% else %}
             Mapas Culturais
             {% endif %}
