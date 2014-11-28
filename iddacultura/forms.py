@@ -12,8 +12,8 @@ class OpenIDSignupForm(forms.Form):
     mais campos.
     """
 
-    first_name = forms.CharField(label="Nome", help_text='',)
-    last_name = forms.CharField(label="Sobrenome", help_text='')
+    first_name = forms.CharField(label="Nome", max_length=30, help_text='',)
+    last_name = forms.CharField(label="Sobrenome", max_length=30, help_text='')
     captcha = ReCaptchaField(attrs={'theme': 'white'})
 
     def __init__(self, *args, **kwargs):
