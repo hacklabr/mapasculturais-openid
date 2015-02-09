@@ -65,19 +65,6 @@ class ProfileEditView(UpdateView):
     template_name = 'iddacultura/edit_profile.html'
     fields = ['first_name', 'last_name', 'email', ]
 
-    def get(self, request, *args, **kwargs):
-        return self.get_response(request, "get", args, kwargs)
-
-    def post(self, request, *args, **kwargs):
-        return self.get_response(request, "post", args, kwargs)
-
-    def get_response(self, request, caller_name, *args, **kwargs):
-        if (not request.user.is_authenticated()):
-            return redirect('homepage')
-        else:
-            caller_in_super_class = getattr(super(ProfileEditView, self), caller_name)
-            return caller_in_super_class(request, args, kwargs)
-
     def get_object(self):
         return self.request.user
 

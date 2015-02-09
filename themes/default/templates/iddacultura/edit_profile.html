@@ -9,4 +9,10 @@
             {{ form.as_p }}
             <div class="textright"><input id="submit" type="submit" name="submit" value="atualizar" /></div>
         </form>
+        <script>
+            // temporarly fix required attribute
+            document.addEventListener("DOMContentLoaded", function() {
+                document.querySelector('.form-perfil').email.required = true
+            });
+        </script>
 {% endblock content %}
