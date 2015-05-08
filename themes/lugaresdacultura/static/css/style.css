@@ -151,7 +151,7 @@ a img {
 body { font: 100%/150% /*16px/24px*/ "Open Sans", Arial, Helvetica, sans-serif; }
 pre { font-family: Verdana, sans-serif; font-size: 0.75rem /*12px*/; }
 code { font-family: "Courier New", monospace; font-size: 0.75rem /*12px*/; }
-h1,h2,h3,h4,h5,h6 { margin-bottom: 1.5rem /*24px*/; font-weight: bold; font-family: "aleo", serif; color: #000; }
+h1,h2,h3,h4,h5,h6 { margin-bottom: 1.5rem /*24px*/; font-weight: bold; font-family: "aleo", serif; color: #FFFFFF; }
 h1 { font-size: 2.25rem /*36px*/; line-height: 3rem /*48px*/; }
 h2 { font-size: 2rem /*32px*/; line-height: 3rem /*48px*/; }
 h3 { font-size: 1.75rem /*28px*/; line-height: 2rem /*48px*/; }
@@ -162,7 +162,7 @@ h1 + h2, h2 + h3, h4 + h5, h5 + h6 { margin-top: 1.5rem /*24px*/; }
 
 /* =Global Elements
 -------------------------------------------------------------- */
-body { background: #f90 /*url(img/grid.png)*/; color: #333; }
+body { background: #1C5690 /*url(img/grid.png)*/; color: #FFFFFF; }
 /* body, input, textarea { color: #666; } */
 hr { background-color: #ccc; border: 1px solid #fff; clear: both; height: 1px; margin-bottom: 22px; }
 
@@ -197,7 +197,7 @@ input, textarea, button, select { padding: 3px 6px; background: #fff; border: 1p
 input, textarea { font-size: .75rem; }
 input, button, select { height: 2rem; }
 input[type="submit"], button[type="submit"] { width: auto; padding: 0 .75rem; vertical-align: bottom; color: #fff; font-size: .75rem; font-weight: bold; background: #000; cursor: pointer; border: none; }
-input[type="submit"]:hover, button[type="submit"]:hover { background: #f90; box-shadow: rgba(0,0,0, .25) 0 1px 2px 0; -webkit-box-shadow: rgba(0,0,0, .25) 0 1px 2px 0; }
+input[type="submit"]:hover, button[type="submit"]:hover { background: #1C5690; box-shadow: rgba(0,0,0, .25) 0 1px 2px 0; -webkit-box-shadow: rgba(0,0,0, .25) 0 1px 2px 0; }
 input[type="radio"], input[type="checkbox"] { width: auto; height: auto; margin: 0; vertical-align: baseline; }
 input:focus, textarea:focus, button:focus, select:focus { outline: none; }
 a { color: #000000; text-decoration: none; outline: none; font-weight: bold; }
@@ -238,10 +238,10 @@ img, embed, object, video { max-width: 100%; height: auto; }
 .botao, .botao-grande { display: inline-block; border-radius: 2px; cursor: pointer; font-family: "Open Sans", sans-serif; }
 .botao:hover, .botao-grande:hover { box-shadow: rgba(0,0,0, .25) 0 1px 2px 0; -webkit-box-shadow: rgba(0,0,0, .25) 0 1px 2px 0;text-decoration: none; }
 .botao { height: 1.875rem; padding: 0 .5rem; font-size: .75rem; line-height: 1.875rem; }
-.botao.principal { color: #fff; background: #f90; border: 1px solid #f90; }
+.botao.principal { color: #fff; background: #1C5690; border: 1px solid #1C5690; }
 .botao.principal:hover { border-color: #e48203; }
 .botao-grande { padding: .5rem; font-size: .875rem; text-align: center; color: #fff; background: #000; }
-.botao-grande:hover { background: #f90; border-color: #f90; }
+.botao-grande:hover { background: #1C5690; border-color: #1C5690; }
 .setinha { position: absolute; width: 0px; height: 0px; border-style: solid; border-width: 8px; line-height: 0px; border-color: transparent transparent #000 transparent; }
 /*ícones*/
 .icone { display: inline-block; vertical-align: middle; }
@@ -253,7 +253,7 @@ a.icone:hover { text-decoration: none; }
 #main-header { /*position: fixed; top: 0; width: 100%; z-index: 150;*/ border-top: 6px solid #000; background: #fff; }
 #main-header h1 { float: left; margin-bottom: 0; line-height: 4.2rem; font-size: 1.5rem; font-family: "Open Sans"; font-weight: bold; text-transform: uppercase; }
 #main-header h1 img { display: block; }
-#main-header h1 a { color: #f90; }
+#main-header h1 a { color: #1C5690; }
 #main-header h1 a:hover { text-decoration: none; color: #000; }
 #brand-logo { padding: .375rem 1.5rem; border-right: 1px solid #000; }
 #brand-logo img { width: 138px; }
@@ -261,7 +261,7 @@ a.icone:hover { text-decoration: none; }
 #logo-iddacultura { padding: 0 1.5rem 0.3rem; border-right: 1px solid #000; }
 #about-nav { padding: 0 1.5rem; }
 #logo-smc { clear: both; margin: .75rem 0; }
-#logo-smc img { width: 90px; margin: 0 auto; }
+#logo-smc img { width: 145px; margin: 0 auto; }
 #main-nav a:hover { text-decoration: none; }
 .menu { position: relative; float: left; margin: -6px 0 0; border-left: 1px solid #000; }
 .menu li { position: relative; float: left; list-style-type: none; }
@@ -275,12 +275,12 @@ a.icone:hover { text-decoration: none; }
 .submenu li { float: none; line-height: 1.5rem; }
 .menu .submenu a { display: block; font-weight: normal; }
 .logado { border-right: 1px solid #000; }
-.menu .entrar:hover, .menu .user-name:hover { border-top: 6px solid #f90; }
-.menu .entrar:hover a, .menu .user-name:hover a { color: #f90; }
+.menu .entrar:hover, .menu .user-name:hover { border-top: 6px solid #1C5690; }
+.menu .entrar:hover a, .menu .user-name:hover a { color: #1C5690; }
 .menu .user-name { width: auto; min-width: 5rem; }
 .menu .user-name .setinha { left: 79px; top: -16px; border-color: transparent transparent #000 transparent; }
 .menu .user-name .submenu { left: 50%; margin-left: -87px; width: 150px; background: #000; }
-.menu .user-name .submenu a { color: #f90; padding: .5rem; }
+.menu .user-name .submenu a { color: #1C5690; padding: .5rem; }
 .menu .user-name .submenu a:hover { color: #fff; }
 
 #marca-dagua { position: fixed; z-index: -1; left: 0; right: 0; top: 0; bottom: 0; background-image: url(../img/fundo.png); background-position: 80% bottom; background-repeat: no-repeat; }
@@ -288,6 +288,7 @@ a.icone:hover { text-decoration: none; }
 /* Forms
 ---------------------------------------------------------------------------*/
 .box-registro { margin-top: 1.5rem; color: #666; background: #fff; border-radius: 2px; box-shadow: 0 2px 2px 0 rgba(0,0,0,.15); -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,.15); }
+#content a { color: #FFF; }
 #content .box-registro { margin: auto; float: none !important; }
 .box-registro input[type="text"], .box-registro input[type="password"] { width: 100%; }
 .form-perfil { width: 70%; }
@@ -308,7 +309,7 @@ p + #recaptcha_widget_div { margin-top: -1.5rem; margin-bottom: 0; }
 ---------------------------------------------------------------------------*/
 #sidebar { padding: 0; }
 #menu-perfil a { display: block; margin-bottom: 2px; padding: .75rem; font-size: .875rem; border-left: 4px solid #ccc; background: #eee; }
-#menu-perfil a.active, #menu-perfil a:hover { border-left: 4px solid #f90; }
+#menu-perfil a.active, #menu-perfil a:hover { border-left: 4px solid #1C5690; }
 
 
 /* Não sei onde usa
