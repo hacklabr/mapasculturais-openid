@@ -12,4 +12,4 @@ DATABASES = {
     }
 }
 
-STATIC_ROOT = join(SITE_ROOT, '../webfiles-staging-blumenal/static/')
+STATIC_ROOT = join(SITE_ROOT, '../webfiles-staging-blumenau/static/')
