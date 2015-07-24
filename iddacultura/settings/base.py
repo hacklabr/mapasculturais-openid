@@ -1,3 +1,4 @@
+# coding=utf-8
 # Django settings for iddacultura project.
 
 import os
@@ -30,6 +31,7 @@ TEMPLATE_DEBUG = DEBUG
 RECAPTCHA_PUBLIC_KEY = get_env_setting('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = get_env_setting('RECAPTCHA_PRIVATE_KEY')
 
+DEFAULT_FROM_EMAIL = 'Nao responda <donotreply@id.map.as>'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
