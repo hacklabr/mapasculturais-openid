@@ -31,7 +31,7 @@ TEMPLATE_DEBUG = DEBUG
 RECAPTCHA_PUBLIC_KEY = get_env_setting('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = get_env_setting('RECAPTCHA_PRIVATE_KEY')
 
-DEFAULT_FROM_EMAIL = 'Nao responda <donotreply@id.map.as>'
+DEFAULT_FROM_EMAIL = 'Nao responda <donotreply@map.as>'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_FORMS = {'login': 'iddacultura.forms.LoginForm'}
@@ -50,8 +50,10 @@ LOGIN_REDIRECT_URL = '/user_profile/'
 
 ALLOWED_HOSTS = ['*']
 
+ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'root@localhost')
+
 ADMINS = (
-    ('Admin Name', 'admin@email.com'),
+    ('ID da Cultura Sysadmin', ADMIN_EMAIL),
 )
 
 MANAGERS = ADMINS
