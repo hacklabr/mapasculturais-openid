@@ -289,9 +289,9 @@ a.icone:hover { text-decoration: none; }
 ---------------------------------------------------------------------------*/
 .box-registro { margin-top: 1.5rem; color: #666; background: #fff; border-radius: 2px; box-shadow: 0 2px 2px 0 rgba(0,0,0,.15); -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,.15); }
 #content .box-registro { margin: auto; float: none !important; }
-.box-registro input[type="text"], .box-registro input[type="password"] { width: 100%; }
+.box-registro input[type="text"], .box-registro input[type="password"], .box-registro input[type="email"] { width: 100%; }
 .form-perfil { width: 70%; }
-.form-perfil input[type="text"], .form-perfil input[type="password"] { width: 100%; }
+.form-perfil input[type="text"], .form-perfil input[type="password"], .form-perfil input[type="email"] { width: 100%; }
 .form-perfil select { width: 60%; }
 .helptext { display: block; font-size: .75rem; color: #333; }
 /*ocultado provisoriamente enquanto só tem o spcultura*/

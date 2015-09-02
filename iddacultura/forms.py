@@ -2,8 +2,10 @@
 
 from django import forms
 from allauth.utils import set_form_field_order
+from allauth.account.forms import LoginForm as AllAuthLoginForm
 from captcha.fields import ReCaptchaField
 from openid_provider.models import OpenID
+from django.utils.translation import pgettext, ugettext_lazy as _, ugettext
 
 
 class OpenIDSignupForm(forms.Form):
@@ -38,3 +40,15 @@ class OpenIDSignupForm(forms.Form):
         user.save()
         oid = OpenID(user=user, default=True)
         oid.save()
+
+
+class LoginForm(AllAuthLoginForm):
+
+    def __init__(self, *args, **kwargs):
+        super(LoginForm, self).__init__(*args, **kwargs)
+        login_widget = forms.TextInput(attrs={'placeholder': _('E-mail'),
+                                              'autofocus': 'autofocus'})
+        login_field = forms.CharField(label=pgettext("field label", "E-mail"),
+                                      widget=login_widget)
+        self.fields["login"] = login_field
+
